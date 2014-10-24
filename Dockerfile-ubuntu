@@ -1,0 +1,29 @@
+FROM ubuntu:latest
+MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
+
+RUN (apt-get update -y && apt-get dist-upgrade -y && apt-get autoremove -y && apt-get clean -y)
+RUN apt-get install software-properties-common
+
+# user
+RUN useradd -m docker
+RUN echo "docker:docker" | chpasswd
+RUN echo "docker ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+# dev tools
+RUN apt-get install -y git vim tree cmake
+
+# qt5
+RUN apt-add-repository ppa:ubuntu-sdk-team/ppa && apt-get update
+
+# kdesrc-build requirements
+RUN apt-get install -y gcc-g++
+RUN apt-get install -y libwww-perl libxml-parser-perl libjson-perl 
+RUN apt-get install -y libqt4-dev
+RUN apt-get install -y cmake tar
+
+# misc
+RUN su docker && git config --global url."git://anongit.kde.org/".insteadOf kde:
+RUN su docker && mkdir /home/docker/.bazaar && echo "[DEFAULT]\n\tssl.cert_reqs=none" >> /home/docker/.bazaar/bazaar.conf
+
+# clone kdesrc-build
+RUN su docker && cd /home/docker && git clone git://anongit.kde.org/kdesrc-build.git

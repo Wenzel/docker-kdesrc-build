@@ -1,0 +1,26 @@
+FROM boombatower/opensuse:latest
+MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
+
+# general dev tools
+RUN zypper --non-interactive in git vim sudo
+
+# add user
+RUN useradd -m docker
+RUN echo "docker ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+# kf5 requirements (repos)
+RUN zypper ar -f "http://download.opensuse.org/repositories/KDE:/Qt5/openSUSE_13.1/" "Qt5"
+RUN zypper --non-interactive --gpg-auto-import-keys refresh
+
+# kf5 requirements (packages)
+RUN zypper --non-interactive in -f perl-libwww-perl perl-XML-Parser perl-JSON
+RUN zypper --non-interactive in -f bzr cmake doxygen
+RUN zypper --non-interactive in -f gettext-tools-mini xcb-util-keysyms-devel libxslt-devel libxml2-devel docbook-xsl-stylesheets
+RUN zypper --non-interactive in -f libqt4-devel libQt5Network-devel libQt5Core-devel libQt5Test-devel libQt5Widgets-devel libQt5Xml-devel libQt5Script-devel libqt5-qtx11extras-devel libqt5-qttools-devel
+
+# misc
+RUN su docker && git config --global url."git://anongit.kde.org/".insteadOf kde:
+RUN su docker && mkdir /home/docker/.bazaar && echo "[DEFAULT]\n\tssl.cert_reqs=none" >> /home/docker/.bazaar/bazaar.conf
+
+# clone kdesrc-build
+RUN su docker && cd /home/docker && git clone git://anongit.kde.org/kdesrc-build.git
