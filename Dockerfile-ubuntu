@@ -1,29 +1,37 @@
 FROM ubuntu:latest
 MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
+ENV DEBIAN_FRONTEND noninteractive
 RUN (apt-get update -y && apt-get dist-upgrade -y && apt-get autoremove -y && apt-get clean -y)
-RUN apt-get install software-properties-common
+RUN apt-get install -y software-properties-common
 
-# user
+# add simple user
+#------------------
 RUN useradd -m docker
 RUN echo "docker:docker" | chpasswd
+RUN apt-get install -y sudo
 RUN echo "docker ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-# dev tools
-RUN apt-get install -y git vim tree cmake
+# install some dev tools
+#-------------
+RUN apt-get install -y git vim tree
 
-# qt5
+# add Qt5 repo
+#---------------
 RUN apt-add-repository ppa:ubuntu-sdk-team/ppa && apt-get update
 
 # kdesrc-build requirements
-RUN apt-get install -y gcc-g++
-RUN apt-get install -y libwww-perl libxml-parser-perl libjson-perl 
-RUN apt-get install -y libqt4-dev
-RUN apt-get install -y cmake tar
-
-# misc
-RUN su docker && git config --global url."git://anongit.kde.org/".insteadOf kde:
-RUN su docker && mkdir /home/docker/.bazaar && echo "[DEFAULT]\n\tssl.cert_reqs=none" >> /home/docker/.bazaar/bazaar.conf
+#---------------------------
+RUN apt-get install -y g++ cmake tar bzr doxygen
+RUN apt-get install -y libwww-perl libxml-parser-perl libjson-perl dialog gettext libxrender-dev pkg-config libxcb-keysyms1-dev
+RUN apt-get install -y libqt4-dev # -> qmake
+# install Qt5 development packages
+RUN apt-get install -y qt5-default libqt5svg5-dev libqt5xmlpatterns5-dev qtscript5-dev libqt5x11extras5-dev
+# kde anongit url alias
+RUN su docker -c 'git config --global url."git://anongit.kde.org/".insteadOf kde:'
+# quick fix with bzr and ssl-certs
+RUN su docker -c 'mkdir /home/docker/.bazaar && echo "[DEFAULT]\n\tssl.cert_reqs=none" >> /home/docker/.bazaar/bazaar.conf'
 
 # clone kdesrc-build
-RUN su docker && cd /home/docker && git clone git://anongit.kde.org/kdesrc-build.git
+#----------------------
+RUN su docker -c 'cd /home/docker && git clone git://anongit.kde.org/kdesrc-build.git'
