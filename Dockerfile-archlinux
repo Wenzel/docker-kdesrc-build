@@ -1,0 +1,28 @@
+FROM base/archlinux:latest
+MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
+
+RUN pacman --noconfirm -Syu
+
+# add simple user
+#------------------
+RUN useradd -m docker
+RUN echo "docker:docker" | chpasswd
+RUN pacman --noconfirm -S sudo
+RUN echo "docker ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+# install some dev tools
+#-------------
+RUN pacman --noconfirm -S git vim tree
+
+# kdesrc-build requirements
+#---------------------------
+RUN pacman --noconfirm -S gcc cmake bzr doxygen make
+RUN pacman --noconfirm -S perl perl-json perl-libwww perl-xml-parser dialog boost giflib pkg-config vlc
+# install Qt5 development packages
+RUN pacman --noconfirm -S qt5-base qt5-x11extras qt5-xmlpatterns qt5-svg qt5-script qt5-tools
+# kde anongit url alias
+RUN su docker -c 'git config --global url."git://anongit.kde.org/".insteadOf kde:'
+
+# clone kdesrc-build
+#----------------------
+RUN su docker -c 'cd /home/docker && git clone git://anongit.kde.org/kdesrc-build.git'
