@@ -7,19 +7,19 @@ without messing with package dependencies and distro specific issues.
 Supported distros
 -----------------
 
-    * `Archlinux`
-    * `Ubuntu` (TODO)
-    * `Fedora` (TODO)
-    * `OpenSUSE` (TODO)
+* `Archlinux`
+* `Ubuntu` (TODO)
+* `Fedora` (TODO)
+* `OpenSUSE` (TODO)
 
 Dependencies installed
 ----------------------
 
-    * `kdesrc-build` (`perl`, `perl-JSON`, `perl-libww`, `perl-parser-xml`)
-    * `KDE Frameworks 5` (`Qt5`)
-    * `KDE Workspace` (TODO)
-    * `KDE Applications` (TODO)
-    * `KDE PIM` (TODO)
+* `kdesrc-build` (`perl`, `perl-JSON`, `perl-libww`, `perl-parser-xml`)
+* `KDE Frameworks 5` (`Qt5`)
+* `KDE Workspace` (TODO)
+* `KDE Applications` (TODO)
+* `KDE PIM` (TODO)
 
 Build
 =====
