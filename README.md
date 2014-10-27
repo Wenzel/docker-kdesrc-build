@@ -9,7 +9,7 @@ Build
 
 First choose the distro your favorite distro
 
-    ln -sf Docker-<distro> Dockerfile
+    ln -sf Dockerfile-<distro> Dockerfile
 
 Then run `docker build` to build the docker image
 
