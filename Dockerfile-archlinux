@@ -17,7 +17,7 @@ RUN pacman --noconfirm -S git vim tree
 # kdesrc-build requirements
 #---------------------------
 RUN pacman --noconfirm -S gcc cmake bzr doxygen make
-RUN pacman --noconfirm -S perl perl-json perl-libwww perl-xml-parser dialog boost giflib pkg-config vlc libepoxy xapian-core libxcursor fontforge pkg-config exiv2 sane gtkmm3 libnm-glib
+RUN pacman --noconfirm -S perl perl-json perl-libwww perl-xml-parser dialog boost giflib pkg-config vlc libepoxy xapian-core libxcursor fontforge pkg-config exiv2 sane gtkmm3 libnm-glib docbook-xsl
 # install Qt5 development packages
 RUN pacman --noconfirm -S qt5-base qt5-x11extras qt5-xmlpatterns qt5-svg qt5-script qt5-tools qt5-declarative
 # kde anongit url alias
