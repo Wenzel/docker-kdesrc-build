@@ -23,6 +23,5 @@ RUN pacman --noconfirm -S qt5-base qt5-x11extras qt5-xmlpatterns qt5-svg qt5-scr
 # kde anongit url alias
 RUN su docker -c 'git config --global url."git://anongit.kde.org/".insteadOf kde:'
 
-# clone kdesrc-build
-#----------------------
-RUN su docker -c 'cd /home/docker && git clone git://anongit.kde.org/kdesrc-build.git'
+VOLUME /work
+RUN chown docker:docker /work
