@@ -4,18 +4,22 @@ This project aims to provide containers to KDE developers
 who would like to build the project from source with the `kdesrc-build` script, 
 without messing with package dependencies and distro specific issues.
 
+Supported distros
+-----------------
+
+    * `Archlinux`
+    * `Ubuntu` (TODO)
+    * `Fedora` (TODO)
+    * `OpenSUSE` (TODO)
+
 Dependencies installed
 ----------------------
 
     * `kdesrc-build` (`perl`, `perl-JSON`, `perl-libww`, `perl-parser-xml`)
     * `KDE Frameworks 5` (`Qt5`)
-
-TODO
-----
-
-    * `KDE Workspace`
-    * `KDE Applications`
-    * `KDE PIM`
+    * `KDE Workspace` (TODO)
+    * `KDE Applications` (TODO)
+    * `KDE PIM` (TODO)
 
 Build
 =====
