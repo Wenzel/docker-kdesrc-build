@@ -20,7 +20,7 @@ Usage
 
 Simple
 ------
-* For a simple usage, just run the image
+For a simple usage, just run the image
 
     docker run -ti <distro>-kdedev /bin/bash
 
