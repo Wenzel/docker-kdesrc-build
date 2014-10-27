@@ -7,7 +7,7 @@ without messing with package dependencies and distro specific issues.
 Build
 =====
 
-First choose the distro you prefer
+First choose the distro your favorite distro
 
     ln -sf Docker-<distro> Dockerfile
 
