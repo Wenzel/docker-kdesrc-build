@@ -8,9 +8,9 @@ Supported distros
 -----------------
 
 * `Archlinux`
+* `OpenSUSE`
 * `Ubuntu` (TODO)
 * `Fedora` (TODO)
-* `OpenSUSE` (TODO)
 
 Dependencies installed
 ----------------------
