@@ -8,7 +8,6 @@ RUN apt-get install -y software-properties-common
 # add simple user
 #------------------
 RUN useradd -m docker
-RUN echo "docker:docker" | chpasswd
 RUN apt-get install -y sudo
 RUN echo "docker ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
@@ -23,10 +22,10 @@ RUN apt-add-repository ppa:ubuntu-sdk-team/ppa && apt-get update
 # kdesrc-build requirements
 #---------------------------
 RUN apt-get install -y g++ cmake tar bzr doxygen
-RUN apt-get install -y libwww-perl libxml-parser-perl libjson-perl dialog gettext libxrender-dev pkg-config libxcb-keysyms1-dev
+RUN apt-get install -y libwww-perl libxml-parser-perl libjson-perl dialog gettext libxrender-dev pkg-config libxcb-keysyms1-dev docbook-xsl libxslt1-dev libxml2-utils libudev-dev
 RUN apt-get install -y libqt4-dev # -> qmake
 # install Qt5 development packages
-RUN apt-get install -y qt5-default libqt5svg5-dev libqt5xmlpatterns5-dev qtscript5-dev libqt5x11extras5-dev
+RUN apt-get install -y qt5-default libqt5svg5-dev libqt5xmlpatterns5-dev qtscript5-dev libqt5x11extras5-dev qttools5-dev
 # kde anongit url alias
 RUN su docker -c 'git config --global url."git://anongit.kde.org/".insteadOf kde:'
 # quick fix with bzr and ssl-certs
@@ -35,3 +34,8 @@ RUN su docker -c 'mkdir /home/docker/.bazaar && echo "[DEFAULT]\n\tssl.cert_reqs
 # clone kdesrc-build
 #----------------------
 RUN su docker -c 'cd /home/docker && git clone git://anongit.kde.org/kdesrc-build.git'
+
+VOLUME /work
+RUN chown docker:users /work
+
+ENTRYPOINT "/bin/bash"

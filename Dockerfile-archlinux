@@ -25,3 +25,5 @@ RUN su docker -c 'git config --global url."git://anongit.kde.org/".insteadOf kde
 
 VOLUME /work
 RUN chown docker:docker /work
+
+ENTRYPOINT "/bin/bash"

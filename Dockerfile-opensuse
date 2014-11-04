@@ -29,3 +29,5 @@ RUN su docker -c 'mkdir /home/docker/.bazaar && echo -e "[DEFAULT]\n\tssl.cert_r
 
 VOLUME /work
 RUN chown docker:users /work
+
+ENTRYPOINT "/bin/bash"
