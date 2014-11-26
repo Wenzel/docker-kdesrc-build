@@ -6,20 +6,36 @@ RUN pacman --noconfirm -Syu
 # add simple user
 #------------------
 RUN useradd -m docker
-RUN echo "docker:docker" | chpasswd
 RUN pacman --noconfirm -S sudo
 RUN echo "docker ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-# install some dev tools
-#-------------
-RUN pacman --noconfirm -S git vim tree
-
-# kdesrc-build requirements
+# Install dependencies
 #---------------------------
-RUN pacman --noconfirm -S gcc cmake bzr doxygen make
-RUN pacman --noconfirm -S perl perl-json perl-libwww perl-xml-parser dialog boost giflib pkg-config vlc libepoxy xapian-core libxcursor fontforge pkg-config exiv2 sane gtkmm3 libnm-glib docbook-xsl
-# install Qt5 development packages
-RUN pacman --noconfirm -S qt5-base qt5-x11extras qt5-xmlpatterns qt5-svg qt5-script qt5-tools qt5-declarative
+# -> Essentials
+RUN pacman --noconfirm -S gcc git cmake make vim tree
+# -> kdesrc-build script
+RUN pacman --noconfirm -S perl perl-json perl-libwww perl-xml-parser dialog qt5-base # qmake
+# -> KDE Frameworks 5
+RUN pacman --noconfirm -S bzr doxygen       # libdbusmenu-qt
+RUN pacman --noconfirm -S qt5-script        # ki18n
+RUN pacman --noconfirm -S qt5-x11extras     # kwindowsystem
+RUN pacman --noconfirm -S docbook-xsl       # kdocbook
+RUN pacman --noconfirm -S qt5-tools         # kwidgetsaddons
+RUN pacman --noconfirm -S qt5-svg           # kiconthemes
+RUN pacman --noconfirm -S boost             # kactivities
+RUN pacman --noconfirm -S giflib            # khtml
+RUN pacman --noconfirm -S vlc               # phonon-vlc
+RUN pacman --noconfirm -S pkg-config        # phonon-gstreamer
+# -> KDE Workspace
+RUN pacman --noconfirm -S gtkmm gtkmm3      # kde-gtk-config
+RUN pacman --noconfirm -S xapian-core       # baloo
+RUN pacman --noconfirm -S libepoxy          # kwin
+RUN pacman --noconfirm -S libnm-glib        # libnm-qt
+RUN pacman --noconfirm -S fontforge         # oxygen-fonts
+RUN pacman --noconfirm -S qt5-quick1        # kdevplatform
+RUN pacman --noconfirm -S exiv2             # gwenview
+RUN pacman --noconfirm -S sane              # libksane
+
 # kde anongit url alias
 RUN su docker -c 'git config --global url."git://anongit.kde.org/".insteadOf kde:'
 
