@@ -27,6 +27,9 @@ RUN pacman --noconfirm -S perl perl-json perl-libwww perl-xml-parser dialog qt5-
 # khtml               |     giflib
 # phonon-vlc          |     vlc
 # phonon-gstreamer    |     pkg-config
+#-----------------------------------------------
+# Alternatively, you can install binary packages for kf5 from arch repositories :
+# RUN pacman --noconfirm -S kf5
 RUN pacman --noconfirm -S bzr doxygen qt5-script qt5-x11extras docbook-xsl qt5-tools \
     qt5-svg boost giflib vlc pkg-config
 # -> KDE Workspace
