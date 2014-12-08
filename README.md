@@ -39,7 +39,7 @@ Simple
 ------
 For a simple usage, just run the image
 
-    docker run -ti <distro>-kdedev /bin/bash
+    docker run -ti <distro>-kdedev
 
 Now you can login as simple user, clone the build script somewhere, define a
 `kdesrc-buildrc` config file and start building KDE.
