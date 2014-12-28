@@ -24,7 +24,7 @@ Dependencies installed
 Build
 =====
 
-First choose the distro your favorite distro
+First choose your favorite from the supported ones (`Archlinux` or `OpenSUSE`)
 
     ln -sf Dockerfile-<distro> Dockerfile
 
@@ -44,12 +44,10 @@ For a simple usage, just run the image
 Now you can login as simple user, clone the build script somewhere, define a
 `kdesrc-buildrc` config file and start building KDE.
 
-    su docker
-    cd /work
     git clone git://anongit.kde.org/kdesrc-build.git
     cd kdesrc-build
     cp kdesrc-buildrc-kf5-sample kdesrc-buildrc
-    vim kdesrc-buildrc
+    vim kdesrc-buildrc # edit the rc file to setup your desired build
     ./kdesrc-build <args>
 
 You can find more info about this script [on the KDE Wiki](https://techbase.kde.org/Getting_Started/Build/kdesrc-build)
@@ -58,11 +56,12 @@ Sources outside of the container
 --------------------------------
 
 Maybe you would like the keep the source code outside of the container,
-so you can make changes with your favorite IDE and just use the container
+so you can make changes with your favorite IDE and use the Docker container
 to build KDE.
 
 You just have to mount a volume on the container
 
     docker run -ti -v ~/path/to/mnt/dir:/work <distro>-kdedev
 
-And here you go !
+On your host system, go into that `/path/to/mnt/dir`, clone `kdesrc-build` and configure it.
+When you want to build, get back on the `kdedev container` , and run `./kdesrc-build`
