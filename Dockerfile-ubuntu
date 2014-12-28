@@ -37,5 +37,5 @@ RUN su docker -c 'cd /home/docker && git clone git://anongit.kde.org/kdesrc-buil
 
 VOLUME /work
 RUN chown docker:users /work
-
-ENTRYPOINT "/bin/bash"
+WORKDIR /work
+ENTRYPOINT ["sudo -u docker /bin/bash"]
