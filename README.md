@@ -39,7 +39,7 @@ Simple
 ------
 For a simple usage, just run the image
 
-    docker run -ti <distro>-kdedev
+    docker run -ti -u docker <distro>-kdedev
 
 Now you can login as simple user, clone the build script somewhere, define a
 `kdesrc-buildrc` config file and start building KDE.
@@ -61,7 +61,7 @@ to build KDE.
 
 You just have to mount a volume on the container
 
-    docker run -ti -v ~/path/to/mnt/dir:/work <distro>-kdedev
+    docker run -ti -u docker -v ~/path/to/mnt/dir:/work <distro>-kdedev
 
 On your host system, go into that `/path/to/mnt/dir`, clone `kdesrc-build` and configure it.
 When you want to build, get back on the `kdedev container` , and run `./kdesrc-build`
