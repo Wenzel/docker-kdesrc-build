@@ -11,29 +11,45 @@ RUN useradd -m docker
 RUN apt-get install -y sudo
 RUN echo "docker ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-# install some dev tools
-#-------------
-RUN apt-get install -y git vim tree
-
 # add Qt5 repo
 #---------------
 RUN apt-add-repository ppa:ubuntu-sdk-team/ppa && apt-get update
 
-# kdesrc-build requirements
+# Install dependencies
 #---------------------------
-RUN apt-get install -y g++ cmake tar bzr doxygen
-RUN apt-get install -y libwww-perl libxml-parser-perl libjson-perl dialog gettext libxrender-dev pkg-config libxcb-keysyms1-dev docbook-xsl libxslt1-dev libxml2-utils libudev-dev
-RUN apt-get install -y libqt4-dev # -> qmake
-# install Qt5 development packages
-RUN apt-get install -y qt5-default libqt5svg5-dev libqt5xmlpatterns5-dev qtscript5-dev libqt5x11extras5-dev qttools5-dev
+# -> Essentials
+RUN apt-get install -y git bzr vim tree g++ cmake tar doxygen
+# -> kdesrc-build script
+RUN apt-get install -y libwww-perl libxml-parser-perl libjson-perl dialog gettext libxrender-dev pkg-config libxcb-keysyms1-dev docbook-xsl libxslt1-dev libxml2-utils libudev-dev libqt4-dev
+# -> KDE Frameworks 5
+# KF5 COMPONENT         |     BUILD DEPENDENCY
+#-----------------------|------------------------
+# ki18n                 |       qtscript5-dev
+# kwindowsystem         |       libqt5x11extras5-dev
+# kwidgetsaddons        |       qttools5-dev
+# kiconthemes           |       libqt5svg5-dev
+# kwallet               |       libgcrypt20-dev
+# kdeclarative          |       qtdeclarative5-dev
+# kactivities           |       libboost1.54-dev
+# kdewebkit             |       libqt5webkit5-dev
+# kdelib4support        |       libsm-dev
+# khtml                 |       libgif-dev libjpeg-dev libpng-dev
+# ktexteditor           |       libqt5xmlpatterns5-dev
+# phonon-vlc            |       libvlc-dev libvlccore-dev
+# akonadi               |       xsltproc
+# networkmanager-qt     |       libnm-glib-dev
+#-----------------------------------------------
+RUN apt-get install -y qtscript5-dev libqtx11extras5-dev qttools5-dev \
+                        libqt5svg5-dev libgcrypt20-dev qtdeclarative5-dev \
+                        libboost1.54-dev libqt5webkit5-dev libsm-dev \
+                        libgif-dev libjpeg-dev libpng-dev \
+                        libqt5xmlpatterns5-dev libvlc-dev libvlccore-dev \
+                        xsltproc libnm-glib-dev
+
 # kde anongit url alias
 RUN su docker -c 'git config --global url."git://anongit.kde.org/".insteadOf kde:'
 # quick fix with bzr and ssl-certs
 RUN su docker -c 'mkdir /home/docker/.bazaar && echo "[DEFAULT]\n\tssl.cert_reqs=none" >> /home/docker/.bazaar/bazaar.conf'
-
-# clone kdesrc-build
-#----------------------
-RUN su docker -c 'cd /home/docker && git clone git://anongit.kde.org/kdesrc-build.git'
 
 VOLUME /work
 RUN chown docker:users /work
