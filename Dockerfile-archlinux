@@ -12,39 +12,40 @@ RUN echo "docker ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 # Install dependencies
 #---------------------------
 # -> Essentials
-RUN pacman --noconfirm -S gcc git cmake make vim tree openssh
+RUN pacman --noconfirm -S gcc git cmake make vim doxygen bzr
 # -> kdesrc-build script
-RUN pacman --noconfirm -S perl perl-json perl-libwww perl-xml-parser dialog qt5-base # qmake
+RUN pacman --noconfirm -S perl perl-json perl-libwww perl-xml-parser dialog \
+                            qt5-base # qmake
 # -> KDE Frameworks 5
-# KF5 COMPONENT       |     BUILD DEPENDENCY
-#---------------------|------------------------
-# ki18n               |     qt5-script
-# kwindowsystem       |     qt5-x11extras
-# kdocbook            |     docbook-xsl
-# kwidgetsaddons      |     qt5-tools
-# kiconthemes         |     qt5-svg
-# kactivities         |     boost
-# khtml               |     giflib
-# phonon-vlc          |     vlc
-# phonon-gstreamer    |     pkg-config
+# KF5 COMPONENT         |       BUILD DEPENDENCY
+#-----------------------|--------------------------
+# ki18n                 |       qt5-script
+# kwindowsystem         |       qt5-x11extras
+# kdocbook              |       docbook-xsl
+# kwidgetsaddons        |       qt5-tools
+# kiconthemes           |       qt5-svg
+# kactivities           |       boost
+# khtml                 |       giflib
+# phonon-vlc            |       vlc
+# phonon-gstreamer      |       pkg-config
 #-----------------------------------------------
 # Alternatively, you can install binary packages for kf5 from arch repositories :
 # RUN pacman --noconfirm -S kf5
-RUN pacman --noconfirm -S bzr doxygen qt5-script qt5-x11extras docbook-xsl qt5-tools \
-    qt5-svg boost giflib vlc pkg-config
+RUN pacman --noconfirm -S qt5-script qt5-x11extras docbook-xsl qt5-tools \
+                            qt5-svg boost giflib vlc pkg-config
 # -> KDE Workspace
-# KDE WORKSPACE COMP  |     BUILD DEPENDENCY
-#---------------------|------------------------
-# kde-gtk-config      |     gtkmm gtkmm3
-# baloo               |     xapian-core
-# kwin                |     libepoxy
-# libnm-qt            |     libnm-glib
-# oxygen-fonts        |     fontforge
-# kdevplatform        |     qt5-quick1
-# gwenview            |     exiv2
-# libksane            |     sane
-RUN pacman --noconfirm -S gtkmm gtkmm3 xapian-core libepoxy libnm-glib fontforge \
-    qt5-quick1 exiv2 sane
+# KDE WORKSPACE COMP    |         BUILD DEPENDENCY
+#-----------------------|----------------------------
+# kde-gtk-config        |         gtkmm gtkmm3
+# baloo                 |         xapian-core
+# kwin                  |         libepoxy
+# libnm-qt              |         libnm-glib
+# oxygen-fonts          |         fontforge
+# kdevplatform          |         qt5-quick1
+# gwenview              |         exiv2
+# libksane              |         sane
+RUN pacman --noconfirm -S gtkmm gtkmm3 xapian-core libepoxy libnm-glib \
+                            fontforge qt5-quick1 exiv2 sane
 
 # kde anongit url alias
 RUN su docker -c 'git config --global url."git://anongit.kde.org/".insteadOf kde:'
