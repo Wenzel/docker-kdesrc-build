@@ -1,30 +1,28 @@
 docker-kdesrc-build
 ===================
-This project aims to provide containers to KDE developers 
+This project aims to provide Dockerfiles to KDE developers 
 who would like to build the project from source with the `kdesrc-build` script, 
-without messing with package dependencies and distro specific issues.
+without messing with build dependencies and distro specific issues.
 
-Supported distros
+Tested distros
 -----------------
 
 * `Archlinux`
-* `OpenSUSE`
-* `Ubuntu` (TODO)
+* `Ubuntu`
+* `OpenSUSE` (TODO)
 * `Fedora` (TODO)
 
 Dependencies installed
 ----------------------
 
-* `kdesrc-build` (`perl`, `perl-JSON`, `perl-libww`, `perl-parser-xml`)
-* `KDE Frameworks 5` (`Qt5`)
-* `KDE Workspace` (TODO)
-* `KDE Applications` (TODO)
-* `KDE PIM` (TODO)
+* `kdesrc-build`
+* `KDE Frameworks 5`
+* `KDE Workspace` (only `archlinux`)
 
 Build
 =====
 
-First choose your favorite from the supported ones (`Archlinux` or `OpenSUSE`)
+First choose your favorite distro
 
     ln -sf Dockerfile-<distro> Dockerfile
 
