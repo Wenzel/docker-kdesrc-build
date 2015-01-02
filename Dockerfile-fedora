@@ -6,20 +6,32 @@ RUN yum -y upgrade
 # add simple user
 #------------------
 RUN useradd -m docker
-RUN yum -y install sudo
+UN yum -y install sudo
 RUN echo "docker ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-# install some dev tools
-#-------------
-RUN yum -y install git vim tree
-
-# kdesrc-build requirements
+# Install dependencies
 #---------------------------
-RUN yum -y install gcc-c++ cmake bzr doxygen
-RUN yum -y install dialog perl-libwww-perl perl-JSON perl-XML-Parser gettext docbook-style-xsl xcb-util-keysyms-devel libxslt-devel libxml2-devel libXrender-devel libgudev1-devel
-RUN yum -y install qt-develop qt-config
-# install Qt5 development packages
-RUN yum -y install qt5-qtbase-devel qt5-qtxmlpatterns-devel qt5-qtx11extras-devel qt5-qttools-devel qt5-qtsvg-devel qt5-qtscript-devel qt5-qttools-static
+# -> Essentials
+RUN yum -y install gcc-c++ git doxygen cmake bzr vim
+# -> kdesrc-build script
+RUN yum -y install dialog perl-libwww-perl perl-JSON perl-XML-Parser \
+                    qt5-qtbase-devel # qmake
+# -> KDE Frameworks 5
+# KF5 COMPONENT         |       BUILD DEPENDENCY
+#-----------------------|--------------------------
+# ki18n                 |       qt5-qtscript-devel
+# kwindowsystem         |       qt5-qtx11extras-devel libXrender-devel xcb-util-keysyms-devel
+# karchive              |       zlib-devel
+# kdoctools             |       libxslt-devel docbook-style-xsl
+# kwidgetsaddons        |       qt5-qttools-devel qt5-qttools-static
+# kiconthemes           |       qt5-qtsvg-devel
+# solid                 |       ?
+#-----------------------------------------------
+RUN yum install -y qt5-qtscript-devel qt5-qtx11extras-devel libXrender-devel \
+                    xcb-util-keysyms-devel zlib-devel libxslt-devel \
+                    docbook-style-xsl qt5-qttools-devel qt5-qttools-static \
+                    qt5-qtsvg-devel
+
 # kde anongit url alias
 RUN su docker -c 'git config --global url."git://anongit.kde.org/".insteadOf kde:'
 
