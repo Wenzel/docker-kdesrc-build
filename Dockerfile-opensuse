@@ -1,27 +1,48 @@
 FROM boombatower/opensuse:latest
 MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
-# general dev tools
-#--------------------
-RUN zypper --non-interactive in git vim
-
 # add simple user
 #-----------------
 RUN useradd -m docker
 RUN zypper --non-interactive in sudo
 RUN echo "docker ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-# kdesrc-build requirements 
-#------------------
-# packages
-RUN zypper --non-interactive in -f bzr cmake doxygen
-RUN zypper --non-interactive in -f perl-libwww-perl perl-XML-Parser perl-JSON dialog 
-RUN zypper --non-interactive in -f tar gettext-tools-mini xcb-util-keysyms-devel libxslt-devel libxml2-devel docbook-xsl-stylesheets libudev-mini-devel boost-devel giflib-devel vlc-devel gstreamer-plugins-base-devel
-# qt5 repo
+# add Qt5 repo
+#---------------
 RUN zypper ar -f "http://download.opensuse.org/repositories/KDE:/Qt5/openSUSE_13.1/" "Qt5"
 RUN zypper --non-interactive --gpg-auto-import-keys refresh
-# qt5 packages
-RUN zypper --non-interactive in -f libqt4-devel libqt5-qtbase-private-headers-devel libQt5Core-devel libQt5Network-devel libQt5Test-devel libQt5Widgets-devel libQt5Xml-devel libQt5Script-devel libqt5-qtx11extras-devel libqt5-qttools-devel libqt5-qtsvg-devel libqt5-qtquick1-devel libQt5WebKit5-devel libQt5WebKitWidgets-devel libqt5-qtxmlpatterns-devel
+
+# Install dependencies
+#---------------------------
+# -> Essentials
+RUN zypper --non-interactive in -f vim tar git bzr cmake doxygen
+# -> kdesrc-build script
+RUN zypper --non-interactive in -f perl-libwww-perl perl-XML-Parser perl-JSON \
+                                    dialog libqt4-devel # qmake
+# -> KDE Frameworks 5
+# KF5 COMPONENT         |     BUILD DEPENDENCY
+#-----------------------|------------------------
+# ki18n                 |       libQt5Script-devel
+# kwindowsystem         |       libqt5-x11extras-devel xcb-utils-keysyms-devel
+# kdoctools             |       libxslt-devel docbook-style-xsl
+# kwidgetsaddons        |       libqt5-qttools-devel
+# kiconthemes           |       libqt5-qtsvg-devel
+# kdeclarative          |       libqt5-qtquick1-devel
+# kactivities           |       boost-devel
+# solid                 |       libudev-mini-devel
+# kdewebkit             |       libQt5WebkKit5-devel libQt5WebKitWidgets-devel
+# khtml                 |       giflib-devel
+# ktexteditor           |       libqt5-qtxmlpatters-devel
+# phonon-vlc            |       vlc-devel
+#-----------------------------------------------
+RUN zypper --non-interactive in -f libQt5Script-devel libqt5-qtx11extras-devel \
+        libqt5-qttools-devel xcb-utils-keysyms-devel libxslt-devel \
+        docbook-style-xsl libqt5-qttools-devel libqt5-qtsvg-devel \
+        libqt5-qtquick1-devel boost-devel libudev-mini-devel \
+        libQt5WebKit5-devel libQt5WebKitWidgets-devel giflib-devel \
+        libqt5-qtxmlpatterns-devel vlc-devel
+
+
 # kde anongit url alias
 RUN su docker -c 'git config --global url."git://anongit.kde.org/".insteadOf kde:'
 # quick fix with bzr and ssl-certs
