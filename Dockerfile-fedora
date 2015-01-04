@@ -6,7 +6,7 @@ RUN yum -y upgrade
 # add simple user
 #------------------
 RUN useradd -m docker
-UN yum -y install sudo
+RUN yum -y install sudo
 RUN echo "docker ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Install dependencies
