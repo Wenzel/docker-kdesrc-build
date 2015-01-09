@@ -39,7 +39,7 @@ RUN apt-get install -y libwww-perl libxml-parser-perl libjson-perl dialog gettex
 # akonadi               |       xsltproc
 # networkmanager-qt     |       libnm-glib-dev
 #-----------------------------------------------
-RUN apt-get install -y qtscript5-dev libqtx11extras5-dev qttools5-dev \
+RUN apt-get install -y qtscript5-dev libqt5x11extras5-dev qttools5-dev \
                         libqt5svg5-dev libgcrypt20-dev qtdeclarative5-dev \
                         libboost1.54-dev libqt5webkit5-dev libsm-dev \
                         libgif-dev libjpeg-dev libpng-dev \
