@@ -1,9 +1,10 @@
-FROM boombatower/opensuse:latest
+FROM opensuse:13.1
 MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
 # add simple user
 #-----------------
 RUN useradd -m docker
+RUN zypper -n --gpg-auto-import-keys refresh
 RUN zypper --non-interactive in sudo
 RUN echo "docker ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
@@ -15,16 +16,16 @@ RUN zypper --non-interactive --gpg-auto-import-keys refresh
 # Install dependencies
 #---------------------------
 # -> Essentials
-RUN zypper --non-interactive in -f vim tar git bzr cmake doxygen
+RUN zypper --non-interactive in vim tar git bzr cmake doxygen
 # -> kdesrc-build script
-RUN zypper --non-interactive in -f perl-libwww-perl perl-XML-Parser perl-JSON \
+RUN zypper --non-interactive in --download-as-needed perl-libwww-perl perl-XML-Parser perl-JSON \
                                     dialog libqt4-devel # qmake
 # -> KDE Frameworks 5
 # KF5 COMPONENT         |     BUILD DEPENDENCY
 #-----------------------|------------------------
-# ki18n                 |       libQt5Script-devel
-# kwindowsystem         |       libqt5-x11extras-devel xcb-utils-keysyms-devel
-# kdoctools             |       libxslt-devel docbook-style-xsl
+# ki18n                 |       libqt5-qtscript-devel
+# kwindowsystem         |       libqt5-x11extras-devel xcb-util-keysyms-devel
+# kdoctools             |       libxslt-devel docbook-xsl-stylesheets
 # kwidgetsaddons        |       libqt5-qttools-devel
 # kiconthemes           |       libqt5-qtsvg-devel
 # kdeclarative          |       libqt5-qtquick1-devel
@@ -35,9 +36,9 @@ RUN zypper --non-interactive in -f perl-libwww-perl perl-XML-Parser perl-JSON \
 # ktexteditor           |       libqt5-qtxmlpatters-devel
 # phonon-vlc            |       vlc-devel
 #-----------------------------------------------
-RUN zypper --non-interactive in -f libQt5Script-devel libqt5-qtx11extras-devel \
-        libqt5-qttools-devel xcb-utils-keysyms-devel libxslt-devel \
-        docbook-style-xsl libqt5-qttools-devel libqt5-qtsvg-devel \
+RUN zypper --non-interactive in --download-as-needed libqt5-qtscript-devel libqt5-qtx11extras-devel \
+        libqt5-qttools-devel xcb-util-keysyms-devel libxslt-devel \
+        docbook-xsl-stylesheets libqt5-qttools-devel libqt5-qtsvg-devel \
         libqt5-qtquick1-devel boost-devel libudev-mini-devel \
         libQt5WebKit5-devel libQt5WebKitWidgets-devel giflib-devel \
         libqt5-qtxmlpatterns-devel vlc-devel
