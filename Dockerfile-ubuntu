@@ -1,9 +1,8 @@
-FROM ubuntu:latest
+FROM ubuntu:14.04
 MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN (apt-get update -y && apt-get dist-upgrade -y && apt-get autoremove -y && apt-get clean -y)
-RUN apt-get install -y software-properties-common
 
 # add simple user
 #------------------
@@ -13,7 +12,7 @@ RUN echo "docker ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # add Qt5 repo
 #---------------
-RUN apt-add-repository ppa:ubuntu-sdk-team/ppa && apt-get update
+RUN echo 'deb http://ppa.launchpad.net/ubuntu-sdk-team/ppa/ubuntu trusty main' >> /etc/apt/sources.list.d/ubuntu-sdk-team-ppa-trusty.list
 
 # Install dependencies
 #---------------------------
