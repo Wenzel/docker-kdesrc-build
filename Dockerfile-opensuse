@@ -18,11 +18,12 @@ RUN zypper --non-interactive --gpg-auto-import-keys refresh
 # -> Essentials
 RUN zypper --non-interactive in vim tar git bzr cmake doxygen
 # -> kdesrc-build script
-RUN zypper --non-interactive in --download-as-needed perl-libwww-perl perl-XML-Parser perl-JSON \
-                                    dialog libqt4-devel # qmake
+RUN zypper --non-interactive in --download-as-needed in perl-libwww-perl perl-XML-Parser perl-JSON \
+                                    dialog python libqt4-devel # qmake
 # -> KDE Frameworks 5
 # KF5 COMPONENT         |     BUILD DEPENDENCY
 #-----------------------|------------------------
+# libdbusmenu-qt        |       libQt5DBus-devel
 # ki18n                 |       libqt5-qtscript-devel
 # kwindowsystem         |       libqt5-x11extras-devel xcb-util-keysyms-devel
 # kdoctools             |       libxslt-devel docbook-xsl-stylesheets
@@ -36,7 +37,7 @@ RUN zypper --non-interactive in --download-as-needed perl-libwww-perl perl-XML-P
 # ktexteditor           |       libqt5-qtxmlpatters-devel
 # phonon-vlc            |       vlc-devel
 #-----------------------------------------------
-RUN zypper --non-interactive in --download-as-needed libqt5-qtscript-devel libqt5-qtx11extras-devel \
+RUN zypper --non-interactive in --download-as-needed libQt5DBus-devel libqt5-qtscript-devel libqt5-qtx11extras-devel \
         libqt5-qttools-devel xcb-util-keysyms-devel libxslt-devel \
         docbook-xsl-stylesheets libqt5-qttools-devel libqt5-qtsvg-devel \
         libqt5-qtquick1-devel boost-devel libudev-mini-devel \
