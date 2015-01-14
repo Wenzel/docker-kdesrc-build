@@ -28,21 +28,23 @@ RUN apt-get install -y libwww-perl libxml-parser-perl libjson-perl dialog gettex
 # kwidgetsaddons        |       qttools5-dev
 # kiconthemes           |       libqt5svg5-dev
 # kwallet               |       libgcrypt20-dev
-# kdeclarative          |       qtdeclarative5-dev
+# kdeclarative          |       qtdeclarative5-dev libepoxy-dev
 # kactivities           |       libboost1.54-dev
 # kdewebkit             |       libqt5webkit5-dev
 # kdelib4support        |       libsm-dev
 # khtml                 |       libgif-dev libjpeg-dev libpng-dev
+# frameworkintegration  |       libxcursor-dev
 # ktexteditor           |       libqt5xmlpatterns5-dev
+# polkit-qt-1           |       libpolkit-agent-1-dev
 # phonon-vlc            |       libvlc-dev libvlccore-dev
 # akonadi               |       xsltproc
 # networkmanager-qt     |       libnm-glib-dev
 #-----------------------------------------------
-RUN apt-get install -y qtscript5-dev libqt5x11extras5-dev qttools5-dev \
+RUN apt-get install -y tscript5-dev libqt5x11extras5-dev qttools5-dev \
                         libqt5svg5-dev libgcrypt20-dev qtdeclarative5-dev \
-                        libboost1.54-dev libqt5webkit5-dev libsm-dev \
-                        libgif-dev libjpeg-dev libpng-dev \
-                        libqt5xmlpatterns5-dev libvlc-dev libvlccore-dev \
+                        libepoxy-dev libboost1.54-dev libqt5webkit5-dev libsm-dev \
+                        libgif-dev libjpeg-dev libpng-dev libxcursor-dev \
+                        libqt5xmlpatterns5-dev libpolkit-agent-1-dev libvlc-dev libvlccore-dev \
                         xsltproc libnm-glib-dev
 
 # kde anongit url alias
