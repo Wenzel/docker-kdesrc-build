@@ -75,7 +75,7 @@ When building Workspace :
 
 - `bluedevil`
 
-       Cannot find libbludevil.cmake
+        Cannot find libbludevil.cmake
 
 - `libbluedevil`
 
