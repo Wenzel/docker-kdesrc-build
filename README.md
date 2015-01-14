@@ -95,6 +95,8 @@ When building Workspace :
 OpenSUSE
 --------
 
+When building Frameworks :
+
 - `libdbusmenu-qt`
 
         Make Error in src/CMakeLists.txt:
