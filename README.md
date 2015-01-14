@@ -9,7 +9,7 @@ Tested distros
 
 * `Archlinux`
 * `Ubuntu`
-* `OpenSUSE` (TODO)
+* `OpenSUSE`
 * `Fedora` (TODO)
 
 Dependencies installed
@@ -64,3 +64,40 @@ You just have to mount a volume on the container
 
 On your host system, go into `/path/to/mnt/dir`, clone `kdesrc-build` and configure it.
 When you want to build, get back on the `kdedev container` , and run `./kdesrc-build`
+
+TODO
+====
+
+Archlinux
+----------
+
+When building Workspace :
+
+- `bluedevil`
+
+   Cannot find libbludevil.cmake
+
+- `libbluedevil`
+
+    CMake Error: The following variables are used in this project, but they are set to NOTFOUND.
+    Please set them or make sure they are set and tested correctly in the CMake files:
+    QT_QT_INCLUDE_DIR (ADVANCED)
+        used as include directory in directory /work/full/source/kde/workspace/libbluedevil/bluedevil
+        used as include directory in directory /work/full/source/kde/workspace/libbluedevil/bluedevil/test
+        used as include directory in directory /work/full/source/kde/workspace/libbluedevil/bluedevil/test
+
+- `plasmate`
+
+    CMake Error at /usr/share/cmake-3.1/Modules/FindPackageHandleStandardArgs.cmake:138 (message):
+    Could NOT find KDevPlatform (missing: KDevPlatform_CONFIG) (Required is at
+    least version "1.90.60")
+
+OpenSUSE
+--------
+
+- `libdbusmenu-qt`
+
+        Make Error in src/CMakeLists.txt:
+        Target "dbusmenu-qt5" INTERFACE_INCLUDE_DIRECTORIES property contains
+        relative path:
+        "include/dbusmenu-qt5"
