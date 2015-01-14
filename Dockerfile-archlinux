@@ -6,6 +6,7 @@ RUN pacman --noconfirm -Syu
 # add simple user
 #------------------
 RUN useradd -m docker
+RUN pacman-db-upgrade
 RUN pacman --noconfirm -S sudo
 RUN echo "docker ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
@@ -34,18 +35,23 @@ RUN pacman --noconfirm -S perl perl-json perl-libwww perl-xml-parser dialog \
 RUN pacman --noconfirm -S qt5-script qt5-x11extras docbook-xsl qt5-tools \
                             qt5-svg boost giflib vlc pkg-config
 # -> KDE Workspace
-# KDE WORKSPACE COMP    |         BUILD DEPENDENCY
+# KDE WORKSPACE COMP    |       BUILD DEPENDENCY
 #-----------------------|----------------------------
-# kde-gtk-config        |         gtkmm gtkmm3
-# baloo                 |         xapian-core
-# kwin                  |         libepoxy
-# libnm-qt              |         libnm-glib
-# oxygen-fonts          |         fontforge
-# kdevplatform          |         qt5-quick1
-# gwenview              |         exiv2
-# libksane              |         sane
-RUN pacman --noconfirm -S gtkmm gtkmm3 xapian-core libepoxy libnm-glib \
-                            fontforge qt5-quick1 exiv2 sane
+# user-manager          |       libpwquality
+# kcm-touchpad          |       xf86-input-synaptics
+# kde-gtk-config        |       gtkmm gtkmm3
+# baloo                 |       xapian-core
+# kwin                  |       libepoxy
+# libnm-qt              |       libmm-glib
+# libbluedevil          |
+# plasmate              |
+# oxygen-fonts          |       fontforge
+# kdevplatform          |       qt5-quick1
+# gwenview              |       exiv2
+# libksane              |       sane
+RUN pacman --noconfirm -S libpwquality xf86-input-synaptics gtkmm gtkmm3 \
+                            xapian-core libepoxy libmm-glib fontforge \
+                            qt5-quick1 exiv2 sane
 
 # kde anongit url alias
 RUN su docker -c 'git config --global url."git://anongit.kde.org/".insteadOf kde:'
