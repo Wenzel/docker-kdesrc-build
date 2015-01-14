@@ -3,16 +3,10 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
 RUN pacman --noconfirm -Syu
 
-# add simple user
-#------------------
-RUN useradd -m docker
-RUN pacman-db-upgrade
-RUN pacman --noconfirm -S sudo
-RUN echo "docker ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-
 # Install dependencies
 #---------------------------
 # -> Essentials
+RUN pacman-db-upgrade
 RUN pacman --noconfirm -S gcc git cmake make vim doxygen bzr
 # -> kdesrc-build script
 RUN pacman --noconfirm -S perl perl-json perl-libwww perl-xml-parser dialog \
@@ -54,9 +48,8 @@ RUN pacman --noconfirm -S libpwquality xf86-input-synaptics gtkmm gtkmm3 \
                             qt5-quick1 exiv2 sane
 
 # kde anongit url alias
-RUN su docker -c 'git config --global url."git://anongit.kde.org/".insteadOf kde:'
+RUN git config --global url."git://anongit.kde.org/".insteadOf kde:
 
 VOLUME /work
-RUN chown docker:docker /work
 WORKDIR /work
 ENTRYPOINT ["/bin/bash"]

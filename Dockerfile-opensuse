@@ -1,15 +1,10 @@
 FROM opensuse:13.1
 MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
-# add simple user
-#-----------------
-RUN useradd -m docker
-RUN zypper -n --gpg-auto-import-keys refresh
-RUN zypper --non-interactive in sudo
-RUN echo "docker ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # add Qt5 repo
 #---------------
+RUN zypper -n --gpg-auto-import-keys refresh
 RUN zypper ar -f "http://download.opensuse.org/repositories/KDE:/Qt5/openSUSE_13.1/" "Qt5"
 RUN zypper --non-interactive --gpg-auto-import-keys refresh
 
@@ -18,7 +13,7 @@ RUN zypper --non-interactive --gpg-auto-import-keys refresh
 # -> Essentials
 RUN zypper --non-interactive in vim tar git bzr cmake doxygen
 # -> kdesrc-build script
-RUN zypper --non-interactive in --download-as-needed in perl-libwww-perl perl-XML-Parser perl-JSON \
+RUN zypper --non-interactive in --download-as-needed perl-libwww-perl perl-XML-Parser perl-JSON \
                                     dialog python libqt4-devel # qmake
 # -> KDE Frameworks 5
 # KF5 COMPONENT         |     BUILD DEPENDENCY
@@ -46,11 +41,10 @@ RUN zypper --non-interactive in --download-as-needed libQt5DBus-devel libqt5-qts
 
 
 # kde anongit url alias
-RUN su docker -c 'git config --global url."git://anongit.kde.org/".insteadOf kde:'
+RUN git config --global url."git://anongit.kde.org/".insteadOf kde:
 # quick fix with bzr and ssl-certs
-RUN su docker -c 'mkdir /home/docker/.bazaar && echo -e "[DEFAULT]\n\tssl.cert_reqs=none" > /home/docker/.bazaar/bazaar.conf'
+RUN mkdir /root/.bazaar && echo -e "[DEFAULT]\n\tssl.cert_reqs=none" > /root/.bazaar/bazaar.conf
 
 VOLUME /work
-RUN chown docker:users /work
 WORKDIR /work
 ENTRYPOINT ["/bin/bash"]

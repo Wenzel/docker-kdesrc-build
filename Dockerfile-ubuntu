@@ -4,12 +4,6 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 ENV DEBIAN_FRONTEND noninteractive
 RUN (apt-get update -y && apt-get dist-upgrade -y && apt-get autoremove -y && apt-get clean -y)
 
-# add simple user
-#------------------
-RUN useradd -m docker
-RUN apt-get install -y sudo
-RUN echo "docker ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-
 # add Qt5 repo
 #---------------
 RUN echo 'deb http://ppa.launchpad.net/ubuntu-sdk-team/ppa/ubuntu trusty main' >> /etc/apt/sources.list.d/ubuntu-sdk-team-ppa-trusty.list
@@ -40,7 +34,7 @@ RUN apt-get install -y libwww-perl libxml-parser-perl libjson-perl dialog gettex
 # akonadi               |       xsltproc
 # networkmanager-qt     |       libnm-glib-dev
 #-----------------------------------------------
-RUN apt-get install -y tscript5-dev libqt5x11extras5-dev qttools5-dev \
+RUN apt-get install -y qtscript5-dev libqt5x11extras5-dev qttools5-dev \
                         libqt5svg5-dev libgcrypt20-dev qtdeclarative5-dev \
                         libepoxy-dev libboost1.54-dev libqt5webkit5-dev libsm-dev \
                         libgif-dev libjpeg-dev libpng-dev libxcursor-dev \
@@ -48,11 +42,10 @@ RUN apt-get install -y tscript5-dev libqt5x11extras5-dev qttools5-dev \
                         xsltproc libnm-glib-dev
 
 # kde anongit url alias
-RUN su docker -c 'git config --global url."git://anongit.kde.org/".insteadOf kde:'
+RUN git config --global url."git://anongit.kde.org/".insteadOf kde:
 # quick fix with bzr and ssl-certs
-RUN su docker -c 'mkdir /home/docker/.bazaar && echo "[DEFAULT]\n\tssl.cert_reqs=none" >> /home/docker/.bazaar/bazaar.conf'
+RUN mkdir /root/.bazaar && echo "[DEFAULT]\n\tssl.cert_reqs=none" >> /root/.bazaar/bazaar.conf
 
 VOLUME /work
-RUN chown docker:users /work
 WORKDIR /work
 ENTRYPOINT ["/bin/bash"]

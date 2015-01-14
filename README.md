@@ -42,7 +42,6 @@ For a simple usage, just run the image
 Now you can login as simple user, clone the build script somewhere, define a
 `kdesrc-buildrc` config file and start building KDE.
 
-    su docker
     git clone git://anongit.kde.org/kdesrc-build.git
     cd kdesrc-build
     cp kdesrc-buildrc-kf5-sample kdesrc-buildrc
@@ -103,3 +102,22 @@ When building Frameworks :
         Target "dbusmenu-qt5" INTERFACE_INCLUDE_DIRECTORIES property contains
         relative path:
         "include/dbusmenu-qt5"
+
+Fedora
+------
+
+When building Frameworks :
+
+- `solid`
+
+        -- The following REQUIRED packages have not been found:
+         * UDev , UDev support for Solid , <http://www.kernel.org/pub/linux/utils/kernel/hotplug/udev.html>
+           Allows Solid to use UDev to provide information about devices on Linux
+
+
+Ubuntu
+------
+
+When building Frameworks :
+
+

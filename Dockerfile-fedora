@@ -3,16 +3,10 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
 RUN yum -y upgrade
 
-# add simple user
-#------------------
-RUN useradd -m docker
-RUN yum -y install sudo
-RUN echo "docker ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-
 # Install dependencies
 #---------------------------
 # -> Essentials
-RUN yum -y install gcc-c++ git doxygen cmake bzr vim
+RUN yum -y install gcc-c++ git doxygen cmake bzr vim tar
 # -> kdesrc-build script
 RUN yum -y install dialog perl-libwww-perl perl-JSON perl-XML-Parser \
                     qt5-qtbase-devel # qmake
@@ -33,9 +27,8 @@ RUN yum install -y qt5-qtscript-devel qt5-qtx11extras-devel libXrender-devel \
                     qt5-qtsvg-devel
 
 # kde anongit url alias
-RUN su docker -c 'git config --global url."git://anongit.kde.org/".insteadOf kde:'
+RUN git config --global url."git://anongit.kde.org/".insteadOf kde:
 
 VOLUME /work
-RUN chown docker:users /work
 WORKDIR /work
 ENTRYPOINT ["/bin/bash"]
