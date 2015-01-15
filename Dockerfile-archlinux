@@ -33,7 +33,7 @@ RUN pacman --noconfirm -S qt5-script qt5-x11extras docbook-xsl qt5-tools \
 # KDE WORKSPACE COMP    |       BUILD DEPENDENCY
 #-----------------------|----------------------------
 # user-manager          |       libpwquality
-# kcm-touchpad          |       xf86-input-synaptics
+# kcm-touchpad          |       xf86-input-synaptics xorg-server-devel
 # kde-gtk-config        |       gtkmm gtkmm3
 # baloo                 |       xapian-core
 # kwin                  |       libepoxy
