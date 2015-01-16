@@ -17,7 +17,6 @@ Dependencies installed
 
 * `kdesrc-build`
 * `KDE Frameworks 5`
-* `KDE Workspace` (only `archlinux`)
 
 Build
 =====
