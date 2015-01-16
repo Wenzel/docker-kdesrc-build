@@ -38,7 +38,6 @@ RUN pacman --noconfirm -S qt5-script qt5-x11extras docbook-xsl qt5-tools \
 # baloo                 |       xapian-core
 # kwin                  |       libepoxy
 # libnm-qt              |       libmm-glib
-# libbluedevil          |
 # plasmate              |
 # oxygen-fonts          |       fontforge
 # kdevplatform          |       qt5-quick1
