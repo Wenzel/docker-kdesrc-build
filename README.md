@@ -8,8 +8,8 @@ Tested distros
 -----------------
 
 * `Archlinux`
-* `Ubuntu`
 * `OpenSUSE`
+* `Ubuntu` (TODO)
 * `Fedora` (TODO)
 
 Dependencies installed
