@@ -31,6 +31,7 @@ RUN zypper --non-interactive in perl-libwww-perl perl-XML-Parser perl-JSON \
 # solid                 |       libgudev-1_0-devel
 # kdewebkit             |       libQt5WebkKit5-devel libQt5WebKitWidgets-devel
 # khtml                 |       giflib-devel
+# frameworkintegration  |       libqt5-qtbase-private-headers-devel
 # ktexteditor           |       libqt5-qtxmlpatters-devel
 # polkit-qt-1           |       libpolkit-qt-1-devel
 # phonon-vlc            |       vlc-devel
@@ -52,6 +53,7 @@ RUN zypper --non-interactive in --download-as-needed \
         libgudev-1_0-devel \
         libQt5WebKit5-devel libQt5WebKitWidgets-devel \
         giflib-devel \
+        libqt5-qtbase-private-headers-devel \
         libqt5-qtxmlpatterns-devel \
         libpolkit-qt-1-devel \
         vlc-devel \
