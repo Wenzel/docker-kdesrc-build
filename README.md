@@ -91,18 +91,6 @@ When building Workspace :
         Could NOT find KDevPlatform (missing: KDevPlatform_CONFIG) (Required is at
         least version "1.90.60")
 
-OpenSUSE
---------
-
-When building Frameworks :
-
-- `libdbusmenu-qt`
-
-        Make Error in src/CMakeLists.txt:
-        Target "dbusmenu-qt5" INTERFACE_INCLUDE_DIRECTORIES property contains
-        relative path:
-        "include/dbusmenu-qt5"
-
 Fedora
 ------
 
@@ -113,11 +101,3 @@ When building Frameworks :
         -- The following REQUIRED packages have not been found:
          * UDev , UDev support for Solid , <http://www.kernel.org/pub/linux/utils/kernel/hotplug/udev.html>
            Allows Solid to use UDev to provide information about devices on Linux
-
-
-Ubuntu
-------
-
-When building Frameworks :
-
-
