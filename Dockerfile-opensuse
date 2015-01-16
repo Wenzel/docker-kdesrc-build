@@ -1,11 +1,11 @@
-FROM opensuse:13.1
+FROM opensuse:13.2
 MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
 
 # add Qt5 repo
 #---------------
 RUN zypper -n --gpg-auto-import-keys refresh
-RUN zypper ar -f "http://download.opensuse.org/repositories/KDE:/Qt5/openSUSE_13.1/" "Qt5"
+RUN zypper ar -f "http://download.opensuse.org/repositories/KDE:/Qt5/openSUSE_13.2/" "Qt5"
 RUN zypper --non-interactive --gpg-auto-import-keys refresh
 
 # Install dependencies
@@ -13,37 +13,54 @@ RUN zypper --non-interactive --gpg-auto-import-keys refresh
 # -> Essentials
 RUN zypper --non-interactive in vim tar git bzr cmake doxygen
 # -> kdesrc-build script
-RUN zypper --non-interactive in --download-as-needed perl-libwww-perl perl-XML-Parser perl-JSON \
-                                    dialog python libqt4-devel # qmake
+RUN zypper --non-interactive in perl-libwww-perl perl-XML-Parser perl-JSON \
+                                    dialog python ca-certificates libqt4-devel # qmake
 # -> KDE Frameworks 5
 # KF5 COMPONENT         |     BUILD DEPENDENCY
 #-----------------------|------------------------
 # libdbusmenu-qt        |       libQt5DBus-devel
-# ki18n                 |       libqt5-qtscript-devel
+# attica                |       libQt5Test-devel
+# ki18n                 |       gettext-tools libQt5Concurrent-devel
 # kwindowsystem         |       libqt5-x11extras-devel xcb-util-keysyms-devel
 # kdoctools             |       libxslt-devel docbook-xsl-stylesheets
 # kwidgetsaddons        |       libqt5-qttools-devel
+# kxml-gui              |       libQt5PrintSupport-devel
 # kiconthemes           |       libqt5-qtsvg-devel
-# kdeclarative          |       libqt5-qtquick1-devel
+# kdeclarative          |       libqt5-qtquick1-devel libepoxy-devel
 # kactivities           |       boost-devel
-# solid                 |       libudev-mini-devel
+# solid                 |       libgudev-1_0-devel
 # kdewebkit             |       libQt5WebkKit5-devel libQt5WebKitWidgets-devel
 # khtml                 |       giflib-devel
 # ktexteditor           |       libqt5-qtxmlpatters-devel
+# polkit-qt-1           |       libpolkit-qt-1-devel
 # phonon-vlc            |       vlc-devel
+# phonon-gstreamer      |       libQt5OpenGL-devel gstreamer-editing-services-devel
+# networkmanager-qt     |       NetworkManager-devel
+
 #-----------------------------------------------
-RUN zypper --non-interactive in --download-as-needed libQt5DBus-devel libqt5-qtscript-devel libqt5-qtx11extras-devel \
-        libqt5-qttools-devel xcb-util-keysyms-devel libxslt-devel \
-        docbook-xsl-stylesheets libqt5-qttools-devel libqt5-qtsvg-devel \
-        libqt5-qtquick1-devel boost-devel libudev-mini-devel \
-        libQt5WebKit5-devel libQt5WebKitWidgets-devel giflib-devel \
-        libqt5-qtxmlpatterns-devel vlc-devel
+RUN zypper --non-interactive in --download-as-needed \
+        libQt5DBus-devel \
+        libQt5Test-devel \
+        gettext-tools libQt5Concurrent-devel \
+        libqt5-qtx11extras-devel xcb-util-keysyms-devel \
+        libxslt-devel docbook-xsl-stylesheets \
+        libqt5-qttools-devel \
+        libQt5PrintSupport-devel \
+        libqt5-qtsvg-devel \
+        libqt5-qtquick1-devel libepoxy-devel \
+        boost-devel \
+        libgudev-1_0-devel \
+        libQt5WebKit5-devel libQt5WebKitWidgets-devel \
+        giflib-devel \
+        libqt5-qtxmlpatterns-devel \
+        libpolkit-qt-1-devel \
+        vlc-devel \
+        libQt5OpenGL-devel gstreamer-editing-services-devel \
+        NetworkManager-devel
 
 
 # kde anongit url alias
 RUN git config --global url."git://anongit.kde.org/".insteadOf kde:
-# quick fix with bzr and ssl-certs
-RUN mkdir /root/.bazaar && echo -e "[DEFAULT]\n\tssl.cert_reqs=none" > /root/.bazaar/bazaar.conf
 
 VOLUME /work
 WORKDIR /work
