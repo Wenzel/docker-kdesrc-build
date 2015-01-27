@@ -9,8 +9,8 @@ Tested distros
 
 * `Archlinux`
 * `OpenSUSE`
+* `Fedora`
 * `Ubuntu` (TODO)
-* `Fedora` (TODO)
 
 Dependencies installed
 ----------------------
@@ -81,17 +81,6 @@ In Workspace :
           /work/full/install/lib64/cmake/KF5KDELibs4Support/FindKDevPlatform.cmake:44 (find_package_handle_standard_args)
           plasmate/CMakeLists.txt:20 (find_package)
 
-
-Fedora
-------
-
-In Frameworks :
-
-- `solid`
-
-        -- The following REQUIRED packages have not been found:
-         * UDev , UDev support for Solid , <http://www.kernel.org/pub/linux/utils/kernel/hotplug/udev.html>
-           Allows Solid to use UDev to provide information about devices on Linux
 
 Ubuntu
 ------
