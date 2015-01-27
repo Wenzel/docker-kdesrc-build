@@ -1,8 +1,6 @@
 FROM ubuntu:14.04
 MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
-ENV DEBIAN_FRONTEND noninteractive
-RUN (apt-get update -y && apt-get dist-upgrade -y && apt-get autoremove -y && apt-get clean -y)
 
 # add Qt5 repo
 #---------------
@@ -11,7 +9,10 @@ RUN echo 'deb http://ppa.launchpad.net/ubuntu-sdk-team/ppa/ubuntu trusty main' >
 # Install dependencies
 #---------------------------
 # -> Essentials
-RUN apt-get install -y git bzr vim tree g++ cmake tar doxygen
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get update
+RUN apt-key adv --recv-keys
+RUN apt-get install -y git bzr vim g++ cmake tar doxygen
 # -> kdesrc-build script
 RUN apt-get install -y libwww-perl libxml-parser-perl libjson-perl dialog gettext libxrender-dev pkg-config libxcb-keysyms1-dev docbook-xsl libxslt1-dev libxml2-utils libudev-dev libqt4-dev
 # -> KDE Frameworks 5
@@ -34,12 +35,24 @@ RUN apt-get install -y libwww-perl libxml-parser-perl libjson-perl dialog gettex
 # akonadi               |       xsltproc
 # networkmanager-qt     |       libnm-glib-dev
 #-----------------------------------------------
-RUN apt-get install -y qtscript5-dev libqt5x11extras5-dev qttools5-dev \
-                        libqt5svg5-dev libgcrypt20-dev qtdeclarative5-dev \
-                        libepoxy-dev libboost1.54-dev libqt5webkit5-dev libsm-dev \
-                        libgif-dev libjpeg-dev libpng-dev libxcursor-dev \
-                        libqt5xmlpatterns5-dev libpolkit-agent-1-dev libvlc-dev libvlccore-dev \
-                        xsltproc libnm-glib-dev
+RUN apt-get install -y \
+                                qtscript5-dev \
+                                libqt5x11extras5-dev \
+                                qttools5-dev \
+                                libqt5svg5-dev \
+                                libgcrypt20-dev \
+                                qtdeclarative5-dev libepoxy-dev \
+                                libboost1.54-dev \
+                                libqt5webkit5-dev \
+                                libsm-dev \
+                                libgif-dev libjpeg-dev libpng-dev \
+                                libxcursor-dev \
+                                libqt5xmlpatterns5-dev \
+                                libpolkit-agent-1-dev \
+                                libvlc-dev \
+                                libvlccore-dev \
+                                xsltproc \
+                                libnm-glib-dev
 
 # kde anongit url alias
 RUN git config --global url."git://anongit.kde.org/".insteadOf kde:

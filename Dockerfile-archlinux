@@ -1,15 +1,14 @@
 FROM base/archlinux:latest
 MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
-RUN pacman --noconfirm -Syu
-
 # Install dependencies
 #---------------------------
 # -> Essentials
+RUN pacman --noconfirm -Syu
 RUN pacman-db-upgrade
-RUN pacman --noconfirm -S gcc git cmake make vim doxygen bzr
+RUN pacman --noconfirm -Sy gcc git cmake make vim doxygen bzr
 # -> kdesrc-build script
-RUN pacman --noconfirm -S perl perl-json perl-libwww perl-xml-parser dialog \
+RUN pacman --noconfirm -Sy perl perl-json perl-libwww perl-xml-parser dialog \
                             qt5-base # qmake
 # -> KDE Frameworks 5
 # KF5 COMPONENT         |       BUILD DEPENDENCY
@@ -27,8 +26,16 @@ RUN pacman --noconfirm -S perl perl-json perl-libwww perl-xml-parser dialog \
 #-----------------------------------------------
 # Alternatively, you can install binary packages for kf5 from arch repositories :
 # RUN pacman --noconfirm -S kf5
-RUN pacman --noconfirm -S qt5-script qt5-x11extras docbook-xsl qt5-tools \
-                            qt5-svg boost giflib vlc pkg-config libnm-glib
+RUN pacman --noconfirm -Sy \
+                                qt5-script \
+                                qt5-x11extras \
+                                docbook-xsl \
+                                qt5-tools \
+                                qt5-svg boost \
+                                giflib \
+                                vlc \
+                                pkg-config \
+                                libnm-glib
 # -> KDE Workspace
 # KDE WORKSPACE COMP    |       BUILD DEPENDENCY
 #-----------------------|----------------------------
@@ -38,14 +45,37 @@ RUN pacman --noconfirm -S qt5-script qt5-x11extras docbook-xsl qt5-tools \
 # baloo                 |       xapian-core
 # kwin                  |       libepoxy
 # libnm-qt              |       libmm-glib
-# plasmate              |
 # oxygen-fonts          |       fontforge
 # kdevplatform          |       qt5-quick1
 # gwenview              |       exiv2
 # libksane              |       sane
-RUN pacman --noconfirm -S libpwquality xf86-input-synaptics gtkmm gtkmm3 \
-                            xapian-core libepoxy libmm-glib fontforge \
-                            qt5-quick1 exiv2 sane
+RUN pacman --noconfirm -Sy \
+                                libpwquality \
+                                xf86-input-synaptics xorg-server-devel \
+                                gtkmm gtkmm3 \
+                                xapian-core \
+                                libepoxy \
+                                libmm-glib \
+                                fontforge \
+                                qt5-quick1 \
+                                exiv2 \
+                                sane
+
+# -> KDE Appliations
+# KDE WORKSPACE COMP    |       BUILD DEPENDENCY
+#-----------------------|----------------------------
+# kdevplatform          |       grantlee-qt5
+# kalgebra              |       glu
+# marble                |       automoc4
+# parley                |       qt5-multimedia
+# step                  |       eigen
+RUN pacman --noconfirm -Sy \
+                                grantlee-qt5 \
+                                glu \
+                                automoc4 \
+                                qt5-multimedia \
+                                eigen
+
 
 # kde anongit url alias
 RUN git config --global url."git://anongit.kde.org/".insteadOf kde:

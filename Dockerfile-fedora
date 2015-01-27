@@ -1,8 +1,6 @@
 FROM fedora:latest
 MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
-RUN yum -y upgrade
-
 # Install dependencies
 #---------------------------
 # -> Essentials
@@ -21,10 +19,13 @@ RUN yum -y install dialog perl-libwww-perl perl-JSON perl-XML-Parser \
 # kiconthemes           |       qt5-qtsvg-devel
 # solid                 |       ?
 #-----------------------------------------------
-RUN yum install -y qt5-qtscript-devel qt5-qtx11extras-devel libXrender-devel \
-                    xcb-util-keysyms-devel zlib-devel libxslt-devel \
-                    docbook-style-xsl qt5-qttools-devel qt5-qttools-static \
-                    qt5-qtsvg-devel
+RUN yum install -y \
+                                qt5-qtscript-devel \
+                                qt5-qtx11extras-devel libXrender-devel xcb-util-keysyms-devel \
+                                zlib-devel \
+                                libxslt-devel docbook-style-xsl \
+                                qt5-qttools-devel qt5-qttools-static \
+                                qt5-qtsvg-devel
 
 # kde anongit url alias
 RUN git config --global url."git://anongit.kde.org/".insteadOf kde:

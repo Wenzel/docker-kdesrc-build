@@ -1,7 +1,6 @@
 FROM opensuse:13.2
 MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
-
 # add Qt5 repo
 #---------------
 RUN zypper -n --gpg-auto-import-keys refresh
@@ -37,7 +36,6 @@ RUN zypper --non-interactive in perl-libwww-perl perl-XML-Parser perl-JSON \
 # phonon-vlc            |       vlc-devel
 # phonon-gstreamer      |       libQt5OpenGL-devel gstreamer-editing-services-devel
 # networkmanager-qt     |       NetworkManager-devel
-
 #-----------------------------------------------
 RUN zypper --non-interactive in --download-as-needed \
         libQt5DBus-devel \
@@ -59,6 +57,45 @@ RUN zypper --non-interactive in --download-as-needed \
         vlc-devel \
         libQt5OpenGL-devel gstreamer-editing-services-devel \
         NetworkManager-devel
+
+
+# -> KDE Workspace
+# KF5 COMPONENT         |       BUILD DEPENDENCY
+#-----------------------|------------------------
+# user-manager          |       libpwquality-devel
+# plasma-workspace      |       kf5baloo
+# libmm-qt              |       ModemManager-devel
+# kde-gtk-config        |       gtk2-devel gtk3-devel
+# kfilemetadata         |       libattr-devel
+# oxygen-fonts          |       fontforge-devel
+# kwayland              |       wayland-devel
+# kwin                  |       xcb-util-image-devel
+# kcm-touchpad          |       xf86-input-synaptics-devel xorg-server
+# plasmate
+# baloo-widgets
+# baloo                 |       libxapian-devel
+#-----------------------------------------------
+
+
+# -> KDE Applications
+# KF5 COMPONENT         |       BUILD DEPENDENCY
+#-----------------------|------------------------
+# kdevplatform          |       grantlee5-devel
+# gwenview              |       libexiv2-devel
+# lokalize              |       hunspell-devel
+# libksane              |       sane-backends-devel
+# kalgebra              |       glu-devel
+# marble                |       automoc4
+# parley                |       libqt5-qtmultimedia-devel
+# step                  |       eigen3-devel
+# kcalc                 |       gmp-devel
+# print-manager         |       cups-devel
+# ark                   |       libarchive-develgrantlee-devel
+# kmix                  |       alsa-devel
+# libkdegames           |       libsndfile-devel
+# ksirk                 |       libqca-qt5-devel
+#-----------------------------------------------
+
 
 
 # kde anongit url alias
