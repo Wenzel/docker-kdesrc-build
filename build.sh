@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# Usage
+#   --nc            = docker build --no-cache=true
+#   --base distro   = select a specific disro to test (all by default)
+# <script> [--nc] [--base base-distro] [kdesrc-build arg1] [kdesrc-build arg2] ...
 
 #------------------------------------------------------------------------------
 #                               CONVENIENCE
