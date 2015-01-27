@@ -1,6 +1,9 @@
 FROM fedora:latest
 MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
+# Add RPM Fusion
+RUN rpm -ivh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm
+
 # Install dependencies
 #---------------------------
 # -> Essentials
@@ -17,7 +20,18 @@ RUN yum -y install dialog perl-libwww-perl perl-JSON perl-XML-Parser \
 # kdoctools             |       libxslt-devel docbook-style-xsl
 # kwidgetsaddons        |       qt5-qttools-devel qt5-qttools-static
 # kiconthemes           |       qt5-qtsvg-devel
-# solid                 |       ?
+# solid                 |       systemd-devel
+# kdeclarative          |       qt5-qtquick1-devel libepoxy-devel
+# kactivities           |       boost-devel
+# kdewebkit             |       qt5-qtwebkit-devel
+# kdelibs4support       |       libSM-devel pcre-devel qca-ossl openssl-devel
+# khtml                 |       giflib-devel libjpeg-turbo-devel libpng-devel
+# frameworkintegration  |       libXcursor-devel oxygen-fonts-devel
+# ktexteditor           |       qt5-qtxmlpatterns-devel
+# polkit-qt-1           |       polkit-devel
+# phonon-vlc            |       vlc-devel
+# phonon-gstreamer      |       gstreamer-devel gstreamer-plugins-bad-free-devel gstreamer1-plugins-bad-free-devel gstreamer1-plugins-base-devel
+# networkmanager-qt     |       NetworkManager-devel NetworkManager-glib-devel
 #-----------------------------------------------
 RUN yum install -y \
                                 qt5-qtscript-devel \
@@ -25,7 +39,19 @@ RUN yum install -y \
                                 zlib-devel \
                                 libxslt-devel docbook-style-xsl \
                                 qt5-qttools-devel qt5-qttools-static \
-                                qt5-qtsvg-devel
+                                qt5-qtsvg-devel \
+                                systemd-devel \
+                                qt5-qtquick1-devel libepoxy-devel\
+                                boost-devel \
+                                qt5-qtwebkit-devel \
+                                libSM-devel pcre-devel qca-ossl openssl-devel \
+                                giflib-devel libjpeg-turbo-devel libpng-devel \
+                                libXcursor-devel oxygen-fonts-devel \
+                                qt5-qtxmlpatterns-devel \
+                                polkit-devel \
+                                vlc-devel \
+                                gstreamer-devel gstreamer-plugins-bad-free-devel gstreamer1-plugins-bad-free-devel gstreamer1-plugins-base-devel \
+                                NetworkManager-devel NetworkManager-glib-devel
 
 # kde anongit url alias
 RUN git config --global url."git://anongit.kde.org/".insteadOf kde:
