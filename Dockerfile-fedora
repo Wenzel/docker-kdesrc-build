@@ -53,6 +53,42 @@ RUN yum install -y \
                                 gstreamer-devel gstreamer-plugins-bad-free-devel gstreamer1-plugins-bad-free-devel gstreamer1-plugins-base-devel \
                                 NetworkManager-devel NetworkManager-glib-devel
 
+# -> KDE Workspace
+# KDE WORKSPACE COMP    |       BUILD DEPENDENCY
+#-----------------------|----------------------------
+# kwayland              |       wayland-devel libwayland-cursor-devel
+# kfilemetadata         |       libattr-devel
+# libmm-qt              |       ModemManager-devel
+# sddm-kcm              |       xcb-util-image-devel
+# plasma-desktop        |       PackageKit-Qt5-devel xorg-x11-xkb-utils-devel
+# user-manager          |       libpwquality-devel
+# kcm-touchpad          |       xorg-x11-drv-synaptics-devel xorg-x11-server-devel
+# kde-gtk-config        |       gtkmm24-devel gtkmm30-devel
+# baloo                 |       xapian-core-devel
+# kwin                  |       libepoxy-devel
+# libnm-qt              |       libmms-devel
+# oxygen-fonts          |       fontforge-devel
+# kdevplatform          |       qt5-qtquick1-devel
+# gwenview              |       exiv2-devel
+# libksane              |       sane-backends-devel
+#-----------------------------------------------
+RUN yum install -y \
+                                wayland-devel libwayland-cursor-devel \
+                                libattr-devel \
+                                ModemManager-devel \
+                                xcb-util-image-devel \
+                                PackageKit-Qt5-devel xorg-x11-xkb-utils-devel \
+                                libpwquality-devel \
+                                xorg-x11-drv-synaptics-devel xorg-x11-server-devel \
+                                gtkmm24-devel gtkmm30-devel \
+                                xapian-core-devel \
+                                libepoxy-devel \
+                                libmms-devel \
+                                fontforge-devel \
+                                qt5-qtquick1-devel \
+                                exiv2-devel \
+                                sane-backends-devel
+
 # kde anongit url alias
 RUN git config --global url."git://anongit.kde.org/".insteadOf kde:
 

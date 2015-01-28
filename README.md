@@ -85,25 +85,19 @@ In Workspace :
 Ubuntu
 ------
 
-In Frameworks :
+- Install latest Qt packages
 
-- `kdeclarative` :
+Fedora
+------
 
-        Building CXX object tests/CMakeFiles/kdeclarativetest.dir/kdeclarativetest_automoc.cpp.o
-        /work/full/source/frameworks/kdeclarative/src/qmlcontrols/kquickcontrolsaddons/plotter.cpp: In constructor 'PlotTexture::PlotTexture(QOpenGLContext*)':
-        /work/full/source/frameworks/kdeclarative/src/qmlcontrols/kquickcontrolsaddons/plotter.cpp:210:14: error: 'class QOpenGLContext' has no member named 'isOpenGLES'
-             if (ctx->isOpenGLES()) {
-                      ^
-        /work/full/source/frameworks/kdeclarative/src/qmlcontrols/kquickcontrolsaddons/plotter.cpp: In member function 'virtual QSGNode* Plotter::updatePaintNode(QSGNode*, QQuickItem::UpdatePaintNodeData*)':
-        /work/full/source/frameworks/kdeclarative/src/qmlcontrols/kquickcontrolsaddons/plotter.cpp:643:18: error: 'class QOpenGLContext' has no member named 'isOpenGLES'
-                 if (ctx->isOpenGLES()) {
-                          ^
-        make[2]: *** [src/qmlcontrols/kquickcontrolsaddons/CMakeFiles/kquickcontrolsaddonsplugin.dir/plotter.cpp.o] Error 1
-        make[2]: *** Waiting for unfinished jobs....
-        make[1]: *** [src/qmlcontrols/kquickcontrolsaddons/CMakeFiles/kquickcontrolsaddonsplugin.dir/all] Error 2
-        make[1]: *** Waiting for unfinished jobs....
-        /work/full/source/frameworks/kdeclarative/tests/kdeclarativetest.cpp: In function 'int main(int, char**)':
-        /work/full/source/frameworks/kdeclarative/tests/kdeclarativetest.cpp:39:29: warning: 'void KDeclarative::KDeclarative::initialize()' is deprecated (declared at /work/full/source/frameworks/kdeclarative/tests/../src/kdeclarative/kdeclarative.h:45) [-Wdeprecated-declarations]
-             kdeclarative.initialize();
-                                     ^
+In Workspace :
 
+- `plasmate`
+
+        CMake Error at /usr/share/cmake-3.1/Modules/FindPackageHandleStandardArgs.cmake:138 (message):
+          Could NOT find KDevPlatform (missing: KDevPlatform_CONFIG) (Required is at
+          least version "1.90.60")
+        Call Stack (most recent call first):
+          /usr/share/cmake-3.1/Modules/FindPackageHandleStandardArgs.cmake:374 (_FPHSA_FAILURE_MESSAGE)
+          /work/full/install/lib64/cmake/KF5KDELibs4Support/FindKDevPlatform.cmake:44 (find_package_handle_standard_args)
+          plasmate/CMakeLists.txt:20 (find_package)
