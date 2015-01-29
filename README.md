@@ -63,6 +63,21 @@ You just have to mount a volume on the container
 On your host system, go into `/path/to/mnt/dir`, clone `kdesrc-build` and configure it.
 When you want to build, get back on the `kdedev container` , and run `./kdesrc-build`
 
+Automated testing
+-----------------
+
+The `build.sh` script automates the process of building/updating the containers
+and running `kdesrc-build` script inside of them.
+
+Without arguments, `build.sh` run `kdesrc-build` on all available distros.
+
+Script syntax :
+
+    ./build.sh [--base <distro>] [--nc] [kdesrc-build arg1] [kdesrc-build arg2]
+
+        --nc    : --no-cache=true (build container from scratch)
+        --base  : build container from Dockerfile-<distro> and run the kdesrc-build
+
 TODO
 ====
 
