@@ -69,7 +69,7 @@ Automated testing
 The `build.sh` script automates the process of building/updating the containers
 and running `kdesrc-build` script inside of them.
 
-Without arguments, `build.sh` run `kdesrc-build` on all available distros.
+Without arguments, `build.sh` runs `kdesrc-build` on all available distros.
 
 Script syntax :
 
