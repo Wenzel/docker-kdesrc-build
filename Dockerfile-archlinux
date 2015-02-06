@@ -64,17 +64,21 @@ RUN pacman --noconfirm -Sy \
 # -> KDE Appliations
 # KDE WORKSPACE COMP    |       BUILD DEPENDENCY
 #-----------------------|----------------------------
+# lokalize              |       hunspell
 # kdevplatform          |       grantlee-qt5
 # kalgebra              |       glu
 # marble                |       automoc4
 # parley                |       qt5-multimedia
 # step                  |       eigen
+# ksirk                 |       qca-qt5
 RUN pacman --noconfirm -Sy \
+                                hunspell \
                                 grantlee-qt5 \
                                 glu \
                                 automoc4 \
                                 qt5-multimedia \
-                                eigen
+                                eigen \
+                                qca-qt5
 
 
 # kde anongit url alias
