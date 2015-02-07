@@ -37,7 +37,7 @@ RUN zypper --non-interactive in perl-libwww-perl perl-XML-Parser perl-JSON \
 # phonon-gstreamer      |       libQt5OpenGL-devel gstreamer-editing-services-devel
 # networkmanager-qt     |       NetworkManager-devel
 #-----------------------------------------------
-RUN zypper --non-interactive in --download-as-needed \
+RUN zypper --non-interactive in \
         libQt5DBus-devel \
         libQt5Test-devel \
         gettext-tools libQt5Concurrent-devel \
@@ -63,7 +63,6 @@ RUN zypper --non-interactive in --download-as-needed \
 # KF5 COMPONENT         |       BUILD DEPENDENCY
 #-----------------------|------------------------
 # user-manager          |       libpwquality-devel
-# plasma-workspace      |       kf5baloo
 # libmm-qt              |       ModemManager-devel
 # kde-gtk-config        |       gtk2-devel gtk3-devel
 # kfilemetadata         |       libattr-devel
@@ -71,11 +70,19 @@ RUN zypper --non-interactive in --download-as-needed \
 # kwayland              |       wayland-devel
 # kwin                  |       xcb-util-image-devel
 # kcm-touchpad          |       xf86-input-synaptics-devel xorg-server
-# plasmate
 # baloo-widgets
 # baloo                 |       libxapian-devel
 #-----------------------------------------------
-
+RUN zypper --non-interactive in \
+        libpwquality-devel \
+        ModemManager-devel \
+        gtk2-devel gtk3-devel \
+        libattr-devel \
+        fontforge-devel \
+        wayland-devel \
+        xcb-util-image-devel \
+        xf86-input-synaptics-devel xorg-server \
+        libxapian-devel
 
 # -> KDE Applications
 # KF5 COMPONENT         |       BUILD DEPENDENCY
@@ -90,12 +97,42 @@ RUN zypper --non-interactive in --download-as-needed \
 # step                  |       eigen3-devel
 # kcalc                 |       gmp-devel
 # print-manager         |       cups-devel
-# ark                   |       libarchive-develgrantlee-devel
+# ark                   |       libarchive-devel
 # kmix                  |       alsa-devel
 # libkdegames           |       libsndfile-devel
 # ksirk                 |       libqca-qt5-devel
 #-----------------------------------------------
+RUN zypper --non-interactive in \
+                              grantlee5-devel \
+                              libexiv2-devel \
+                              hunspell-devel \
+                              sane-backends-devel \
+                              glu-devel \
+                              automoc4 \
+                              libqt5-qtmultimedia-devel \
+                              eigen3-devel \
+                              gmp-devel \
+                              cups-devel \
+                              libarchive-devel \
+                              alsa-devel \
+                              libsndfile-devel \
+                              libqca-qt5-devel
 
+# -> KDE PIM
+# KDE WORKSPACE COMP    |       BUILD DEPENDENCY
+#-----------------------|----------------------------
+# prison                |       libdmtx-devel qrencode-devel
+# kcalcore              |       libical-devel
+# kimap                 |       cyrus-sasl-devel
+# kldap                 |       openldap2-devel
+# gpgmepp               |       libgpgme-devel
+#-----------------------------------------------
+RUN zypper --non-interactive in \
+                                libdmtx-devel qrencode-devel \
+                                libical-devel \
+                                cyrus-sasl-devel \
+                                openldap2-devel \
+                                libgpgme-devel
 
 
 # kde anongit url alias
