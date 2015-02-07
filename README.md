@@ -16,7 +16,10 @@ Dependencies installed
 ----------------------
 
 * `kdesrc-build`
-* `KDE Frameworks 5`
+* `Frameworks`
+* `Workspace`
+* `Applications`
+* `PIM`
 
 Build
 =====
@@ -38,7 +41,7 @@ For a simple usage, just run the image
 
     docker run -ti <distro>-kdedev
 
-Now you can login as simple user, clone the build script somewhere, define a
+Clone the build script somewhere, define a
 `kdesrc-buildrc` config file and start building KDE.
 
     git clone git://anongit.kde.org/kdesrc-build.git
@@ -80,22 +83,6 @@ Script syntax :
 
 TODO
 ====
-
-Archlinux
-----------
-
-In Workspace :
-
-- `plasmate`
-
-        CMake Error at /usr/share/cmake-3.1/Modules/FindPackageHandleStandardArgs.cmake:138 (message):
-          Could NOT find KDevPlatform (missing: KDevPlatform_CONFIG) (Required is at
-          least version "1.90.60")
-        Call Stack (most recent call first):
-          /usr/share/cmake-3.1/Modules/FindPackageHandleStandardArgs.cmake:374 (_FPHSA_FAILURE_MESSAGE)
-          /work/full/install/lib64/cmake/KF5KDELibs4Support/FindKDevPlatform.cmake:44 (find_package_handle_standard_args)
-          plasmate/CMakeLists.txt:20 (find_package)
-
 
 Ubuntu
 ------
