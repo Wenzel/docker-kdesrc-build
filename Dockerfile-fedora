@@ -56,7 +56,7 @@ RUN yum install -y \
 # -> KDE Workspace
 # KDE WORKSPACE COMP    |       BUILD DEPENDENCY
 #-----------------------|----------------------------
-# kwayland              |       wayland-devel libwayland-cursor-devel
+# kwayland              |       wayland-devel libwayland-cursor-devel libwayland-server-devel
 # kfilemetadata         |       libattr-devel
 # libmm-qt              |       ModemManager-devel
 # sddm-kcm              |       xcb-util-image-devel
@@ -73,7 +73,7 @@ RUN yum install -y \
 # libksane              |       sane-backends-devel
 #-----------------------------------------------
 RUN yum install -y \
-                                wayland-devel libwayland-cursor-devel \
+                                wayland-devel libwayland-cursor-devel libwayland-server-devel \
                                 libattr-devel \
                                 ModemManager-devel \
                                 xcb-util-image-devel \
@@ -88,6 +88,54 @@ RUN yum install -y \
                                 qt5-qtquick1-devel \
                                 exiv2-devel \
                                 sane-backends-devel
+
+# -> KDE Applications
+# COMPONENT             |       BUILD DEPENDENCY
+#-----------------------|----------------------------
+# gwenview              |       lcms2-devel
+# lokalize              |       hunspell-devel
+# kalgebra              |       glu
+# parley                |       qt5-qtmultimedia qt5-multimedia-devel
+# step                  |       eigen3-devel
+# rocs                  |       grentlee-devel
+# telepathy-qt          |       qtsinglecoreapplication-devel
+# ark                   |       libarchive-devel
+# kmix                  |       alsa-lib alsa-lib-devel
+# libkdegames           |       openal-soft-devel libsndfile-devel
+# kcalc                 |       gmp-devel
+# cups                  |       cups-devel
+# ksirk                 |       qca2-devel qca-ossl qca-gnupg qca-pkcs11
+#----------------------------------------------------
+RUN yum install -y \
+                                lcms2-devel \
+                                hunspell-devel \
+                                glui-devel \
+                                qt5-qtmultimedia qt5-multimedia-devel \
+                                eigen3-devel \
+                                grantlee-devel \
+                                qtsinglecoreapplication-devel \
+                                libarchive-devel \
+                                alsa-lib alsa-lib-devel \
+                                openal-soft-devel libsndfile-devel \
+                                gmp-devel \
+                                cups-devel \
+                                qca2-devel qca-ossl qca-gnupg qca-pkcs11
+
+# -> KDE PIM
+# COMPONENT             |       BUILD DEPENDENCY
+#-----------------------|----------------------------
+# prison                |       libdmtx-devel qrencode-devel
+# kcalcore              |       libical-devel
+# kimap                 |       cyrus-sasl-devel
+# kldap                 |       openldap-devel
+# gpgmepp               |       gpgme-devel
+#----------------------------------------------------
+RUN yum install -y \
+                                libdmtx-devel qrencode-devel \
+                                libical-devel \
+                                cyrus-sasl-devel \
+                                openldap-devel \
+                                gpgme-devel
 
 # kde anongit url alias
 RUN git config --global url."git://anongit.kde.org/".insteadOf kde:
