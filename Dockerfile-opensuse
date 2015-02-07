@@ -69,8 +69,7 @@ RUN zypper --non-interactive in \
 # oxygen-fonts          |       fontforge-devel
 # kwayland              |       wayland-devel
 # kwin                  |       xcb-util-image-devel
-# kcm-touchpad          |       xf86-input-synaptics-devel xorg-server
-# baloo-widgets
+# kcm-touchpad          |       xf86-input-synaptics-devel xorg-server xorg-x11-util-devel libX11-devel  libxkbcommon-x11-devel
 # baloo                 |       libxapian-devel
 #-----------------------------------------------
 RUN zypper --non-interactive in \
@@ -81,7 +80,7 @@ RUN zypper --non-interactive in \
         fontforge-devel \
         wayland-devel \
         xcb-util-image-devel \
-        xf86-input-synaptics-devel xorg-server \
+        xf86-input-synaptics-devel xorg-x11-devel xorg-x11-util-devel libX11-devel libxkbcommon-x11-devel \
         libxapian-devel
 
 # -> KDE Applications
@@ -99,7 +98,7 @@ RUN zypper --non-interactive in \
 # print-manager         |       cups-devel
 # ark                   |       libarchive-devel
 # kmix                  |       alsa-devel
-# libkdegames           |       libsndfile-devel
+# libkdegames           |       libsndfile-devel openal-soft-devel
 # ksirk                 |       libqca-qt5-devel
 #-----------------------------------------------
 RUN zypper --non-interactive in \
@@ -115,7 +114,7 @@ RUN zypper --non-interactive in \
                               cups-devel \
                               libarchive-devel \
                               alsa-devel \
-                              libsndfile-devel \
+                              libsndfile-devel openal-soft-devel \
                               libqca-qt5-devel
 
 # -> KDE PIM
