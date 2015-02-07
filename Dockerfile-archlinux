@@ -49,6 +49,7 @@ RUN pacman --noconfirm -Sy \
 # kdevplatform          |       qt5-quick1
 # gwenview              |       exiv2
 # libksane              |       sane
+#-----------------------------------------------
 RUN pacman --noconfirm -Sy \
                                 libpwquality \
                                 xf86-input-synaptics xorg-server-devel \
@@ -71,6 +72,7 @@ RUN pacman --noconfirm -Sy \
 # parley                |       qt5-multimedia
 # step                  |       eigen
 # ksirk                 |       qca-qt5
+#-----------------------------------------------
 RUN pacman --noconfirm -Sy \
                                 hunspell \
                                 grantlee-qt5 \
@@ -80,6 +82,15 @@ RUN pacman --noconfirm -Sy \
                                 eigen \
                                 qca-qt5
 
+# -> KDE PIM
+# KDE WORKSPACE COMP    |       BUILD DEPENDENCY
+#-----------------------|----------------------------
+# prison                |       libdmtx qrencode
+# kcalcore              |       libical
+#-----------------------------------------------
+RUN pacman --noconfirm -Sy \
+                                libdmtx qrencode \
+                                libical
 
 # kde anongit url alias
 RUN git config --global url."git://anongit.kde.org/".insteadOf kde:
