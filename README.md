@@ -105,14 +105,34 @@ Ubuntu
 Fedora
 ------
 
-In Workspace :
+In Applications :
 
-- `plasmate`
+- `kdevlatform` : How to install `grantlee5` ?
 
-        CMake Error at /usr/share/cmake-3.1/Modules/FindPackageHandleStandardArgs.cmake:138 (message):
-          Could NOT find KDevPlatform (missing: KDevPlatform_CONFIG) (Required is at
-          least version "1.90.60")
+        CMake Error at CMakeLists.txt:76 (find_package):
+          By not providing "FindGrantlee5.cmake" in CMAKE_MODULE_PATH this project
+          has asked CMake to find a package configuration file provided by
+          "Grantlee5", but CMake did not find one.
+
+          Could not find a package configuration file provided by "Grantlee5" with
+          any of the following names:
+
+            Grantlee5Config.cmake
+            grantlee5-config.cmake
+
+- `parley` : Need `Qt5Multimedia` development packages
+
+        CMake Error at /usr/lib64/cmake/Qt5/Qt5Config.cmake:26 (find_package):
+          Could not find a package configuration file provided by "Qt5Multimedia"
+          with any of the following names:
+
+            Qt5MultimediaConfig.cmake
+            qt5multimedia-config.cmake
+
+          Add the installation prefix of "Qt5Multimedia" to CMAKE_PREFIX_PATH or set
+          "Qt5Multimedia_DIR" to a directory containing one of the above files.  If
+          "Qt5Multimedia" provides a separate development package or SDK, be sure it
+          has been installed.
         Call Stack (most recent call first):
-          /usr/share/cmake-3.1/Modules/FindPackageHandleStandardArgs.cmake:374 (_FPHSA_FAILURE_MESSAGE)
-          /work/full/install/lib64/cmake/KF5KDELibs4Support/FindKDevPlatform.cmake:44 (find_package_handle_standard_args)
-          plasmate/CMakeLists.txt:20 (find_package)
+          CMakeLists.txt:18 (find_package)
+
