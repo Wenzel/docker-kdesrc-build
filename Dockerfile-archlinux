@@ -48,9 +48,9 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 RUN pacman --noconfirm -Syu && \
     pacman-db-upgrade && \
     pacman --noconfirm -Sy gcc git cmake make vim doxygen bzr && \
-    pacman --noconfirm -Sy perl perl-json perl-libwww perl-xml-parser dialog \ # kdesrc-build
+    pacman --noconfirm -Sy perl perl-json perl-libwww perl-xml-parser dialog \
                             qt5-base && \
-    pacman --noconfirm -Sy \    # FRAMEWORKS
+    pacman --noconfirm -Sy \
                                 qt5-script \
                                 qt5-x11extras \
                                 docbook-xsl \
@@ -60,7 +60,7 @@ RUN pacman --noconfirm -Syu && \
                                 vlc \
                                 pkg-config \
                                 libnm-glib && \
-    pacman --noconfirm -Sy \    # WORKSPACE
+    pacman --noconfirm -Sy \
                                 libpwquality \
                                 xf86-input-synaptics xorg-server-devel \
                                 gtkmm gtkmm3 \
@@ -71,13 +71,13 @@ RUN pacman --noconfirm -Syu && \
                                 qt5-quick1 \
                                 exiv2 \
                                 sane && \
-    pacman --noconfirm -Sy \    # APPLICATIONS
+    pacman --noconfirm -Sy \
                                 grantlee-qt5 \
                                 glu \
                                 automoc4 \
                                 qt5-multimedia \
                                 eigen && \
-    pacman --noconfirm -Sy \    # PIM
+    pacman --noconfirm -Sy \
                                 libdmtx qrencode \
                                 libical && \
     useradd -d /home/kdedev -m kdedev && \

@@ -31,8 +31,8 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && \
     apt-key adv --recv-keys && \
     apt-get install -y git bzr vim g++ cmake tar doxygen && \
-    apt-get install -y libwww-perl libxml-parser-perl libjson-perl dialog gettext libxrender-dev pkg-config libxcb-keysyms1-dev docbook-xsl libxslt1-dev libxml2-utils libudev-dev libqt4-dev && \ # kdesrc-build
-    apt-get install -y \ # FRAMEWORKS
+    apt-get install -y libwww-perl libxml-parser-perl libjson-perl dialog gettext libxrender-dev pkg-config libxcb-keysyms1-dev docbook-xsl libxslt1-dev libxml2-utils libudev-dev libqt4-dev && \
+    apt-get install -y \
                         qtscript5-dev \
                         libqt5x11extras5-dev \
                         qttools5-dev \

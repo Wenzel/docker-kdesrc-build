@@ -72,8 +72,8 @@ RUN rpm -ivh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-s
 #---------------------------
 RUN yum -y install gcc-c++ git doxygen cmake bzr vim tar && \
     yum -y install dialog perl-libwww-perl perl-JSON perl-XML-Parser \
-                    qt5-qtbase-devel && \ # kdesrc-build
-    yum install -y \ # FRAMEWORKS
+                    qt5-qtbase-devel && \
+    yum install -y \
                     qt5-qtscript-devel \
                     qt5-qtx11extras-devel libXrender-devel xcb-util-keysyms-devel \
                     zlib-devel \
@@ -92,7 +92,7 @@ RUN yum -y install gcc-c++ git doxygen cmake bzr vim tar && \
                     vlc-devel \
                     gstreamer-devel gstreamer-plugins-bad-free-devel gstreamer1-plugins-bad-free-devel gstreamer1-plugins-base-devel \
                                 NetworkManager-devel NetworkManager-glib-devel && \
-    yum install -y \ # WORKSPACE
+    yum install -y \
                     wayland-devel libwayland-cursor-devel \
                     libattr-devel \
                     ModemManager-devel \
@@ -108,7 +108,7 @@ RUN yum -y install gcc-c++ git doxygen cmake bzr vim tar && \
                     qt5-qtquick1-devel \
                     exiv2-devel \
                     sane-backends-devel && \
-    yum install -y \ # APPLICATIONS
+    yum install -y \ 
                     lcms2-devel \
                     hunspell-devel \
                     glui-devel \
@@ -122,7 +122,7 @@ RUN yum -y install gcc-c++ git doxygen cmake bzr vim tar && \
                     gmp-devel \
                     cups-devel \
                     qca2-devel qca-ossl qca-gnupg qca-pkcs11
-    yum install -y \ # PIM
+    yum install -y \ 
                     libdmtx-devel qrencode-devel \
                     libical-devel \
                     cyrus-sasl-devel \

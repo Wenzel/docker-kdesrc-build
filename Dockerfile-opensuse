@@ -72,8 +72,8 @@ RUN zypper -n --gpg-auto-import-keys refresh && \
 #---------------------
 RUN zypper --non-interactive in vim tar git bzr cmake doxygen && \
     zypper --non-interactive in perl-libwww-perl perl-XML-Parser perl-JSON \
-                                    dialog python ca-certificates libqt4-devel && \ # kdesrc-build
-    zypper --non-interactive in \ # FRAMEWORKS
+                                    dialog python ca-certificates libqt4-devel && \
+    zypper --non-interactive in \
         libQt5DBus-devel \
         libQt5Test-devel \
         gettext-tools libQt5Concurrent-devel \
@@ -93,7 +93,7 @@ RUN zypper --non-interactive in vim tar git bzr cmake doxygen && \
         vlc-devel \
         libQt5OpenGL-devel gstreamer-editing-services-devel \
         NetworkManager-devel && \
-    zypper --non-interactive in \ # APPLICATIONS
+    zypper --non-interactive in \
                               grantlee5-devel \
                               libexiv2-devel \
                               hunspell-devel \
@@ -108,7 +108,7 @@ RUN zypper --non-interactive in vim tar git bzr cmake doxygen && \
                               alsa-devel \
                               libsndfile-devel openal-soft-devel \
                               libqca-qt5-devel &&
-    zypper --non-interactive in \ # PIM
+    zypper --non-interactive in \
                                 libdmtx-devel qrencode-devel \
                                 libical-devel \
                                 cyrus-sasl-devel \
