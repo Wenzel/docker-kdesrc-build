@@ -1,22 +1,8 @@
 FROM opensuse:13.2
 MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
-# add Qt5 repo
-#---------------
-RUN zypper -n --gpg-auto-import-keys refresh
-RUN zypper ar -f "http://download.opensuse.org/repositories/KDE:/Qt5/openSUSE_13.2/" "Qt5"
-RUN zypper --non-interactive --gpg-auto-import-keys refresh
-
-# Install dependencies
-#---------------------------
-# -> Essentials
-RUN zypper --non-interactive in vim tar git bzr cmake doxygen
-# -> kdesrc-build script
-RUN zypper --non-interactive in perl-libwww-perl perl-XML-Parser perl-JSON \
-                                    dialog python ca-certificates libqt4-devel # qmake
-# -> KDE Frameworks 5
-# KF5 COMPONENT         |     BUILD DEPENDENCY
-#-----------------------|------------------------
+# FRAMEWORKS            |       BUILD DEPENDENCY
+#-----------------------|---------------------------------
 # libdbusmenu-qt        |       libQt5DBus-devel
 # attica                |       libQt5Test-devel
 # ki18n                 |       gettext-tools libQt5Concurrent-devel
@@ -36,8 +22,58 @@ RUN zypper --non-interactive in perl-libwww-perl perl-XML-Parser perl-JSON \
 # phonon-vlc            |       vlc-devel
 # phonon-gstreamer      |       libQt5OpenGL-devel gstreamer-editing-services-devel
 # networkmanager-qt     |       NetworkManager-devel
-#-----------------------------------------------
-RUN zypper --non-interactive in \
+#-----------------------|---------------------------------
+# WORKSPACE             |       BUILD DEPENDENCY
+#-----------------------|---------------------------------
+# user-manager          |       libpwquality-devel
+# libmm-qt              |       ModemManager-devel
+# kde-gtk-config        |       gtk2-devel gtk3-devel
+# kfilemetadata         |       libattr-devel
+# oxygen-fonts          |       fontforge-devel
+# kwayland              |       wayland-devel
+# kwin                  |       xcb-util-image-devel
+# kcm-touchpad          |       xf86-input-synaptics-devel xorg-server xorg-x11-util-devel libX11-devel  libxkbcommon-x11-devel
+# baloo                 |       libxapian-devel
+#-----------------------|---------------------------------
+# APPLICATIONS          |       BUILD DEPENDENCY
+#-----------------------|---------------------------------
+# kdevplatform          |       grantlee5-devel
+# gwenview              |       libexiv2-devel
+# lokalize              |       hunspell-devel
+# libksane              |       sane-backends-devel
+# kalgebra              |       glu-devel
+# marble                |       automoc4
+# parley                |       libqt5-qtmultimedia-devel
+# step                  |       eigen3-devel
+# kcalc                 |       gmp-devel
+# print-manager         |       cups-devel
+# ark                   |       libarchive-devel
+# kmix                  |       alsa-devel
+# libkdegames           |       libsndfile-devel openal-soft-devel
+# ksirk                 |       libqca-qt5-devel
+#-----------------------|---------------------------------
+# PIM                   |       BUILD DEPENDENCY
+#-----------------------|---------------------------------
+# prison                |       libdmtx-devel qrencode-devel
+# kcalcore              |       libical-devel
+# kimap                 |       cyrus-sasl-devel
+# kldap                 |       openldap2-devel
+# gpgmepp               |       libgpgme-devel
+#-----------------------|---------------------------------
+
+
+# add Qt5 repo
+#---------------
+RUN zypper -n --gpg-auto-import-keys refresh && \
+    zypper ar -f "http://download.opensuse.org/repositories/KDE:/Qt5/openSUSE_13.2/" "Qt5" && \
+    zypper --non-interactive --gpg-auto-import-keys refresh
+
+# install dependencies
+#---------------------
+RUN zypper --non-interactive in vim tar git bzr cmake doxygen && \
+    zypper --non-interactive in perl-libwww-perl perl-XML-Parser perl-JSON \
+                                    dialog python ca-certificates libqt4-devel && \ # kdesrc-build
+    zypper --non-interactive in \ # FRAMEWORKS
         libQt5DBus-devel \
         libQt5Test-devel \
         gettext-tools libQt5Concurrent-devel \
@@ -56,52 +92,8 @@ RUN zypper --non-interactive in \
         libpolkit-qt-1-devel \
         vlc-devel \
         libQt5OpenGL-devel gstreamer-editing-services-devel \
-        NetworkManager-devel
-
-
-# -> KDE Workspace
-# KF5 COMPONENT         |       BUILD DEPENDENCY
-#-----------------------|------------------------
-# user-manager          |       libpwquality-devel
-# libmm-qt              |       ModemManager-devel
-# kde-gtk-config        |       gtk2-devel gtk3-devel
-# kfilemetadata         |       libattr-devel
-# oxygen-fonts          |       fontforge-devel
-# kwayland              |       wayland-devel
-# kwin                  |       xcb-util-image-devel
-# kcm-touchpad          |       xf86-input-synaptics-devel xorg-server xorg-x11-util-devel libX11-devel  libxkbcommon-x11-devel
-# baloo                 |       libxapian-devel
-#-----------------------------------------------
-RUN zypper --non-interactive in \
-        libpwquality-devel \
-        ModemManager-devel \
-        gtk2-devel gtk3-devel \
-        libattr-devel \
-        fontforge-devel \
-        wayland-devel \
-        xcb-util-image-devel \
-        xf86-input-synaptics-devel xorg-x11-devel xorg-x11-util-devel libX11-devel libxkbcommon-x11-devel \
-        libxapian-devel
-
-# -> KDE Applications
-# KF5 COMPONENT         |       BUILD DEPENDENCY
-#-----------------------|------------------------
-# kdevplatform          |       grantlee5-devel
-# gwenview              |       libexiv2-devel
-# lokalize              |       hunspell-devel
-# libksane              |       sane-backends-devel
-# kalgebra              |       glu-devel
-# marble                |       automoc4
-# parley                |       libqt5-qtmultimedia-devel
-# step                  |       eigen3-devel
-# kcalc                 |       gmp-devel
-# print-manager         |       cups-devel
-# ark                   |       libarchive-devel
-# kmix                  |       alsa-devel
-# libkdegames           |       libsndfile-devel openal-soft-devel
-# ksirk                 |       libqca-qt5-devel
-#-----------------------------------------------
-RUN zypper --non-interactive in \
+        NetworkManager-devel && \
+    zypper --non-interactive in \ # APPLICATIONS
                               grantlee5-devel \
                               libexiv2-devel \
                               hunspell-devel \
@@ -115,28 +107,32 @@ RUN zypper --non-interactive in \
                               libarchive-devel \
                               alsa-devel \
                               libsndfile-devel openal-soft-devel \
-                              libqca-qt5-devel
-
-# -> KDE PIM
-# KDE WORKSPACE COMP    |       BUILD DEPENDENCY
-#-----------------------|----------------------------
-# prison                |       libdmtx-devel qrencode-devel
-# kcalcore              |       libical-devel
-# kimap                 |       cyrus-sasl-devel
-# kldap                 |       openldap2-devel
-# gpgmepp               |       libgpgme-devel
-#-----------------------------------------------
-RUN zypper --non-interactive in \
+                              libqca-qt5-devel &&
+    zypper --non-interactive in \ # PIM
                                 libdmtx-devel qrencode-devel \
                                 libical-devel \
                                 cyrus-sasl-devel \
                                 openldap2-devel \
-                                libgpgme-devel
+                                libgpgme-devel &&
+    useradd -d /home/kdedev -m kdedev && \
+    mkdir /work /qt && \
+    chown kdedev /work /qt
 
+#^^ kdedev user is added. It will use UID=1000 for files created in volumes ^^
 
+COPY kdesrc-buildrc /home/kdedev/.kdesrc-buildrc
+COPY bashrc /home/kdedev/.bashrc
+RUN chown kdedev /home/kdedev/.kdesrc-buildrc /home/kdedev/.bashrc
+USER kdedev
+ENV HOME /home/kdedev
+WORKDIR /home/kdedev/
 # kde anongit url alias
-RUN git config --global url."git://anongit.kde.org/".insteadOf kde:
+RUN git config --global url."git://anongit.kde.org/".insteadOf kde: && \
+    git config --global url."ssh://git@git.kde.org/".pushInsteadOf kde: && \
+    git clone git://anongit.kde.org/kdesrc-build.git 
 
 VOLUME /work
-WORKDIR /work
+VOLUME /qt
+
+WORKDIR /home/kdedev/
 ENTRYPOINT ["/bin/bash"]

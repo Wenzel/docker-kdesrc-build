@@ -1,18 +1,8 @@
 FROM base/archlinux:latest
 MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
-# Install dependencies
-#---------------------------
-# -> Essentials
-RUN pacman --noconfirm -Syu
-RUN pacman-db-upgrade
-RUN pacman --noconfirm -Sy gcc git cmake make vim doxygen bzr
-# -> kdesrc-build script
-RUN pacman --noconfirm -Sy perl perl-json perl-libwww perl-xml-parser dialog \
-                            qt5-base # qmake
-# -> KDE Frameworks 5
-# KF5 COMPONENT         |       BUILD DEPENDENCY
-#-----------------------|--------------------------
+# FRAMEWORKS            |       BUILD DEPENDENCY
+#-----------------------|---------------------------------
 # ki18n                 |       qt5-script
 # kwindowsystem         |       qt5-x11extras
 # kdocbook              |       docbook-xsl
@@ -23,22 +13,9 @@ RUN pacman --noconfirm -Sy perl perl-json perl-libwww perl-xml-parser dialog \
 # phonon-vlc            |       vlc
 # phonon-gstreamer      |       pkg-config
 # networkmanager-qt     |       libnm-glib
-#-----------------------------------------------
-# Alternatively, you can install binary packages for kf5 from arch repositories :
-# RUN pacman --noconfirm -S kf5
-RUN pacman --noconfirm -Sy \
-                                qt5-script \
-                                qt5-x11extras \
-                                docbook-xsl \
-                                qt5-tools \
-                                qt5-svg boost \
-                                giflib \
-                                vlc \
-                                pkg-config \
-                                libnm-glib
-# -> KDE Workspace
-# KDE WORKSPACE COMP    |       BUILD DEPENDENCY
-#-----------------------|----------------------------
+#---------------------------------------------------------
+# WORKSPACE             |       BUILD DEPENDENCY
+#-----------------------|---------------------------------
 # user-manager          |       libpwquality
 # kcm-touchpad          |       xf86-input-synaptics xorg-server-devel
 # kde-gtk-config        |       gtkmm gtkmm3
@@ -49,8 +26,41 @@ RUN pacman --noconfirm -Sy \
 # kdevplatform          |       qt5-quick1
 # gwenview              |       exiv2
 # libksane              |       sane
-#-----------------------------------------------
-RUN pacman --noconfirm -Sy \
+#-----------------------|---------------------------------
+# APPLICATIONS          |       BUILD DEPENDENCY
+#-----------------------|---------------------------------
+# lokalize              |       hunspell
+# kdevplatform          |       grantlee-qt5
+# kalgebra              |       glu
+# marble                |       automoc4
+# parley                |       qt5-multimedia
+# step                  |       eigen
+# ksirk                 |       qca-qt5
+#-----------------------|---------------------------------
+# PIM                   |       BUILD DEPENDENCY
+#-----------------------|---------------------------------
+# prison                |       libdmtx qrencode
+# kcalcore              |       libical
+#-----------------------|---------------------------------
+
+# Install dependencies
+#---------------------------
+RUN pacman --noconfirm -Syu && \
+    pacman-db-upgrade && \
+    pacman --noconfirm -Sy gcc git cmake make vim doxygen bzr && \
+    pacman --noconfirm -Sy perl perl-json perl-libwww perl-xml-parser dialog \ # kdesrc-build
+                            qt5-base && \
+    pacman --noconfirm -Sy \    # FRAMEWORKS
+                                qt5-script \
+                                qt5-x11extras \
+                                docbook-xsl \
+                                qt5-tools \
+                                qt5-svg boost \
+                                giflib \
+                                vlc \
+                                pkg-config \
+                                libnm-glib && \
+    pacman --noconfirm -Sy \    # WORKSPACE
                                 libpwquality \
                                 xf86-input-synaptics xorg-server-devel \
                                 gtkmm gtkmm3 \
@@ -60,41 +70,34 @@ RUN pacman --noconfirm -Sy \
                                 fontforge \
                                 qt5-quick1 \
                                 exiv2 \
-                                sane
-
-# -> KDE Appliations
-# KDE WORKSPACE COMP    |       BUILD DEPENDENCY
-#-----------------------|----------------------------
-# lokalize              |       hunspell
-# kdevplatform          |       grantlee-qt5
-# kalgebra              |       glu
-# marble                |       automoc4
-# parley                |       qt5-multimedia
-# step                  |       eigen
-# ksirk                 |       qca-qt5
-#-----------------------------------------------
-RUN pacman --noconfirm -Sy \
-                                hunspell \
+                                sane && \
+    pacman --noconfirm -Sy \    # APPLICATIONS
                                 grantlee-qt5 \
                                 glu \
                                 automoc4 \
                                 qt5-multimedia \
-                                eigen \
-                                qca-qt5
-
-# -> KDE PIM
-# KDE WORKSPACE COMP    |       BUILD DEPENDENCY
-#-----------------------|----------------------------
-# prison                |       libdmtx qrencode
-# kcalcore              |       libical
-#-----------------------------------------------
-RUN pacman --noconfirm -Sy \
+                                eigen && \
+    pacman --noconfirm -Sy \    # PIM
                                 libdmtx qrencode \
-                                libical
+                                libical && \
+    useradd -d /home/kdedev -m kdedev && \
+    mkdir /work /tmp/kdesrc-build /qt && \
+    chown kdedev /work /tmp/kdesrc-build /qt
 
+#^^ kdedev user is added. It will use UID=1000 for files created in volumes ^^
+
+COPY kdesrc-buildrc /home/kdedev/.kdesrc-buildrc
+COPY bashrc /home/kdedev/.bashrc
+RUN chown kdedev /home/kdedev/.kdesrc-buildrc /home/kdedev/.bashrc
+USER kdedev
+ENV HOME /home/kdedev
+WORKDIR /home/kdedev/
 # kde anongit url alias
-RUN git config --global url."git://anongit.kde.org/".insteadOf kde:
+RUN git config --global url."git://anongit.kde.org/".insteadOf kde: && \
+    git config --global url."ssh://git@git.kde.org/".pushInsteadOf kde: && \
+    git clone git://anongit.kde.org/kdesrc-build.git 
 
 VOLUME /work
-WORKDIR /work
+VOLUME /qt
+
 ENTRYPOINT ["/bin/bash"]
