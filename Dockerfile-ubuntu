@@ -10,11 +10,34 @@ RUN echo 'deb http://ppa.launchpad.net/ubuntu-sdk-team/ppa/ubuntu trusty main' >
 #---------------------------
 # -> Essentials
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update
-RUN apt-key adv --recv-keys
-RUN apt-get install -y git bzr vim g++ cmake tar doxygen
-# -> kdesrc-build script
-RUN apt-get install -y libwww-perl libxml-parser-perl libjson-perl dialog gettext libxrender-dev pkg-config libxcb-keysyms1-dev docbook-xsl libxslt1-dev libxml2-utils libudev-dev libqt4-dev
+RUN apt-get update && \
+    apt-key adv --recv-keys && \
+    apt-get install -y git bzr vim g++ cmake tar doxygen && \
+    apt-get install -y libwww-perl libxml-parser-perl libjson-perl dialog gettext libxrender-dev pkg-config libxcb-keysyms1-dev docbook-xsl libxslt1-dev libxml2-utils libudev-dev libqt4-dev && \
+    apt-get install -y \
+                                qtscript5-dev \
+                                libqt5x11extras5-dev \
+                                qttools5-dev \
+                                libqt5svg5-dev \
+                                libgcrypt20-dev \
+                                qtdeclarative5-dev libepoxy-dev \
+                                libboost1.54-dev \
+                                libqt5webkit5-dev \
+                                libsm-dev \
+                                libgif-dev libjpeg-dev libpng-dev \
+                                libxcursor-dev \
+                                libqt5xmlpatterns5-dev \
+                                libpolkit-agent-1-dev \
+                                libvlc-dev \
+                                libvlccore-dev \
+                                xsltproc \
+                                libnm-glib-dev && \
+    useradd -d /home/kdedev -m kdedev && \
+    mkdir /work /qt && \
+    chown kdedev /work /qt
+
+#^^ kdedev user is added. It will use UID=1000 for files created in volumes ^^
+
 # -> KDE Frameworks 5
 # KF5 COMPONENT         |     BUILD DEPENDENCY
 #-----------------------|------------------------
@@ -35,30 +58,21 @@ RUN apt-get install -y libwww-perl libxml-parser-perl libjson-perl dialog gettex
 # akonadi               |       xsltproc
 # networkmanager-qt     |       libnm-glib-dev
 #-----------------------------------------------
-RUN apt-get install -y \
-                                qtscript5-dev \
-                                libqt5x11extras5-dev \
-                                qttools5-dev \
-                                libqt5svg5-dev \
-                                libgcrypt20-dev \
-                                qtdeclarative5-dev libepoxy-dev \
-                                libboost1.54-dev \
-                                libqt5webkit5-dev \
-                                libsm-dev \
-                                libgif-dev libjpeg-dev libpng-dev \
-                                libxcursor-dev \
-                                libqt5xmlpatterns5-dev \
-                                libpolkit-agent-1-dev \
-                                libvlc-dev \
-                                libvlccore-dev \
-                                xsltproc \
-                                libnm-glib-dev
-
+COPY kdesrc-buildrc /home/kdedev/.kdesrc-buildrc
+COPY bashrc /home/kdedev/.bashrc
+RUN chown kdedev /home/kdedev/.kdesrc-buildrc /home/kdedev/.bashrc
+USER kdedev
+ENV HOME /home/kdedev
+WORKDIR /home/kdedev/
 # kde anongit url alias
-RUN git config --global url."git://anongit.kde.org/".insteadOf kde:
+RUN git config --global url."git://anongit.kde.org/".insteadOf kde: && \
+    git config --global url."ssh://git@git.kde.org/".pushInsteadOf kde: && \
+    git clone git://anongit.kde.org/kdesrc-build.git 
 # quick fix with bzr and ssl-certs
-RUN mkdir /root/.bazaar && echo "[DEFAULT]\n\tssl.cert_reqs=none" >> /root/.bazaar/bazaar.conf
+RUN mkdir /home/kdedev/.bazaar && echo "[DEFAULT]\n\tssl.cert_reqs=none" >> /home/kdedev/.bazaar/bazaar.conf
 
 VOLUME /work
-WORKDIR /work
+VOLUME /qt
+
+WORKDIR /home/kdedev/
 ENTRYPOINT ["/bin/bash"]
