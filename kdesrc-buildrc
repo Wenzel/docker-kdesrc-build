@@ -12,6 +12,14 @@ global
     # Where to download source code. By default the build directory and
     # logs will be kept under this directory as well.
     source-dir /work/build/source
+    build-dir /work/build/build
+    
+    cxxflags -pipe -DQT_STRICT_ITERATORS -DQURL_NO_CAST_FROM_STRING -DQT_NO_HTTP -DQT_NO_FTP -Wformat -Werror=return-type -Wno-variadic-macros -Wlogical-op
+    # WARNING: opensuse users need -DLIB_SUFFIX=64 here, as long as FindKDE4Internal.cmake is used
+    #          if you're using a distro without "lib64", remove the option.
+    # cmake-options -DKDE4_BUILD_TESTS=TRUE -DLIB_SUFFIX=64
+    cmake-options -DBUILD_TESTING=TRUE -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_LIBDIR=lib -DLIB_SUFFIX=64
+    
     make-options -j4
 end global
 

@@ -1,19 +1,8 @@
 FROM fedora:latest
 MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
-# Add RPM Fusion
-RUN rpm -ivh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm
-
-# Install dependencies
-#---------------------------
-# -> Essentials
-RUN yum -y install gcc-c++ git doxygen cmake bzr vim tar
-# -> kdesrc-build script
-RUN yum -y install dialog perl-libwww-perl perl-JSON perl-XML-Parser \
-                    qt5-qtbase-devel # qmake
-# -> KDE Frameworks 5
-# KF5 COMPONENT         |       BUILD DEPENDENCY
-#-----------------------|--------------------------
+# FRAMEWORKS            |       BUILD DEPENDENCY
+#-----------------------|---------------------------------
 # ki18n                 |       qt5-qtscript-devel
 # kwindowsystem         |       qt5-qtx11extras-devel libXrender-devel xcb-util-keysyms-devel
 # karchive              |       zlib-devel
@@ -32,30 +21,9 @@ RUN yum -y install dialog perl-libwww-perl perl-JSON perl-XML-Parser \
 # phonon-vlc            |       vlc-devel
 # phonon-gstreamer      |       gstreamer-devel gstreamer-plugins-bad-free-devel gstreamer1-plugins-bad-free-devel gstreamer1-plugins-base-devel
 # networkmanager-qt     |       NetworkManager-devel NetworkManager-glib-devel
-#-----------------------------------------------
-RUN yum install -y \
-                                qt5-qtscript-devel \
-                                qt5-qtx11extras-devel libXrender-devel xcb-util-keysyms-devel \
-                                zlib-devel \
-                                libxslt-devel docbook-style-xsl \
-                                qt5-qttools-devel qt5-qttools-static \
-                                qt5-qtsvg-devel \
-                                systemd-devel \
-                                qt5-qtquick1-devel libepoxy-devel\
-                                boost-devel \
-                                qt5-qtwebkit-devel \
-                                libSM-devel pcre-devel qca-ossl openssl-devel \
-                                giflib-devel libjpeg-turbo-devel libpng-devel \
-                                libXcursor-devel oxygen-fonts-devel \
-                                qt5-qtxmlpatterns-devel \
-                                polkit-devel \
-                                vlc-devel \
-                                gstreamer-devel gstreamer-plugins-bad-free-devel gstreamer1-plugins-bad-free-devel gstreamer1-plugins-base-devel \
-                                NetworkManager-devel NetworkManager-glib-devel
-
-# -> KDE Workspace
-# KDE WORKSPACE COMP    |       BUILD DEPENDENCY
-#-----------------------|----------------------------
+#-----------------------|---------------------------------
+# WORKSPACE             |       BUILD DEPENDENCY
+#-----------------------|---------------------------------
 # kwayland              |       wayland-devel libwayland-cursor-devel libwayland-server-devel
 # kfilemetadata         |       libattr-devel
 # libmm-qt              |       ModemManager-devel
@@ -71,27 +39,9 @@ RUN yum install -y \
 # kdevplatform          |       qt5-qtquick1-devel
 # gwenview              |       exiv2-devel
 # libksane              |       sane-backends-devel
-#-----------------------------------------------
-RUN yum install -y \
-                                wayland-devel libwayland-cursor-devel libwayland-server-devel \
-                                libattr-devel \
-                                ModemManager-devel \
-                                xcb-util-image-devel \
-                                PackageKit-Qt5-devel xorg-x11-xkb-utils-devel \
-                                libpwquality-devel \
-                                xorg-x11-drv-synaptics-devel xorg-x11-server-devel \
-                                gtkmm24-devel gtkmm30-devel \
-                                xapian-core-devel \
-                                libepoxy-devel \
-                                libmms-devel \
-                                fontforge-devel \
-                                qt5-qtquick1-devel \
-                                exiv2-devel \
-                                sane-backends-devel
-
-# -> KDE Applications
-# COMPONENT             |       BUILD DEPENDENCY
-#-----------------------|----------------------------
+#-----------------------|---------------------------------
+# APPLICATIONS          |       BUILD DEPENDENCY
+#-----------------------|---------------------------------
 # gwenview              |       lcms2-devel
 # lokalize              |       hunspell-devel
 # kalgebra              |       glu
@@ -105,41 +55,98 @@ RUN yum install -y \
 # kcalc                 |       gmp-devel
 # cups                  |       cups-devel
 # ksirk                 |       qca2-devel qca-ossl qca-gnupg qca-pkcs11
-#----------------------------------------------------
-RUN yum install -y \
-                                lcms2-devel \
-                                hunspell-devel \
-                                glui-devel \
-                                qt5-qtmultimedia qt5-multimedia-devel \
-                                eigen3-devel \
-                                grantlee-devel \
-                                qtsinglecoreapplication-devel \
-                                libarchive-devel \
-                                alsa-lib alsa-lib-devel \
-                                openal-soft-devel libsndfile-devel \
-                                gmp-devel \
-                                cups-devel \
-                                qca2-devel qca-ossl qca-gnupg qca-pkcs11
-
-# -> KDE PIM
-# COMPONENT             |       BUILD DEPENDENCY
-#-----------------------|----------------------------
+#-----------------------|---------------------------------
+# PIM                   |       BUILD DEPENDENCY
+#-----------------------|---------------------------------
 # prison                |       libdmtx-devel qrencode-devel
 # kcalcore              |       libical-devel
 # kimap                 |       cyrus-sasl-devel
 # kldap                 |       openldap-devel
 # gpgmepp               |       gpgme-devel
-#----------------------------------------------------
-RUN yum install -y \
-                                libdmtx-devel qrencode-devel \
-                                libical-devel \
-                                cyrus-sasl-devel \
-                                openldap-devel \
-                                gpgme-devel
+#-----------------------|---------------------------------
 
+# Add RPM Fusion
+RUN rpm -ivh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm
+
+# Install dependencies
+#---------------------------
+RUN yum -y install gcc-c++ git doxygen cmake bzr vim tar && \
+    yum -y install dialog perl-libwww-perl perl-JSON perl-XML-Parser \
+                    qt5-qtbase-devel && \ # kdesrc-build
+    yum install -y \ # FRAMEWORKS
+                    qt5-qtscript-devel \
+                    qt5-qtx11extras-devel libXrender-devel xcb-util-keysyms-devel \
+                    zlib-devel \
+                    libxslt-devel docbook-style-xsl \
+                    qt5-qttools-devel qt5-qttools-static \
+                    qt5-qtsvg-devel \
+                    systemd-devel \
+                    qt5-qtquick1-devel libepoxy-devel\
+                    boost-devel \
+                    qt5-qtwebkit-devel \
+                    libSM-devel pcre-devel qca-ossl openssl-devel \
+                    giflib-devel libjpeg-turbo-devel libpng-devel \
+                    libXcursor-devel oxygen-fonts-devel \
+                    qt5-qtxmlpatterns-devel \
+                    polkit-devel \
+                    vlc-devel \
+                    gstreamer-devel gstreamer-plugins-bad-free-devel gstreamer1-plugins-bad-free-devel gstreamer1-plugins-base-devel \
+                                NetworkManager-devel NetworkManager-glib-devel && \
+    yum install -y \ # WORKSPACE
+                    wayland-devel libwayland-cursor-devel \
+                    libattr-devel \
+                    ModemManager-devel \
+                    xcb-util-image-devel \
+                    PackageKit-Qt5-devel xorg-x11-xkb-utils-devel \
+                    libpwquality-devel \
+                    xorg-x11-drv-synaptics-devel xorg-x11-server-devel \
+                    gtkmm24-devel gtkmm30-devel \
+                    xapian-core-devel \
+                    libepoxy-devel \
+                    libmms-devel \
+                    fontforge-devel \
+                    qt5-qtquick1-devel \
+                    exiv2-devel \
+                    sane-backends-devel && \
+    yum install -y \ # APPLICATIONS
+                    lcms2-devel \
+                    hunspell-devel \
+                    glui-devel \
+                    qt5-qtmultimedia qt5-multimedia-devel \
+                    eigen3-devel \
+                    grantlee-devel \
+                    qtsinglecoreapplication-devel \
+                    libarchive-devel \
+                    alsa-lib alsa-lib-devel \
+                    openal-soft-devel libsndfile-devel \
+                    gmp-devel \
+                    cups-devel \
+                    qca2-devel qca-ossl qca-gnupg qca-pkcs11
+    yum install -y \ # PIM
+                    libdmtx-devel qrencode-devel \
+                    libical-devel \
+                    cyrus-sasl-devel \
+                    openldap-devel \
+                    gpgme-devel
+    useradd -d /home/kdedev -m kdedev && \
+    mkdir /work /qt && \
+    chown kdedev /work /qt
+
+#^^ kdedev user is added. It will use UID=1000 for files created in volumes ^^
+
+COPY kdesrc-buildrc /home/kdedev/.kdesrc-buildrc
+COPY bashrc /home/kdedev/.bashrc
+RUN chown kdedev /home/kdedev/.kdesrc-buildrc /home/kdedev/.bashrc
+USER kdedev
+ENV HOME /home/kdedev
+WORKDIR /home/kdedev/
 # kde anongit url alias
-RUN git config --global url."git://anongit.kde.org/".insteadOf kde:
+RUN git config --global url."git://anongit.kde.org/".insteadOf kde: && \
+    git config --global url."ssh://git@git.kde.org/".pushInsteadOf kde: && \
+    git clone git://anongit.kde.org/kdesrc-build.git 
 
 VOLUME /work
-WORKDIR /work
+VOLUME /qt
+
+WORKDIR /home/kdedev/
 ENTRYPOINT ["/bin/bash"]
