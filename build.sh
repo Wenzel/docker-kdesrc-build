@@ -86,7 +86,7 @@ done
 
 if [ -z "${base_system}" ]; then 
     # test on all distros available
-    for i in echo $(cd "$__dir" && Dockerfile-*); do
+    for i in $(cd "$__dir" && echo Dockerfile-*); do
         distro=${i#Dockerfile-}
         arr_distro_to_test+=("$distro")
     done
@@ -99,12 +99,7 @@ check_mount_point ()
     local distro=$1
     echo -e "-> ${bldylw}Checking mount point${txtrst}"
     # check mnt/$distro/kdesrc-build dir
-    if [ ! -d "$mnt_dir/$distro/kdesrc-build" ]; then
-        mkdir -p "$mnt_dir/$distro"
-        git clone git://anongit.kde.org/kdesrc-build "$mnt_dir/$distro/kdesrc-build"
-        # copy rc
-        cp "$__dir/kdesrc-buildrc" "$mnt_dir/$distro/kdesrc-build"
-    fi
+    mkdir -p "$mnt_dir/$distro"
 }
 
 update_image ()
@@ -112,7 +107,8 @@ update_image ()
     local distro=$1
     echo -e "-> ${bldylw}Updating image${txtrst}"
     # ensure up to date
-    docker build --no-cache="$no_cache" -t "$distro-kdedev" - < Dockerfile-$distro
+    (cd "$__dir" && ln -sf "Dockerfile-$distro" Dockerfile)
+    docker build --no-cache="$no_cache" -t "$distro-kdedev" .
 }
 
 run_kdesrc_build ()
