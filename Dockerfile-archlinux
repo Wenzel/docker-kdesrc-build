@@ -84,7 +84,6 @@ RUN pacman --noconfirm -Syu && \
     mkdir /work /tmp/kdesrc-build /qt && \
     chown kdedev /work /tmp/kdesrc-build /qt
 
-#^^ kdedev user is added. It will use UID=1000 for files created in volumes ^^
 
 COPY kdesrc-buildrc /home/kdedev/.kdesrc-buildrc
 COPY bashrc /home/kdedev/.bashrc
