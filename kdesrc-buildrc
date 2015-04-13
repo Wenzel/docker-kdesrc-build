@@ -31,7 +31,8 @@ end global
 
 # NOTE: You MUST change the path below to include the actual path to your
 # kdesrc-build installation.
-include /work/kdesrc-build/kf5-frameworks-build-include
+include /home/kdedev/kdesrc-build/kf5-frameworks-build-include
+include /home/kdedev/kdesrc-build/kf5-workspace-build-include
 
 # If you wish to maintain the module list yourself that is possible, simply
 # look at the files pointed to above and use the "module-set" declarations that
