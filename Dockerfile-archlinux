@@ -45,7 +45,9 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
 # Install dependencies
 #---------------------------
-RUN pacman --noconfirm -Syu && \
+RUN pacman-key --populate archlinux && \
+    pacman-key --refresh-keys && \
+    pacman --noconfirm -Syyu && \
     pacman-db-upgrade && \
     pacman --noconfirm -Sy gcc git cmake make vim doxygen bzr && \
     pacman --noconfirm -Sy perl perl-json perl-libwww perl-xml-parser dialog \
