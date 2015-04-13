@@ -82,12 +82,12 @@ and running `kdesrc-build` script inside of them.
 
 Without arguments, `build.sh` runs `kdesrc-build` on all available distros.
 
-Script syntax :
+Usage: build.py [options] [--] [<kdesrc-build-args>...]
 
-    ./build.sh [--base <distro>] [--nc] [kdesrc-build arg1] [kdesrc-build arg2]
-
-        --nc    : --no-cache=true (build container from scratch)
-        --base  : build container from Dockerfile-<distro> and run the kdesrc-build
+Options:
+    -b --base DISTRO    Use DISTRO as base system [Default: all]
+    --no-cache          Do not use cache when building the image
+    -h --help           Display this message
 
 TODO
 ====
