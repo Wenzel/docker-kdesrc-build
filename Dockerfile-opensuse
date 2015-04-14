@@ -5,7 +5,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 #-----------------------|---------------------------------
 # libdbusmenu-qt        |       libQt5DBus-devel
 # attica                |       libQt5Test-devel
-# ki18n                 |       gettext-tools libQt5Concurrent-devel
+# ki18n                 |       gettext-tools libQt5Concurrent-devel libqt5-qtscript-devel
 # kwindowsystem         |       libqt5-x11extras-devel xcb-util-keysyms-devel
 # kdoctools             |       libxslt-devel docbook-xsl-stylesheets
 # kwidgetsaddons        |       libqt5-qttools-devel
@@ -21,6 +21,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # polkit-qt-1           |       libpolkit-qt-1-devel
 # phonon-vlc            |       vlc-devel
 # phonon-gstreamer      |       libQt5OpenGL-devel gstreamer-editing-services-devel
+# modemmanager-qt       |       libModemManagerQt-devel
 # networkmanager-qt     |       NetworkManager-devel
 #-----------------------|---------------------------------
 # WORKSPACE             |       BUILD DEPENDENCY
@@ -76,7 +77,7 @@ RUN zypper --non-interactive in vim tar git bzr cmake doxygen && \
     zypper --non-interactive in \
         libQt5DBus-devel \
         libQt5Test-devel \
-        gettext-tools libQt5Concurrent-devel \
+        gettext-tools libQt5Concurrent-devel libqt5-qtscript-devel \
         libqt5-qtx11extras-devel xcb-util-keysyms-devel \
         libxslt-devel docbook-xsl-stylesheets \
         libqt5-qttools-devel \
@@ -92,7 +93,7 @@ RUN zypper --non-interactive in vim tar git bzr cmake doxygen && \
         libpolkit-qt-1-devel \
         vlc-devel \
         libQt5OpenGL-devel gstreamer-editing-services-devel \
-        NetworkManager-devel && \
+        libModemManagerQt-devel NetworkManager-devel && \
     zypper --non-interactive in \
                               grantlee5-devel \
                               libexiv2-devel \
