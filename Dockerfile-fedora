@@ -121,13 +121,13 @@ RUN yum -y install gcc-c++ git doxygen cmake bzr vim tar && \
                     openal-soft-devel libsndfile-devel \
                     gmp-devel \
                     cups-devel \
-                    qca2-devel qca-ossl qca-gnupg qca-pkcs11 \
+                    qca2-devel qca-ossl qca-gnupg qca-pkcs11 && \
     yum install -y \ 
                     libdmtx-devel qrencode-devel \
                     libical-devel \
                     cyrus-sasl-devel \
                     openldap-devel \
-                    gpgme-devel \
+                    gpgme-devel && \
     useradd -d /home/kdedev -m kdedev && \
     mkdir /work /qt && \
     chown kdedev /work /qt
