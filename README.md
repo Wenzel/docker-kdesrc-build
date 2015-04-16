@@ -87,6 +87,7 @@ Usage: build.py [options] [--] [<kdesrc-build-args>...]
 Options:
     -b --base DISTRO    Use DISTRO as base system [Default: all]
     --no-cache          Do not use cache when building the image
+    --rm                Automatically remove the container when it exits [Default: True]
     -h --help           Display this message
 
 TODO
