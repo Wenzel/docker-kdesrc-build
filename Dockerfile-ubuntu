@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:14.10
 MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
 # FRAMEWORKS            |       BUILD DEPENDENCY
