@@ -86,7 +86,8 @@ RUN pacman-key --populate archlinux && \
     mkdir /work /tmp/kdesrc-build /qt && \
     chown kdedev /work /tmp/kdesrc-build /qt
 
-
+# setup kdedev account
+RUN pacman -S --noconfirm sudo && echo 'kdedev ALL=NOPASSWD: ALL' >> /etc/sudoers
 USER kdedev
 ENV HOME /home/kdedev
 WORKDIR /home/kdedev/
@@ -94,6 +95,7 @@ WORKDIR /home/kdedev/
 RUN git config --global url."git://anongit.kde.org/".insteadOf kde: && \
     git config --global url."ssh://git@git.kde.org/".pushInsteadOf kde: && \
     git clone git://anongit.kde.org/kdesrc-build.git 
+
 
 VOLUME /work
 VOLUME /qt

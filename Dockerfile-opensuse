@@ -119,8 +119,8 @@ RUN zypper --non-interactive in vim tar git bzr cmake doxygen && \
     mkdir /work /qt && \
     chown kdedev /work /qt
 
-#^^ kdedev user is added. It will use UID=1000 for files created in volumes ^^
-
+# setup kdedev account
+RUN zypper --non-interactive in sudo && echo 'kdedev ALL=NOPASSWD: ALL' >> /etc/sudoers
 USER kdedev
 ENV HOME /home/kdedev
 WORKDIR /home/kdedev/

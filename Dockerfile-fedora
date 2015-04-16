@@ -132,8 +132,8 @@ RUN yum -y install gcc-c++ git doxygen cmake bzr vim tar && \
     mkdir /work /qt && \
     chown kdedev /work /qt
 
-#^^ kdedev user is added. It will use UID=1000 for files created in volumes ^^
-
+# setup kdedev account
+RUN yum install -y sudo && echo 'kdedev ALL=NOPASSWD: ALL' >> /etc/sudoers
 USER kdedev
 ENV HOME /home/kdedev
 WORKDIR /home/kdedev/

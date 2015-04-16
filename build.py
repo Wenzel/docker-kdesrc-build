@@ -7,6 +7,7 @@ Options:
     -b --base DISTRO    Use DISTRO as base system [Default: all]
     --no-cache          Do not use cache when building the image [Default: False]
     --rm                Automatically remove the container when it exits [Default: True]
+    --root              Run kdesrc-build as root user. Useful to install files in /usr for example [Default: False]
     -h --help           Display this message
 
 """
@@ -55,8 +56,13 @@ def update_image(template, cache_enabled):
         '.'
     ])
 
-def run_kdesrc_build(template, auto_rm_enabled, kdesrc_args):
+def run_kdesrc_build(template, auto_rm_enabled, run_as_root, kdesrc_args):
     host_mnt_dir = MNT_DIR + '/' + template
+    sudo = ''
+    if run_as_root:
+        sudo = 'sudo'
+    cmd = 'cd kdesrc-build && git pull && {} ./kdesrc-build '.format(sudo)
+    cmd += ' '.join(kdesrc_args)
     subprocess.call(['docker',
         'run',
         '-it',
@@ -65,7 +71,7 @@ def run_kdesrc_build(template, auto_rm_enabled, kdesrc_args):
         '-v', __SCRIPT_CUR_DIR + '/kdesrc-buildrc:/home/kdedev/.kdesrc-buildrc',
         template + '-kdedev',
         '-c',
-        'cd kdesrc-build && git pull && ./kdesrc-build ' + ' '.join(kdesrc_args)
+        cmd
     ])
 
 if __name__ == '__main__':
@@ -77,4 +83,4 @@ if __name__ == '__main__':
         print(i)
         check_mnt_point(i)
         update_image(i, args['--no-cache'])
-        run_kdesrc_build(i, args['--rm'], args['<kdesrc-build-args>'])
+        run_kdesrc_build(i, args['--rm'], args['--root'], args['<kdesrc-build-args>'])
