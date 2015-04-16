@@ -62,6 +62,7 @@ def run_kdesrc_build(template, auto_rm_enabled, kdesrc_args):
         '-it',
         '--rm=' + str(auto_rm_enabled),
         '-v', host_mnt_dir + ':/work',
+        '-v', __SCRIPT_CUR_DIR + '/kdesrc-buildrc:/home/kdedev/.kdesrc-buildrc',
         template + '-kdedev',
         '-c',
         'cd kdesrc-build && git pull && ./kdesrc-build ' + ' '.join(kdesrc_args)

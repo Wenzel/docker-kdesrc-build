@@ -121,8 +121,6 @@ RUN zypper --non-interactive in vim tar git bzr cmake doxygen && \
 
 #^^ kdedev user is added. It will use UID=1000 for files created in volumes ^^
 
-COPY kdesrc-buildrc /home/kdedev/.kdesrc-buildrc
-RUN chown kdedev /home/kdedev/.kdesrc-buildrc /home/kdedev/.bashrc
 USER kdedev
 ENV HOME /home/kdedev
 WORKDIR /home/kdedev/
