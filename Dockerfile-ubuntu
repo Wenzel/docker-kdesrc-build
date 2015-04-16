@@ -57,7 +57,6 @@ RUN apt-get update && \
 #^^ kdedev user is added. It will use UID=1000 for files created in volumes ^^
 
 COPY kdesrc-buildrc /home/kdedev/.kdesrc-buildrc
-COPY bashrc /home/kdedev/.bashrc
 RUN chown kdedev /home/kdedev/.kdesrc-buildrc /home/kdedev/.bashrc
 USER kdedev
 ENV HOME /home/kdedev

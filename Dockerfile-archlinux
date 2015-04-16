@@ -88,7 +88,6 @@ RUN pacman-key --populate archlinux && \
 
 
 COPY kdesrc-buildrc /home/kdedev/.kdesrc-buildrc
-COPY bashrc /home/kdedev/.bashrc
 RUN chown kdedev /home/kdedev/.kdesrc-buildrc /home/kdedev/.bashrc
 USER kdedev
 ENV HOME /home/kdedev
