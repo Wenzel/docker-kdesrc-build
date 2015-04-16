@@ -65,8 +65,6 @@ WORKDIR /home/kdedev/
 RUN git config --global url."git://anongit.kde.org/".insteadOf kde: && \
     git config --global url."ssh://git@git.kde.org/".pushInsteadOf kde: && \
     git clone git://anongit.kde.org/kdesrc-build.git 
-# quick fix with bzr and ssl-certs
-RUN mkdir /home/kdedev/.bazaar && echo "[DEFAULT]\n\tssl.cert_reqs=none" >> /home/kdedev/.bazaar/bazaar.conf
 
 VOLUME /work
 VOLUME /qt
