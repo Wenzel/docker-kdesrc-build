@@ -1,18 +1,13 @@
-# This is a sample kdesrc-build configuration file appropriate for KDE
-# Frameworks 5-based build environments.
-#
 # See the kdesrc-buildrc-sample for explanations of what the options do, or
 # view the manpage or kdesrc-build documentation at
 # http://kdesrc-build.kde.org/documentation/
 global
     branch-group kf5-qt5
-    kdedir /work/build/install # Where to install KF5-based software
     qtdir /usr     # Where to find Qt5
 
-    # Where to download source code. By default the build directory and
-    # logs will be kept under this directory as well.
-    source-dir /work/build/source
-    build-dir /work/build/build
+    source-dir /work/source
+    build-dir /work/build
+    kdedir /work/install # Where to install KF5-based software
     
     cxxflags -pipe -DQT_STRICT_ITERATORS -DQURL_NO_CAST_FROM_STRING -DQT_NO_HTTP -DQT_NO_FTP -Wformat -Werror=return-type -Wno-variadic-macros -Wlogical-op
     # WARNING: opensuse users need -DLIB_SUFFIX=64 here, as long as FindKDE4Internal.cmake is used
@@ -21,6 +16,7 @@ global
     cmake-options -DBUILD_TESTING=TRUE -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_LIBDIR=lib -DLIB_SUFFIX=64
     
     make-options -j4
+    stop-on-failure true
 end global
 
 # Instead of specifying modules here, the current best practice is to refer to
@@ -31,8 +27,9 @@ end global
 
 # NOTE: You MUST change the path below to include the actual path to your
 # kdesrc-build installation.
-include /home/kdedev/kdesrc-build/kf5-frameworks-build-include
-include /home/kdedev/kdesrc-build/kf5-workspace-build-include
+include ./kdesrc-build/kf5-frameworks-build-include
+include ./kdesrc-build/kf5-workspace-build-include
+include ./kdesrc-build/kf5-applications-build-include
 
 # If you wish to maintain the module list yourself that is possible, simply
 # look at the files pointed to above and use the "module-set" declarations that
