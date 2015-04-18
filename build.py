@@ -10,6 +10,7 @@ Options:
     --root                  Run kdesrc-build as root user. Useful to install files in /usr for example [Default: False]
     --display DISPLAY       Change the DISPLAY environment variable passed to the container [Default: :0]
     --xsocket PATH          Change the PATH to your X server socket dir, which will be mounted as a volume into the container [Default: /tmp/.X11-unix/]
+    --qt PATH               Set the PATH to your a specified Qt installation (mounted as /qt) [Default: False]
     -h --help               Display this message
 
 """
@@ -58,7 +59,7 @@ def update_image(template, cache_enabled):
         '.'
     ])
 
-def run_kdesrc_build(template, auto_rm_enabled, run_as_root, display, xsocket_path, shell_enabled, kdesrc_args):
+def run_kdesrc_build(template, auto_rm_enabled, run_as_root, display, xsocket_path, shell_enabled, qt_dir, kdesrc_args):
     host_mnt_dir = '{}/{}'.format(MNT_DIR, template)
     sudo = ''
     if run_as_root:
@@ -68,18 +69,30 @@ def run_kdesrc_build(template, auto_rm_enabled, run_as_root, display, xsocket_pa
     else:
         cmd = 'cd kdesrc-build && git pull && {} ./kdesrc-build '.format(sudo)
         cmd += ' '.join(kdesrc_args)
-    subprocess.call(['docker',
+    qt_mount = []
+    if qt_dir != 'False':
+        qt_mount = [ '-v', '{}:/qt'.format(qt_dir) ]
+    # create subp_cmd
+    subp_cmd = [
+        'docker',
         'run',
         '-it',
         '--rm={}'.format(str(auto_rm_enabled)),
-        '-e', 'DISPLAY={}'.format(display),
+        '-e', 'DISPLAY={}'.format(display)
+    ]
+    subp_cmd.extend([
         '-v', '{}:/work'.format(host_mnt_dir),
         '-v', __SCRIPT_CUR_DIR + '/kdesrc-buildrc:/home/kdedev/.kdesrc-buildrc',
-        '-v', '{}:/tmp/.X11-unix/'.format(xsocket_path),
-        template + '-kdedev',
+        '-v', '{}:/tmp/.X11-unix/'.format(xsocket_path)
+    ])
+    subp_cmd.extend(qt_mount)
+    subp_cmd.extend([ 
+        '{}-kdedev'.format(template),
         '-c',
         cmd
     ])
+    # run
+    subprocess.call(subp_cmd)
 
 if __name__ == '__main__':
     args = docopt(__doc__)
@@ -90,4 +103,4 @@ if __name__ == '__main__':
         print(i)
         check_mnt_point(i)
         update_image(i, args['--no-cache'])
-        run_kdesrc_build(i, args['--rm'], args['--root'], args['--display'], args['--xsocket'], args['--shell'], args['<kdesrc-build-args>'])
+        run_kdesrc_build(i, args['--rm'], args['--root'], args['--display'], args['--xsocket'], args['--shell'], args['--qt'], args['<kdesrc-build-args>'])
