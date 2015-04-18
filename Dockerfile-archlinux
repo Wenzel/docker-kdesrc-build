@@ -82,6 +82,7 @@ RUN pacman-key --populate archlinux && \
     pacman --noconfirm -Sy \
                                 libdmtx qrencode \
                                 libical && \
+    pacman --noconfirm -Sy xorg-xsetroot xorg-xprop xorg-font-utils xorg-xmessage && \
     useradd -d /home/kdedev -m kdedev && \
     mkdir /work /tmp/kdesrc-build /qt && \
     chown kdedev /work /tmp/kdesrc-build /qt
