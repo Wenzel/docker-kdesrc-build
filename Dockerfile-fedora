@@ -132,6 +132,9 @@ RUN yum -y install gcc-c++ git doxygen cmake bzr vim tar && \
     mkdir /work /qt && \
     chown kdedev /work /qt
 
+# some symlinks in /root to handle sudo ./kdesrc-build
+RUN ln -s /home/kdedev/.kdesrc-buildrc /root/.kdesrc-buildrc && \
+    ln -s /home/kdedev/kdesrc-build /root/kdesrc-build
 # setup kdedev account
 RUN yum install -y sudo && echo 'kdedev ALL=NOPASSWD: ALL' >> /etc/sudoers
 USER kdedev
@@ -145,5 +148,4 @@ RUN git config --global url."git://anongit.kde.org/".insteadOf kde: && \
 VOLUME /work
 VOLUME /qt
 
-WORKDIR /home/kdedev/
 ENTRYPOINT ["/bin/bash"]

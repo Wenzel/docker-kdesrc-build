@@ -86,6 +86,9 @@ RUN pacman-key --populate archlinux && \
     mkdir /work /tmp/kdesrc-build /qt && \
     chown kdedev /work /tmp/kdesrc-build /qt
 
+# some symlinks in /root to handle sudo ./kdesrc-build
+RUN ln -s /home/kdedev/.kdesrc-buildrc /root/.kdesrc-buildrc && \
+    ln -s /home/kdedev/kdesrc-build /root/kdesrc-build
 # setup kdedev account
 RUN pacman -S --noconfirm sudo && echo 'kdedev ALL=NOPASSWD: ALL' >> /etc/sudoers
 USER kdedev

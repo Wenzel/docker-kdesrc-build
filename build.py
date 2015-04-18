@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 """
-Usage: build.py [options] [--] [<kdesrc-build-args>...]
+Usage: build.py [options] [--shell | -- [<kdesrc-build-args>...]]
 
 Options:
     -b --base DISTRO        Use DISTRO as base system [Default: all]
@@ -58,13 +58,16 @@ def update_image(template, cache_enabled):
         '.'
     ])
 
-def run_kdesrc_build(template, auto_rm_enabled, run_as_root, display, xsocket_path, kdesrc_args):
+def run_kdesrc_build(template, auto_rm_enabled, run_as_root, display, xsocket_path, shell_enabled, kdesrc_args):
     host_mnt_dir = '{}/{}'.format(MNT_DIR, template)
     sudo = ''
     if run_as_root:
         sudo = 'sudo'
-    cmd = 'cd kdesrc-build && git pull && {} ./kdesrc-build '.format(sudo)
-    cmd += ' '.join(kdesrc_args)
+    if shell_enabled:
+        cmd = '/bin/bash' # just run an interactive shell
+    else:
+        cmd = 'cd kdesrc-build && git pull && {} ./kdesrc-build '.format(sudo)
+        cmd += ' '.join(kdesrc_args)
     subprocess.call(['docker',
         'run',
         '-it',
@@ -87,4 +90,4 @@ if __name__ == '__main__':
         print(i)
         check_mnt_point(i)
         update_image(i, args['--no-cache'])
-        run_kdesrc_build(i, args['--rm'], args['--root'], args['--display'], args['--xsocket'], args['<kdesrc-build-args>'])
+        run_kdesrc_build(i, args['--rm'], args['--root'], args['--display'], args['--xsocket'], args['--shell'], args['<kdesrc-build-args>'])
