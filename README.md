@@ -21,8 +21,8 @@ Moreover, you can run and try the entire Plasma Desktop in another tty !
 
 ## Quick and simple
 
-Just choose a distro as a base system for the container (`archlinux` 
-is recommended, as it has the latest dependencies), and run the script :
+Just choose a distro as a base system for the container (*`archlinux` 
+is recommended, as it has the latest dependencies*), and run the script :
 
     ./run.py --base archlinux
 
@@ -49,7 +49,6 @@ run `/bin/bash` so you can work and try whatever you want in the environement.
     ./run.py --base archlinux --shell
 
 ## Use a specific version of Qt
---------------------------------
 
 If you want to change the Qt version used during the compilation, you can
 provide a the path to a Qt installation on the host with :
@@ -74,6 +73,14 @@ Don't forget to change the `qtdir` variable in the `kdesrc-buildrc`
         --qt PATH               Set the PATH to your a specified Qt installation (mounted as /qt) [Default: False]
         -h --help               Display this message
 
-# kdesrc-buildrc
+## kdesrc-buildrc configuration
 
 To configure `kdesrc-buildrc`, take a look at [http://kdesrc-build.kde.org/documentation/](http://kdesrc-build.kde.org/documentation/¬)
+
+# Dependencies installed
+
+|              | Archlinux | Fedora | OpenSUSE | Ubuntu |
+|--------------|-----------|--------|----------|--------|
+| Frameworks   |     ✓     |    ✗   |     ✗    |    ✗   |
+| Workspace    |     ✓     |    ✗   |     ✗    |    ✗   |
+| Applications |     ✗     |    ✗   |     ✗    |    ✗   |
