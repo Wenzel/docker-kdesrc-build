@@ -30,7 +30,7 @@ def check_templates(sel_distro):
     if sel_distro == 'all':
         regexp_str = '^Dockerfile-(.+)$'
     else:
-        regexp_str = '^Dockerfile-(' + sel_distro + ')$'
+        regexp_str = '^Dockerfile-({})$'.format(sel_distro)
     reg = re.compile(regexp_str)
     for i in os.listdir(__SCRIPT_CUR_DIR):
         if reg.match(i):
@@ -39,27 +39,27 @@ def check_templates(sel_distro):
 
 
 def check_mnt_point(template):
-    print("Checking mount point for " + template)
-    path = MNT_DIR + '/' + template
+    print("Checking mount point for {}".format(template))
+    path = '{}/{}'.format(MNT_DIR, template)
     os.makedirs(path, exist_ok=True)
 
 def update_image(template, cache_enabled):
     print("Updating image for " + template)
-    source = 'Dockerfile-' + template
+    source = 'Dockerfile-{}'.format(template)
     dest = 'Dockerfile'
     if os.path.exists(dest):
         os.remove(dest)
     os.symlink(source, dest)
     subprocess.call(['docker',
         'build',
-        '--no-cache=' + str(cache_enabled),
+        '--no-cache={}'.format(str(cache_enabled)),
         '-t',
         template + '-kdedev',
         '.'
     ])
 
 def run_kdesrc_build(template, auto_rm_enabled, run_as_root, display, xsocket_path, kdesrc_args):
-    host_mnt_dir = MNT_DIR + '/' + template
+    host_mnt_dir = '{}/{}'.format(MNT_DIR, template)
     sudo = ''
     if run_as_root:
         sudo = 'sudo'
@@ -68,9 +68,9 @@ def run_kdesrc_build(template, auto_rm_enabled, run_as_root, display, xsocket_pa
     subprocess.call(['docker',
         'run',
         '-it',
-        '--rm=' + str(auto_rm_enabled),
+        '--rm={}'.format(str(auto_rm_enabled)),
         '-e', 'DISPLAY={}'.format(display),
-        '-v', host_mnt_dir + ':/work',
+        '-v', '{}:/work'.format(host_mnt_dir),
         '-v', __SCRIPT_CUR_DIR + '/kdesrc-buildrc:/home/kdedev/.kdesrc-buildrc',
         '-v', '{}:/tmp/.X11-unix/'.format(xsocket_path),
         template + '-kdedev',
