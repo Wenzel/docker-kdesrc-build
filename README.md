@@ -1,150 +1,79 @@
-docker-kdesrc-build
-===================
-This project aims to provide Dockerfiles to KDE developers 
-who would like to build the project from source with the `kdesrc-build` script, 
-without messing with build dependencies and distro specific issues.
+# docker-kdesrc-build
 
-Tested distros
------------------
+This project aims to provide a lightweight and ready to use KDE development
+environment by wrapping the `kdesrc-build` tool in Docker.
 
-* `Archlinux`
-* `OpenSUSE`
-* `Fedora`
-* `Ubuntu` (TODO)
+This way, you can compile and work on the latest version of the KDE project 
+and keep your main system clean of unwanted development packages.
 
-Dependencies installed
-----------------------
+You can run a KDE application on your current desktop by sharing your X
+server instance inside the Docker container
 
-* `kdesrc-build`
-* `Frameworks`
-* `Workspace`
-* `Applications`
-* `PIM`
+Moreover, you can run and try the entire Plasma Desktop in another tty !
 
-Build
-=====
+# Requirements
 
-First choose your favorite distro
+- `python` `>=` `3.2`
+- `docopt`
+- `docker`
 
-    ln -sf Dockerfile-<distro> Dockerfile
+# Usage
 
-Then run `docker build` to build the docker image
+## Quick and simple
 
-    docker build -t <distro>-kdedev .
+Just choose a distro as a base system for the container (`archlinux` 
+is recommended, as it has the latest dependencies), and run the script :
 
-Usage
-=====
+    ./run.py --base archlinux
 
-* configure `kdesrc-buildrc` in `/home/kdedev/.kdesrc-buildrc`
-* When you want to build, run the `./kdesrc-build` script. (in `/home/kdedev/kdesrc-build/`)
+The script will do the following operations :
 
-You can find more info about this script [on the KDE Wiki](https://techbase.kde.org/Getting_Started/Build/kdesrc-build)
+* check for a `Dockerfile-archlinux` file
+* create a dir under `$HOME/kdebuild/archlinux` to be mounted under `/work`
+* build or update the Docker image `archlinux-kdedev` if necessary
+* mount `bash_profile` as a volume (`/home/kdedev/.bash_profile`)
+* mount `kdesrc-buildrc` as a volume (`/home/kdedev/.kdesrc-buildrc`)
+* run the container
+* pull the latest version of `kdesrc-build`
+* run `kdesrc-build`
 
-Sources outside of the container
+You can pass arguments `kdesrc-build` script with the following syntax :
+
+    ./run.py --base archlinux -- --arg1 --arg2 ...
+
+## I want a shell
+
+Just use the `--shell` option. Instead of invoking `kdesrc-build`, it will
+run `/bin/bash` so you can work and try whatever you want in the environement.
+
+    ./run.py --base archlinux --shell
+
+## Use a specific version of Qt
 --------------------------------
 
-You can keep the source code and the build outside of the container by
-mounting the `/work` volume :
+If you want to change the Qt version used during the compilation, you can
+provide a the path to a Qt installation on the host with :
 
-    docker run -ti -v ~/path/to/mnt/dir:/work <distro>-kdedev
+    ./run.py --base archlinux --qt /path/to/qt
 
-Qt libraries outside of the container
---------------------------------
+This path will be mounted under `/qt`
 
-You can provide the container with a path to the base dir of the desired QT installation. This allows
-you to easily select which QT version installed on your host OS will be used for
-compiling KDE packages.
+Don't forget to change the `qtdir` variable in the `kdesrc-buildrc`
 
-add the following options to the commandline :
+## Command line options reference
 
-    -v ~/path/to/qtbase/dir:/qt
+    Usage: build.py [options] [--shell | -- [<kdesrc-build-args>...]]
 
-/path/to/qt/base/dir might be /usr if you want to use your host's OS distro QT
-installation. If you have installed different QT versions by yourself this path 
-might look something like this: <qt_base_dir>/5.4/gcc_64/
+    Options:
+        -b --base DISTRO        Use DISTRO as base system [Default: all]
+        --no-cache              Do not use cache when building the image [Default: False]
+        --rm                    Automatically remove the container when it exits [Default: True]
+        --root                  Run kdesrc-build as root user. Useful to install files in /usr for example [Default: False]
+        --display DISPLAY       Change the DISPLAY environment variable passed to the container [Default: :0]
+        --xsocket PATH          Change the PATH to your X server socket dir, which will be mounted as a volume into the container [Default: /tmp/.X11-unix/]
+        --qt PATH               Set the PATH to your a specified Qt installation (mounted as /qt) [Default: False]
+        -h --help               Display this message
 
-Files owner and permissions
----------------------------
+# kdesrc-buildrc
 
-This images create a new user (kdedev) with UID=1000. If your user in your host 
-OS has the same UID you will be able to seamesly open, edit and run files created
-by the docker container from you host OS. If this is not the case, you will find
-bindfs useful in order to map containers UID to your desired host's UID.
-
-Example: 
-    sudo bindfs -u 1000 -g 1000 --create-for-user=<your_users_uid> --create-for-group=<your_users_gid> /origin/work/dir/ /dest/work/dir/
-
-Automated testing
------------------
-
-The `build.sh` script automates the process of building/updating the containers
-and running `kdesrc-build` script inside of them.
-
-Without arguments, `build.sh` runs `kdesrc-build` on all available distros.
-
-Usage: build.py [options] [--] [<kdesrc-build-args>...]
-
-Options:
-    -b --base DISTRO    Use DISTRO as base system [Default: all]
-    --no-cache          Do not use cache when building the image
-    --rm                Automatically remove the container when it exits [Default: True]
-    -h --help           Display this message
-
-TODO
-====
-
-Ubuntu
-------
-
-- Install latest Qt packages
-
-
-Archlinux
-----------
-
-In Workspace :
-
-- `plasmate`
-
-        CMake Error at /usr/share/cmake-3.1/Modules/FindPackageHandleStandardArgs.cmake:138 (message):
-          Could NOT find KDevPlatform (missing: KDevPlatform_CONFIG) (Required is at
-          least version "1.90.60")
-        Call Stack (most recent call first):
-          /usr/share/cmake-3.1/Modules/FindPackageHandleStandardArgs.cmake:374 (_FPHSA_FAILURE_MESSAGE)
-          /work/full/install/lib64/cmake/KF5KDELibs4Support/FindKDevPlatform.cmake:44 (find_package_handle_standard_args)
-          plasmate/CMakeLists.txt:20 (find_package)
-
-Fedora
-------
-
-In Applications :
-
-- `kdevlatform` : How to install `grantlee5` ?
-
-        CMake Error at CMakeLists.txt:76 (find_package):
-          By not providing "FindGrantlee5.cmake" in CMAKE_MODULE_PATH this project
-          has asked CMake to find a package configuration file provided by
-          "Grantlee5", but CMake did not find one.
-
-          Could not find a package configuration file provided by "Grantlee5" with
-          any of the following names:
-
-            Grantlee5Config.cmake
-            grantlee5-config.cmake
-
-- `parley` : Need `Qt5Multimedia` development packages
-
-        CMake Error at /usr/lib64/cmake/Qt5/Qt5Config.cmake:26 (find_package):
-          Could not find a package configuration file provided by "Qt5Multimedia"
-          with any of the following names:
-
-            Qt5MultimediaConfig.cmake
-            qt5multimedia-config.cmake
-
-          Add the installation prefix of "Qt5Multimedia" to CMAKE_PREFIX_PATH or set
-          "Qt5Multimedia_DIR" to a directory containing one of the above files.  If
-          "Qt5Multimedia" provides a separate development package or SDK, be sure it
-          has been installed.
-        Call Stack (most recent call first):
-          CMakeLists.txt:18 (find_package)
-
+To configure `kdesrc-buildrc`, take a look at [http://kdesrc-build.kde.org/documentation/](http://kdesrc-build.kde.org/documentation/¬)
