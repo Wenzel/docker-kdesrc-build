@@ -74,6 +74,7 @@ RUN pacman-key --populate archlinux && \
                                 exiv2 \
                                 sane && \
     pacman --noconfirm -Sy \
+                                hunspell \
                                 grantlee-qt5 \
                                 glu \
                                 automoc4 \
