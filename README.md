@@ -59,6 +59,37 @@ This path will be mounted under `/qt`
 
 Don't forget to change the `qtdir` variable in the `kdesrc-buildrc`
 
+## Run the Plasma Desktop
+
+To run an entire Plasma Desktop session, we need to create a new X server instance
+, running on a new `tty`, for example, `tty8`.
+
+As root, on the host system :
+
+    startx -display :1 -- :1 vt8
+
+Also you have to explicitly authorize access to allow clients inside the
+container to use this instance :
+
+As root again, on the host system :
+
+    DISPLAY=':1' xhost +
+
+Then, run the container and use the `--display` option to specify the right
+tty to be used by applications :
+
+    ./run.py --base archlinux --display ':1' --shell
+
+Execute `startkde` from your install directory (which is `/work` by default)
+
+You should have build `workspace` set (`kdesrc-build workspace`)
+
+Inside the container :
+
+    $ /work/install/bin/startkde
+
+And the KDE desktop should be starting on `tty8` !
+
 ## Command line options reference
 
     Usage: build.py [options] [--shell | -- [<kdesrc-build-args>...]]
