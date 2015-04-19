@@ -1,8 +1,8 @@
 QTDIR=$(grep qtdir $HOME/.kdesrc-buildrc | awk '{ print $2 }' )
 KDEDIR=$(grep kdedir $HOME/.kdesrc-buildrc  | awk '{ print $2 }')
 KDEDIRS=$KDEDIR
-PATH=$KDEDIR/bin:$QTDIR/bin:$PATH
-MANPATH=$QTDIR/doc/man:$MANPATH
+PATH="$KDEDIR/bin:$QTDIR/bin:$PATH"
+MANPATH="$QTDIR/doc/man:$MANPATH"
 
 # Act appropriately if LD_LIBRARY_PATH is not already set.
 if [ -z $LD_LIBRARY_PATH ]; then
