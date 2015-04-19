@@ -64,16 +64,12 @@ Don't forget to change the `qtdir` variable in the `kdesrc-buildrc`
 To run an entire Plasma Desktop session, we need to create a new X server instance
 , running on a new `tty`, for example, `tty8`.
 
-As root, on the host system :
+    # startx -display :1 -- :1 vt8
 
-    startx -display :1 -- :1 vt8
+Also you have to **explicitly authorize access** to allow clients inside the
+container to use this xserver instance :
 
-Also you have to explicitly authorize access to allow clients inside the
-container to use this instance :
-
-As root again, on the host system :
-
-    DISPLAY=':1' xhost +
+    # DISPLAY=':1' xhost +
 
 Then, run the container and use the `--display` option to specify the right
 tty to be used by applications :
@@ -82,7 +78,7 @@ tty to be used by applications :
 
 Execute `startkde` from your install directory (which is `/work` by default)
 
-You should have build `workspace` set (`kdesrc-build workspace`)
+Note that you should have build the `workspace` set first (`kdesrc-build workspace`)
 
 Inside the container :
 
