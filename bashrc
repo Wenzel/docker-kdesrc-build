@@ -1,5 +1,5 @@
-QTDIR=$(grep qtdir $HOME/.kdesrc-buildrc | awk '{ print $3 }' )
-KDEDIR=$(grep kdedir $HOME/.kdesrc-buildrc  | awk '{ print $3 }')
+QTDIR=$(grep qtdir $HOME/.kdesrc-buildrc | awk '{ print $2 }' )
+KDEDIR=$(grep kdedir $HOME/.kdesrc-buildrc  | awk '{ print $2 }')
 KDEDIRS=$KDEDIR
 PATH=$KDEDIR/bin:$QTDIR/bin:$PATH
 MANPATH=$QTDIR/doc/man:$MANPATH

@@ -83,7 +83,7 @@ def run_kdesrc_build(template, auto_rm_enabled, run_as_root, display, xsocket_pa
     subp_cmd.extend([
         '-v', '{}:/work'.format(host_mnt_dir),
         '-v', __SCRIPT_CUR_DIR + '/kdesrc-buildrc:/home/kdedev/.kdesrc-buildrc',
-        '-v', __SCRIPT_CUR_DIR + '/bash_profile:/home/kdedev/.bash_profile',
+        '-v', __SCRIPT_CUR_DIR + '/bashrc:/home/kdedev/.bashrc',
         '-v', '{}:/tmp/.X11-unix/'.format(xsocket_path)
     ])
     subp_cmd.extend(qt_mount)

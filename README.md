@@ -31,7 +31,7 @@ The script will do the following operations :
 * check for a `Dockerfile-archlinux` file
 * create a dir under `$HOME/kdebuild/archlinux` to be mounted under `/work`
 * build or update the Docker image `archlinux-kdedev` if necessary
-* mount `bash_profile` as a volume (`/home/kdedev/.bash_profile`)
+* mount `bashrc` as a volume (`/home/kdedev/.bashrc`)
 * mount `kdesrc-buildrc` as a volume (`/home/kdedev/.kdesrc-buildrc`)
 * run the container
 * pull the latest version of `kdesrc-build`
