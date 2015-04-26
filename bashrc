@@ -12,3 +12,35 @@ else
 fi
 
 export QTDIR KDEDIRS PATH MANPATH LD_LIBRARY_PATH
+
+function run_xvfb ()
+{
+    sudo Xvfb $DISPLAY +extension RANDR -screen 0 1024x780x24 &
+}
+
+function kill_xvfb () 
+{ 
+    sudo kill -9 $(pgrep Xvfb)
+}
+
+function re_xvfb () 
+{ 
+    kill_xvfb
+    run_xvfb 
+}
+
+function run_vnc () 
+{
+    x11vnc -usepw -display $DISPLAY &
+}
+
+function kill_vnc () 
+{
+    sudo kill -9 $(pgrep x11vnc)
+}
+
+function re_vnc ()
+{
+    kill_vnc
+    run_vnc
+}
