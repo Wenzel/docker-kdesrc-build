@@ -34,19 +34,7 @@ The script will do the following operations :
 * mount `bashrc` as a volume (`/home/kdedev/.bashrc`)
 * mount `kdesrc-buildrc` as a volume (`/home/kdedev/.kdesrc-buildrc`)
 * run the container
-* pull the latest version of `kdesrc-build`
-* run `kdesrc-build`
-
-You can pass arguments `kdesrc-build` script with the following syntax :
-
-    ./run.py --base archlinux -- --arg1 --arg2 ...
-
-## I want a shell
-
-Just use the `--shell` option. Instead of invoking `kdesrc-build`, it will
-run `/bin/bash` so you can work and try whatever you want in the environement.
-
-    ./run.py --base archlinux --shell
+* run `/bin/bash`
 
 ## Use a specific version of Qt
 
@@ -76,7 +64,7 @@ container to use this xserver instance :
 Then, run the container and use the `--display` option to specify the right
 tty to be used by applications :
 
-    ./run.py --base archlinux --display ':1' --shell
+    ./run.py --base archlinux --display ':1'
 
 Execute `startkde` from your install directory (which is `/work` by default)
 
@@ -93,13 +81,13 @@ And the KDE desktop should be starting on `tty8` !
 Another method consist to run a `Virtual FrameBuffer` inside the container,
 as well as a `VNC` server to view it's content.
 
-Run the environement as a shell :
+Run the environement :
 
-    ./run.py --base archlinux --shell
+    ./run.py --base archlinux 
 
 Run the `Xvfb` server :
 
-    sudo Xvfb $DISPLAY -extension GLX -screen 0 1024x780x24 &
+    sudo Xvfb $DISPLAY +extension GLX +render -screen 0 1024x780x24 &
 
 Run the `VNC server :`
 
@@ -120,16 +108,17 @@ Now you can run any applications, including `startkde` !
 
 ## Command line options reference
 
-    Usage: build.py [options] [--shell | -- [<kdesrc-build-args>...]]
+    Usage: build.py [options]
 
     Options:
         -b --base DISTRO        Use DISTRO as base system [Default: all]
         --no-cache              Do not use cache when building the image [Default: False]
         --rm                    Automatically remove the container when it exits [Default: True]
         --display DISPLAY       Change the DISPLAY environment variable passed to the container [Default: :0]
-        --xsocket               
+        --vnc                   Enable port forwarding and disable X11 socket sharing
         --qt PATH               Set the PATH to your a specified Qt installation (mounted as /qt) [Default: False]
         -h --help               Display this message
+
 
 ## kdesrc-buildrc configuration
 
