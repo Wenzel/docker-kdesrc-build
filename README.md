@@ -94,7 +94,6 @@ And the KDE desktop should be starting on `tty8` !
         -b --base DISTRO        Use DISTRO as base system [Default: all]
         --no-cache              Do not use cache when building the image [Default: False]
         --rm                    Automatically remove the container when it exits [Default: True]
-        --root                  Run kdesrc-build as root user. Useful to install files in /usr for example [Default: False]
         --display DISPLAY       Change the DISPLAY environment variable passed to the container [Default: :0]
         --xsocket PATH          Change the PATH to your X server socket dir, which will be mounted as a volume into the container [Default: /tmp/.X11-unix/]
         --qt PATH               Set the PATH to your a specified Qt installation (mounted as /qt) [Default: False]

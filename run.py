@@ -59,15 +59,13 @@ def update_image(template, cache_enabled):
         '.'
     ])
 
-def run_kdesrc_build(template, auto_rm_enabled, run_as_root, display, xsocket_path, shell_enabled, qt_dir, kdesrc_args):
+def run_kdesrc_build(template, auto_rm_enabled, display, xsocket_path, shell_enabled, qt_dir, kdesrc_args):
     host_mnt_dir = '{}/{}'.format(MNT_DIR, template)
     sudo = ''
-    if run_as_root:
-        sudo = 'sudo'
     if shell_enabled:
         cmd = '/bin/bash' # just run an interactive shell
     else:
-        cmd = 'cd kdesrc-build && git pull && {} ./kdesrc-build '.format(sudo)
+        cmd = 'cd kdesrc-build && git pull && ./kdesrc-build '
         cmd += ' '.join(kdesrc_args)
     qt_mount = []
     if qt_dir != 'False':
@@ -77,6 +75,7 @@ def run_kdesrc_build(template, auto_rm_enabled, run_as_root, display, xsocket_pa
         'docker',
         'run',
         '-it',
+        '--privileged',
         '--rm={}'.format(str(auto_rm_enabled)),
         '-e', 'DISPLAY={}'.format(display)
     ]
@@ -104,4 +103,4 @@ if __name__ == '__main__':
         print(i)
         check_mnt_point(i)
         update_image(i, args['--no-cache'])
-        run_kdesrc_build(i, args['--rm'], args['--root'], args['--display'], args['--xsocket'], args['--shell'], args['--qt'], args['<kdesrc-build-args>'])
+        run_kdesrc_build(i, args['--rm'], args['--display'], args['--xsocket'], args['--shell'], args['--qt'], args['<kdesrc-build-args>'])
