@@ -83,7 +83,9 @@ RUN pacman-key --populate archlinux && \
     pacman --noconfirm -Sy \
                                 libdmtx qrencode \
                                 libical && \
-    pacman --noconfirm -Sy xorg-xsetroot xorg-xprop xorg-font-utils xorg-xmessage && \
+    pacman --noconfirm -Sy xorg-xsetroot xorg-xprop xorg-font-utils xorg-xmessage \
+                            xorg-fonts-100dpi xorg-fonts-75dpi xorg-fonts-alias \
+                            xorg-server-xvfb x11vnc && \
     useradd -d /home/kdedev -m kdedev && \
     mkdir /work /tmp/kdesrc-build /qt && \
     chown kdedev /work /tmp/kdesrc-build /qt
@@ -96,6 +98,8 @@ RUN pacman -S --noconfirm sudo && echo 'kdedev ALL=NOPASSWD: ALL' >> /etc/sudoer
 USER kdedev
 ENV HOME /home/kdedev
 WORKDIR /home/kdedev/
+# VNC setup
+RUN mkdir -p ~/.vnc && x11vnc -storepasswd 1234 ~/.vnc/passwd
 # kde anongit url alias
 RUN git config --global url."git://anongit.kde.org/".insteadOf kde: && \
     git config --global url."ssh://git@git.kde.org/".pushInsteadOf kde: && \

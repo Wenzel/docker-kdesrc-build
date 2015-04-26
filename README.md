@@ -61,6 +61,8 @@ Don't forget to change the `qtdir` variable in the `kdesrc-buildrc`
 
 ## Run the Plasma Desktop
 
+### 1 - Using a shared X11 socket
+
 To run an entire Plasma Desktop session, we need to create a new X server instance
 , running on a new `tty`, for example, `tty8`.
 
@@ -86,6 +88,36 @@ Inside the container :
 
 And the KDE desktop should be starting on `tty8` !
 
+### 2 - Using a VNC Server
+
+Another method consist to run a `Virtual FrameBuffer` inside the container,
+as well as a `VNC` server to view it's content.
+
+Run the environement as a shell :
+
+    ./run.py --base archlinux --shell
+
+Run the `Xvfb` server :
+
+    sudo Xvfb $DISPLAY -extension GLX -screen 0 1024x780x24 &
+
+Run the `VNC server :`
+
+    sudo x11vnc -usepw -display $DISPLAY
+
+Now you should inspect the container on the host
+    
+    docker inspect <container name | ID>
+
+and check for it's IP address:
+
+    "IPAddress": "172.17.0.10"
+
+You can connect to the VNC server `container-ip-address`:`5900` with a VNC client
+on the host !
+
+Now you can run any applications, including `startkde` !
+
 ## Command line options reference
 
     Usage: build.py [options] [--shell | -- [<kdesrc-build-args>...]]
@@ -95,7 +127,7 @@ And the KDE desktop should be starting on `tty8` !
         --no-cache              Do not use cache when building the image [Default: False]
         --rm                    Automatically remove the container when it exits [Default: True]
         --display DISPLAY       Change the DISPLAY environment variable passed to the container [Default: :0]
-        --xsocket PATH          Change the PATH to your X server socket dir, which will be mounted as a volume into the container [Default: /tmp/.X11-unix/]
+        --xsocket               
         --qt PATH               Set the PATH to your a specified Qt installation (mounted as /qt) [Default: False]
         -h --help               Display this message
 
