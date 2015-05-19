@@ -36,17 +36,6 @@ The script will do the following operations :
 * run the container
 * run `/bin/bash`
 
-## Use a specific version of Qt
-
-If you want to change the Qt version used during the compilation, you can
-provide a the path to a Qt installation on the host with :
-
-    ./run.py --base archlinux --qt /path/to/qt
-
-This path will be mounted under `/qt`
-
-Don't forget to change the `qtdir` variable in the `kdesrc-buildrc`
-
 ## Run the Plasma Desktop
 
 ### 1 - Using a shared X11 socket
@@ -123,6 +112,17 @@ Now you can run any applications, including `startkde` !
 ## kdesrc-buildrc configuration
 
 To configure `kdesrc-buildrc`, take a look at [http://kdesrc-build.kde.org/documentation/](http://kdesrc-build.kde.org/documentation/¬)
+
+## Use a specific version of Qt
+
+If you want to change the Qt version used during the compilation, you can
+provide a the path to a Qt installation on the host with :
+
+    ./run.py --base archlinux --qt /path/to/qt
+
+This path will be mounted under `/qt`
+
+Don't forget to change the `qtdir` variable in the `kdesrc-buildrc`
 
 # Dependencies installed
 
