@@ -50,7 +50,7 @@ def update_image(template, cache_enabled):
         '--no-cache={}'.format(str(cache_enabled)),
         '-t',
         '{}-kdedev'.format(template),
-        '-f', 'Dockerfile-{}'.format(template)
+        '-f', 'Dockerfile-{}'.format(template),
         '.'
     ], cwd=__SCRIPT_CUR_DIR)
 
