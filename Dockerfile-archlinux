@@ -91,11 +91,12 @@ RUN pacman --noconfirm -Sy xorg-xsetroot xorg-xprop xorg-font-utils xorg-xmessag
                             xorg-server-xvfb x11vnc
 
 # setup kdedev account
-RUN useradd -d /home/kdedev -m kdedev && \
+RUN useradd -d /home/kdedev -m kdedev -G video && \
     pacman -S --noconfirm sudo && echo 'kdedev ALL=NOPASSWD: ALL' >> /etc/sudoers
 # some symlinks in /root to handle sudo ./kdesrc-build
 RUN ln -s /home/kdedev/.kdesrc-buildrc /root/.kdesrc-buildrc && \
-    ln -s /home/kdedev/kdesrc-build /root/kdesrc-build
+    ln -s /home/kdedev/kdesrc-build /root/kdesrc-build && \
+    mkdir -p /root/.vnc && ln -s /home/kdedev/.vnc/passwd /root/.vnc/passwd
 USER kdedev
 ENV HOME /home/kdedev
 WORKDIR /home/kdedev/
