@@ -15,7 +15,7 @@ Moreover, you can run and try the entire Plasma Desktop in another tty !
 
 - `python` `>=` `3.2`
 - `docopt`
-- `docker`
+- `docker` `>=` `1.5`
 
 # Usage
 

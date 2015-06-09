@@ -45,18 +45,14 @@ def check_mnt_point(template):
 
 def update_image(template, cache_enabled):
     print("Updating image for " + template)
-    source = 'Dockerfile-{}'.format(template)
-    dest = 'Dockerfile'
-    if os.path.exists(dest):
-        os.remove(dest)
-    os.symlink(source, dest)
     subprocess.call(['docker',
         'build',
         '--no-cache={}'.format(str(cache_enabled)),
         '-t',
-        template + '-kdedev',
+        '{}-kdedev'.format(template),
+        '-f', 'Dockerfile-{}'.format(template)
         '.'
-    ])
+    ], cwd=__SCRIPT_CUR_DIR)
 
 def run_kdesrc_build(template, auto_rm_enabled, display, vnc_enabled, qt_dir):
     host_mnt_dir = '{}/{}'.format(MNT_DIR, template)
