@@ -1,9 +1,9 @@
-FROM fedora:latest
+FROM fedora:22
 MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
 # FRAMEWORKS            |       BUILD DEPENDENCY
 #-----------------------|---------------------------------
-# ki18n                 |       qt5-qtscript-devel
+# ki18n                 |       qt5-qtscript-devel gettext-devel
 # kwindowsystem         |       qt5-qtx11extras-devel libXrender-devel xcb-util-keysyms-devel
 # karchive              |       zlib-devel
 # kdoctools             |       libxslt-devel docbook-style-xsl
@@ -32,7 +32,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # user-manager          |       libpwquality-devel
 # kcm-touchpad          |       xorg-x11-drv-synaptics-devel xorg-x11-server-devel
 # kde-gtk-config        |       gtkmm24-devel gtkmm30-devel
-# baloo                 |       xapian-core-devel
+# baloo                 |       xapian-core-devel lmdb-devel
 # kwin                  |       libepoxy-devel
 # libnm-qt              |       libmms-devel
 # oxygen-fonts          |       fontforge-devel
@@ -45,7 +45,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # gwenview              |       lcms2-devel
 # lokalize              |       hunspell-devel
 # kalgebra              |       glu
-# parley                |       qt5-qtmultimedia qt5-multimedia-devel
+# parley                |       qt5-qtmultimedia qt5-qtmultimedia-devel
 # step                  |       eigen3-devel
 # rocs                  |       grentlee-devel
 # telepathy-qt          |       qtsinglecoreapplication-devel
@@ -70,11 +70,11 @@ RUN rpm -ivh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-s
 
 # Install dependencies
 #---------------------------
-RUN yum -y install gcc-c++ git doxygen cmake bzr vim tar && \
-    yum -y install dialog perl-libwww-perl perl-JSON perl-XML-Parser \
+RUN dnf -y install gcc-c++ git doxygen cmake bzr vim tar && \
+    dnf -y install dialog perl-libwww-perl perl-JSON perl-XML-Parser \
                     qt5-qtbase-devel && \
-    yum install -y \
-                    qt5-qtscript-devel \
+    dnf install -y \
+                    qt5-qtscript-devel gettext-devel \
                     qt5-qtx11extras-devel libXrender-devel xcb-util-keysyms-devel \
                     zlib-devel \
                     libxslt-devel docbook-style-xsl \
@@ -91,9 +91,9 @@ RUN yum -y install gcc-c++ git doxygen cmake bzr vim tar && \
                     polkit-devel \
                     vlc-devel \
                     gstreamer-devel gstreamer-plugins-bad-free-devel gstreamer1-plugins-bad-free-devel gstreamer1-plugins-base-devel \
-                                NetworkManager-devel NetworkManager-glib-devel && \
-    yum install -y \
-                    wayland-devel libwayland-cursor-devel \
+                                NetworkManager-devel NetworkManager-glib-devel NetworkManager-libnm-devel && \
+    dnf install -y \
+                    wayland-devel libwayland-cursor-devel libwayland-server-devel \
                     libattr-devel \
                     ModemManager-devel \
                     xcb-util-image-devel \
@@ -101,18 +101,18 @@ RUN yum -y install gcc-c++ git doxygen cmake bzr vim tar && \
                     libpwquality-devel \
                     xorg-x11-drv-synaptics-devel xorg-x11-server-devel \
                     gtkmm24-devel gtkmm30-devel \
-                    xapian-core-devel \
+                    xapian-core-devel lmdb-devel \
                     libepoxy-devel \
                     libmms-devel \
                     fontforge-devel \
                     qt5-qtquick1-devel \
                     exiv2-devel \
                     sane-backends-devel && \
-    yum install -y \ 
+    dnf install -y \ 
                     lcms2-devel \
                     hunspell-devel \
                     glui-devel \
-                    qt5-qtmultimedia qt5-multimedia-devel \
+                    qt5-qtmultimedia qt5-qtmultimedia-devel \
                     eigen3-devel \
                     grantlee-devel \
                     qtsinglecoreapplication-devel \
@@ -121,8 +121,8 @@ RUN yum -y install gcc-c++ git doxygen cmake bzr vim tar && \
                     openal-soft-devel libsndfile-devel \
                     gmp-devel \
                     cups-devel \
-                    qca2-devel qca-ossl qca-gnupg qca-pkcs11 && \
-    yum install -y \ 
+                    qca-devel qca-ossl qca-gnupg qca-pkcs11 && \
+    dnf install -y \ 
                     libdmtx-devel qrencode-devel \
                     libical-devel \
                     cyrus-sasl-devel \
@@ -136,7 +136,7 @@ RUN yum -y install gcc-c++ git doxygen cmake bzr vim tar && \
 RUN ln -s /home/kdedev/.kdesrc-buildrc /root/.kdesrc-buildrc && \
     ln -s /home/kdedev/kdesrc-build /root/kdesrc-build
 # setup kdedev account
-RUN yum install -y sudo && echo 'kdedev ALL=NOPASSWD: ALL' >> /etc/sudoers
+RUN dnf install -y sudo && echo 'kdedev ALL=NOPASSWD: ALL' >> /etc/sudoers
 USER kdedev
 ENV HOME /home/kdedev
 WORKDIR /home/kdedev/
