@@ -1,4 +1,4 @@
-FROM base/archlinux:latest
+FROM l3iggs/archlinux
 MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
 # FRAMEWORKS            |       BUILD DEPENDENCY
@@ -45,14 +45,13 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
 # Install dependencies
 #---------------------------
-RUN pacman-key --populate archlinux && \
-    pacman-key --refresh-keys && \
-    pacman --noconfirm -Syyu && \
-    pacman-db-upgrade && \
-    pacman --noconfirm -Sy gcc git cmake make vim doxygen bzr && \
-    pacman --noconfirm -Sy perl perl-json perl-libwww perl-xml-parser dialog \
-                            qt5-base && \
-    pacman --noconfirm -Sy \
+# build-essential
+RUN pacman --noconfirm -Sy gcc git cmake make vim doxygen bzr
+# kdesrc-build
+RUN pacman --noconfirm -Sy perl perl-json perl-libwww perl-xml-parser dialog \
+                            qt5-base
+# Frameworks
+RUN pacman --noconfirm -Sy \
                                 qt5-script \
                                 qt5-x11extras \
                                 docbook-xsl \
@@ -61,8 +60,9 @@ RUN pacman-key --populate archlinux && \
                                 giflib \
                                 vlc \
                                 pkg-config \
-                                libnm-glib && \
-    pacman --noconfirm -Sy \
+                                libnm-glib
+# Workspace
+RUN pacman --noconfirm -Sy \
                                 libpwquality \
                                 xf86-input-synaptics xorg-server-devel \
                                 gtkmm gtkmm3 \
@@ -72,29 +72,30 @@ RUN pacman-key --populate archlinux && \
                                 fontforge \
                                 qt5-quick1 \
                                 exiv2 \
-                                sane && \
-    pacman --noconfirm -Sy \
+                                sane
+# Applications
+RUN pacman --noconfirm -Sy \
                                 hunspell \
                                 grantlee-qt5 \
                                 glu \
                                 automoc4 \
                                 qt5-multimedia \
-                                eigen && \
-    pacman --noconfirm -Sy \
+                                eigen
+# PIM
+RUN pacman --noconfirm -Sy \
                                 libdmtx qrencode \
-                                libical && \
-    pacman --noconfirm -Sy xorg-xsetroot xorg-xprop xorg-font-utils xorg-xmessage \
+                                libical
+# Xorg & VNC
+RUN pacman --noconfirm -Sy xorg-xsetroot xorg-xprop xorg-font-utils xorg-xmessage \
                             xorg-fonts-100dpi xorg-fonts-75dpi xorg-fonts-alias \
-                            xorg-server-xvfb x11vnc && \
-    useradd -d /home/kdedev -m kdedev && \
-    mkdir /work /tmp/kdesrc-build /qt && \
-    chown kdedev /work /tmp/kdesrc-build /qt
+                            xorg-server-xvfb x11vnc
 
+# setup kdedev account
+RUN useradd -d /home/kdedev -m kdedev && \
+    pacman -S --noconfirm sudo && echo 'kdedev ALL=NOPASSWD: ALL' >> /etc/sudoers
 # some symlinks in /root to handle sudo ./kdesrc-build
 RUN ln -s /home/kdedev/.kdesrc-buildrc /root/.kdesrc-buildrc && \
     ln -s /home/kdedev/kdesrc-build /root/kdesrc-build
-# setup kdedev account
-RUN pacman -S --noconfirm sudo && echo 'kdedev ALL=NOPASSWD: ALL' >> /etc/sudoers
 USER kdedev
 ENV HOME /home/kdedev
 WORKDIR /home/kdedev/
