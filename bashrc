@@ -1,17 +1,13 @@
-QTDIR=$(grep qtdir $HOME/.kdesrc-buildrc | awk '{ print $2 }' )
-KDEDIR=$(grep kdedir $HOME/.kdesrc-buildrc  | awk '{ print $2 }')
-KDEDIRS=$KDEDIR
-PATH="$KDEDIR/bin:$QTDIR/bin:$PATH"
-MANPATH="$QTDIR/doc/man:$MANPATH"
-
-# Act appropriately if LD_LIBRARY_PATH is not already set.
-if [ -z $LD_LIBRARY_PATH ]; then
-  LD_LIBRARY_PATH=$KDEDIR/lib:$QTDIR/lib
-else
-  LD_LIBRARY_PATH=$KDEDIR/lib:$QTDIR/lib:$LD_LIBRARY_PATH
-fi
-
-export QTDIR KDEDIRS PATH MANPATH LD_LIBRARY_PATH
+export KF5=$(grep kdedir $HOME/.kdesrc-buildrc  | awk '{ print $2 }')
+export QTDIR=$(grep qtdir $HOME/.kdesrc-buildrc | awk '{ print $2 }' )
+export XDG_DATA_DIRS="$KF5/share:$XDG_DATA_DIRS:/usr/share"
+export XDG_CONFIG_DIRS="$KF5/etc/xdg:$XDG_CONFIG_DIRS:/etc/xdg"
+export PATH="$KF5/bin:$QTDIR/bin:$PATH"
+export QT_PLUGIN_PATH="$KF5/lib/plugins:$KF5/lib64/plugins:$KF5/lib/x86_64-linux-gnu/plugins:$QTDIR/plugins:$QT_PLUGIN_PATH"
+export QML2_IMPORT_PATH="$KF5/lib/qml:$KF5/lib64/qml:$KF5/lib/x86_64-linux-gnu/qml:$QTDIR/qml"
+export QML_IMPORT_PATH="$QML2_IMPORT_PATH"
+export KDE_SESSION_VERSION="5"
+export KDE_FULL_SESSION="true"
 
 function run_xvfb ()
 {
