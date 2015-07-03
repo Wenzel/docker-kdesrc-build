@@ -43,6 +43,10 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # kcalcore              |       libical
 #-----------------------|---------------------------------
 
+# General upgrade
+#---------------------------
+RUN pacman --noconfirm -Syu
+
 # Install dependencies
 #---------------------------
 # build-essential
