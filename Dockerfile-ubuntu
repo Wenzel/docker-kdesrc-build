@@ -17,8 +17,9 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # ktexteditor           |       libqt5xmlpatterns5-dev
 # polkit-qt-1           |       libpolkit-agent-1-dev
 # phonon-vlc            |       libvlc-dev libvlccore-dev
+# phonon-gstreamer      |       libgstreamer-plugins-base1.0-dev
 # akonadi               |       xsltproc
-# networkmanager-qt     |       libnm-glib-dev
+# networkmanager-qt     |       libnm-glib-dev modemmanager-dev
 #-----------------------|---------------------------------
 
 # add Qt5 repo
@@ -46,10 +47,10 @@ RUN apt-get update && \
                         libxcursor-dev \
                         libqt5xmlpatterns5-dev \
                         libpolkit-agent-1-dev \
-                        libvlc-dev \
-                        libvlccore-dev \
+                        libvlc-dev libvlccore-dev \
+                        libgstreamer-plugins-base1.0-dev
                         xsltproc \
-                        libnm-glib-dev && \
+                        libnm-glib-dev modemmanager-dev && \
     useradd -d /home/kdedev -m kdedev && \
     mkdir /work /qt && \
     chown kdedev /work /qt
