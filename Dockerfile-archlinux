@@ -20,7 +20,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # kcm-touchpad          |       xf86-input-synaptics xorg-server-devel
 # kde-gtk-config        |       gtkmm gtkmm3
 # baloo                 |       xapian-core
-# kwin                  |       libepoxy
+# kwin                  |       libepoxy extra/xcb-util-cursor
 # libnm-qt              |       libmm-glib
 # oxygen-fonts          |       fontforge
 # kdevplatform          |       qt5-quick1
@@ -71,7 +71,7 @@ RUN pacman --noconfirm -Sy \
                                 xf86-input-synaptics xorg-server-devel \
                                 gtkmm gtkmm3 \
                                 xapian-core \
-                                libepoxy \
+                                libepoxy extra/xcb-util-cursor \
                                 libmm-glib \
                                 fontforge \
                                 qt5-quick1 \
