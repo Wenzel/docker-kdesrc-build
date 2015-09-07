@@ -19,7 +19,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # user-manager          |       libpwquality
 # kcm-touchpad          |       xf86-input-synaptics xorg-server-devel
 # kde-gtk-config        |       gtkmm gtkmm3
-# baloo                 |       xapian-core
+# baloo                 |       xapian-core lmdb
 # kwin                  |       libepoxy extra/xcb-util-cursor
 # libnm-qt              |       libmm-glib
 # oxygen-fonts          |       fontforge
@@ -70,7 +70,7 @@ RUN pacman --noconfirm -Sy \
                                 libpwquality \
                                 xf86-input-synaptics xorg-server-devel \
                                 gtkmm gtkmm3 \
-                                xapian-core \
+                                xapian-core lmdb \
                                 libepoxy extra/xcb-util-cursor \
                                 libmm-glib \
                                 fontforge \
