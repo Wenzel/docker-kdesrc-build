@@ -95,9 +95,9 @@ on the host !
 
 Now you can run any applications, including `startkde` !
 
-## Command line options reference
+## Command line options reference for run.py
 
-    Usage: build.py [options]
+    Usage: run.py [options]
 
     Options:
         -b --base DISTRO        Use DISTRO as base system [Default: all]
