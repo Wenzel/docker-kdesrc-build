@@ -13,13 +13,14 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # phonon-vlc            |       vlc
 # phonon-gstreamer      |       pkg-config
 # networkmanager-qt     |       libnm-glib
+# plasma-nm             |       qca-qt5
 #---------------------------------------------------------
 # WORKSPACE             |       BUILD DEPENDENCY
 #-----------------------|---------------------------------
 # user-manager          |       libpwquality
 # kcm-touchpad          |       xf86-input-synaptics xorg-server-devel
 # kde-gtk-config        |       gtkmm gtkmm3
-# baloo                 |       xapian-core
+# baloo                 |       xapian-core lmdb
 # kwin                  |       libepoxy extra/xcb-util-cursor
 # libnm-qt              |       libmm-glib
 # oxygen-fonts          |       fontforge
@@ -64,13 +65,14 @@ RUN pacman --noconfirm -Sy \
                                 giflib \
                                 vlc \
                                 pkg-config \
-                                libnm-glib
+                                libnm-glib \
+                                qca-qt5
 # Workspace
 RUN pacman --noconfirm -Sy \
                                 libpwquality \
                                 xf86-input-synaptics xorg-server-devel \
                                 gtkmm gtkmm3 \
-                                xapian-core \
+                                xapian-core lmdb \
                                 libepoxy extra/xcb-util-cursor \
                                 libmm-glib \
                                 fontforge \
