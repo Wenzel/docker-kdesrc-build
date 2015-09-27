@@ -32,7 +32,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # user-manager          |       libpwquality-devel
 # kcm-touchpad          |       xorg-x11-drv-synaptics-devel xorg-x11-server-devel
 # kde-gtk-config        |       gtkmm24-devel gtkmm30-devel
-# baloo                 |       xapian-core-devel lmdb-devel
+# baloo                 |       lmdb-devel
 # kwin                  |       libepoxy-devel
 # libnm-qt              |       libmms-devel
 # oxygen-fonts          |       fontforge-devel
@@ -101,7 +101,7 @@ RUN dnf -y install gcc-c++ git doxygen cmake bzr vim tar && \
                     libpwquality-devel \
                     xorg-x11-drv-synaptics-devel xorg-x11-server-devel \
                     gtkmm24-devel gtkmm30-devel \
-                    xapian-core-devel lmdb-devel \
+                    lmdb-devel \
                     libepoxy-devel \
                     libmms-devel \
                     fontforge-devel \
