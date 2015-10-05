@@ -23,6 +23,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # phonon-gstreamer      |       libQt5OpenGL-devel gstreamer-editing-services-devel
 # modemmanager-qt       |       ModemManager-devel
 # networkmanager-qt     |       NetworkManager-devel
+# baloo                 |       libxapian-devel lmdb-devel
 #-----------------------|---------------------------------
 # WORKSPACE             |       BUILD DEPENDENCY
 #-----------------------|---------------------------------
@@ -33,7 +34,6 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # kwayland              |       wayland-devel
 # kwin                  |       xcb-util-image-devel xcb-util-cursor-devel
 # kcm-touchpad          |       xf86-input-synaptics-devel xorg-x11-util-devel libX11-devel  libxkbcommon-x11-devel xf86-input-wacom-devel
-# baloo                 |       libxapian-devel lmdb-devel
 #-----------------------|---------------------------------
 # APPLICATIONS          |       BUILD DEPENDENCY
 #-----------------------|---------------------------------

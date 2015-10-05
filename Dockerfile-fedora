@@ -21,6 +21,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # phonon-vlc            |       vlc-devel
 # phonon-gstreamer      |       gstreamer-devel gstreamer-plugins-bad-free-devel gstreamer1-plugins-bad-free-devel gstreamer1-plugins-base-devel
 # networkmanager-qt     |       NetworkManager-devel NetworkManager-glib-devel
+# baloo                 |       lmdb-devel
 #-----------------------|---------------------------------
 # WORKSPACE             |       BUILD DEPENDENCY
 #-----------------------|---------------------------------
@@ -32,7 +33,6 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # user-manager          |       libpwquality-devel
 # kcm-touchpad          |       xorg-x11-drv-synaptics-devel xorg-x11-server-devel
 # kde-gtk-config        |       gtkmm24-devel gtkmm30-devel
-# baloo                 |       lmdb-devel
 # kwin                  |       libepoxy-devel
 # libnm-qt              |       libmms-devel
 # oxygen-fonts          |       fontforge-devel
