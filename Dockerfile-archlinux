@@ -16,6 +16,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # networkmanager-qt     |       libnm-glib
 # plasma-nm             |       qca-qt5
 # baloo                 |       lmdb
+# kdewebkit             |       qt5-webkit
 #---------------------------------------------------------
 # WORKSPACE             |       BUILD DEPENDENCY
 #-----------------------|---------------------------------
@@ -68,7 +69,8 @@ RUN pacman --noconfirm -Sy \
                                 vlc \
                                 pkg-config \
                                 libnm-glib \
-                                qca-qt5
+                                qca-qt5 \
+                                qt5-webkit
 # Workspace
 RUN pacman --noconfirm -Sy \
                                 libpwquality \
