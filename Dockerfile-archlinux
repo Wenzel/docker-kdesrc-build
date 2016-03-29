@@ -29,6 +29,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # kdevplatform          |       qt5-quick1
 # gwenview              |       exiv2
 # libksane              |       sane
+# kaccounts-integration |       libaccounts-qt signond
 #-----------------------|---------------------------------
 # APPLICATIONS          |       BUILD DEPENDENCY
 #-----------------------|---------------------------------
@@ -81,7 +82,8 @@ RUN pacman --noconfirm -Sy \
                                 libmm-glib \
                                 fontforge \
                                 exiv2 \
-                                sane
+                                sane \
+                                libaccounts-qt signond
 # Applications
 RUN pacman --noconfirm -Sy \
                                 hunspell \
