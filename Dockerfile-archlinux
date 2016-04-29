@@ -35,6 +35,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 #-----------------------|---------------------------------
 # lokalize              |       hunspell
 # kdevplatform          |       grantlee-qt5
+# kdevelop              |       clang llvm
 # kalgebra              |       glu
 # marble                |       automoc4
 # parley                |       qt5-multimedia
@@ -88,6 +89,7 @@ RUN pacman --noconfirm -Sy \
 RUN pacman --noconfirm -Sy \
                                 hunspell \
                                 grantlee-qt5 \
+                                clang llvm \
                                 glu \
                                 automoc4 \
                                 qt5-multimedia \
