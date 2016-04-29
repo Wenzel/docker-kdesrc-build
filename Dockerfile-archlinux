@@ -39,8 +39,8 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # kalgebra              |       glu
 # marble                |       automoc4
 # parley                |       qt5-multimedia
+# artikulate            |       qt5-gstreamer
 # step                  |       eigen
-# ksirk                 |       qca-qt5
 #-----------------------|---------------------------------
 # PIM                   |       BUILD DEPENDENCY
 #-----------------------|---------------------------------
@@ -71,7 +71,6 @@ RUN pacman --noconfirm -Sy \
                                 vlc \
                                 pkg-config \
                                 libnm-glib \
-                                qca-qt5 \
                                 qt5-webkit
 # Workspace
 RUN pacman --noconfirm -Sy \
@@ -93,6 +92,7 @@ RUN pacman --noconfirm -Sy \
                                 glu \
                                 automoc4 \
                                 qt5-multimedia \
+                                qt5-gstreamer \
                                 eigen
 # PIM
 RUN pacman --noconfirm -Sy \
