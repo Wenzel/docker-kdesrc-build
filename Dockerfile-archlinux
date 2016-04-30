@@ -71,6 +71,7 @@ RUN pacman --noconfirm -Sy \
                                 vlc \
                                 pkg-config \
                                 libnm-glib \
+                                qca-qt5 \
                                 qt5-webkit
 # Workspace
 RUN pacman --noconfirm -Sy \
