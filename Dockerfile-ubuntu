@@ -48,7 +48,7 @@ RUN apt-get update && \
                         libqt5xmlpatterns5-dev \
                         libpolkit-agent-1-dev \
                         libvlc-dev libvlccore-dev \
-                        libgstreamer-plugins-base1.0-dev
+                        libgstreamer-plugins-base1.0-dev \
                         xsltproc \
                         libnm-glib-dev modemmanager-dev && \
     useradd -d /home/kdedev -m kdedev && \
