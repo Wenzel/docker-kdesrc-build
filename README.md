@@ -36,6 +36,9 @@ The script will do the following operations :
 * run the container
 * run `/bin/bash`
 
+You will find the `kdesrc-build` repository cloned in your home directory.
+You can run `./kdesrc-build/kdesrc-build` to start the build.
+
 ## Run the Plasma Desktop
 
 ### 1 - Using a shared X11 socket
