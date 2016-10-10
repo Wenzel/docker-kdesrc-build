@@ -18,6 +18,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # baloo                 |       lmdb
 # kdewebkit             |       qt5-webkit
 # kservice              |       flex bison
+# gpgme                 |       autoconf automake
 #---------------------------------------------------------
 # WORKSPACE             |       BUILD DEPENDENCY
 #-----------------------|---------------------------------
@@ -31,6 +32,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # gwenview              |       exiv2
 # libksane              |       sane
 # kaccounts-integration |       libaccounts-qt signond
+# plasma-pa             |       gconf libcanberra
 #-----------------------|---------------------------------
 # APPLICATIONS          |       BUILD DEPENDENCY
 #-----------------------|---------------------------------
@@ -42,6 +44,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # parley                |       qt5-multimedia
 # artikulate            |       qt5-gstreamer
 # step                  |       eigen
+# khelpcenter           |       xapian-core
 #-----------------------|---------------------------------
 # PIM                   |       BUILD DEPENDENCY
 #-----------------------|---------------------------------
@@ -74,7 +77,8 @@ RUN pacman --noconfirm -Sy \
                                 libnm-glib \
                                 qca-qt5 \
                                 qt5-webkit \
-                                flex bison
+                                flex bison \
+                                autoconf automake
 # Workspace
 RUN pacman --noconfirm -Sy \
                                 libpwquality \
@@ -86,7 +90,8 @@ RUN pacman --noconfirm -Sy \
                                 fontforge \
                                 exiv2 \
                                 sane \
-                                libaccounts-qt signond
+                                libaccounts-qt signond \
+                                gconf libcanberra
 # Applications
 RUN pacman --noconfirm -Sy \
                                 hunspell \
