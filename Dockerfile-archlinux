@@ -129,7 +129,7 @@ VOLUME /qt
 
 # fix bug in git rebase script
 RUN sudo sed -ie "s/. git-sh-setup/. \/usr\/lib\/git-core\/git-sh-setup/g" /usr/lib/git-core/git-rebase && \
-    sudo sed -ie "s/. git-sh-i18n/. \/usr\/lib\/git-core\/git-sh-i18n/g" /usr/lib/git-core/git-rebase
-        
+    sudo sed -ie "s/. git-sh-i18n/. \/usr\/lib\/git-core\/git-sh-i18n/g" /usr/lib/git-core/git-rebase && \
+    sudo sed -ie "s/. git-sh-i18n/. \/usr\/lib\/git-core\/git-sh-i18n/g" /usr/lib/git-core/git-sh-setup
 
 ENTRYPOINT ["/bin/bash"]
