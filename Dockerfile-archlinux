@@ -17,6 +17,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # plasma-nm             |       qca-qt5
 # baloo                 |       lmdb
 # kdewebkit             |       qt5-webkit
+# kservice              |       flex bison
 #---------------------------------------------------------
 # WORKSPACE             |       BUILD DEPENDENCY
 #-----------------------|---------------------------------
@@ -72,7 +73,8 @@ RUN pacman --noconfirm -Sy \
                                 pkg-config \
                                 libnm-glib \
                                 qca-qt5 \
-                                qt5-webkit
+                                qt5-webkit \
+                                flex bison
 # Workspace
 RUN pacman --noconfirm -Sy \
                                 libpwquality \
