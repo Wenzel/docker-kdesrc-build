@@ -101,7 +101,8 @@ RUN pacman --noconfirm -Sy \
                                 automoc4 \
                                 qt5-multimedia \
                                 qt5-gstreamer \
-                                eigen
+                                eigen \
+                                xapian-core
 # PIM
 RUN pacman --noconfirm -Sy \
                                 libdmtx qrencode \
