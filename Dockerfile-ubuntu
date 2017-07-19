@@ -9,7 +9,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # kiconthemes           |       libqt5svg5-dev
 # kwallet               |       libgcrypt20-dev
 # kdeclarative          |       qtdeclarative5-dev libepoxy-dev
-# kactivities           |       libboost1.54-dev
+# kactivities           |       libboost-all-dev
 # kdewebkit             |       libqt5webkit5-dev
 # kdelib4support        |       libsm-dev
 # khtml                 |       libgif-dev libjpeg-dev libpng-dev
@@ -40,7 +40,7 @@ RUN apt-get update && \
                         libqt5svg5-dev \
                         libgcrypt20-dev \
                         qtdeclarative5-dev libepoxy-dev \
-                        libboost1.54-dev \
+                        libboost-all-dev \
                         libqt5webkit5-dev \
                         libsm-dev \
                         libgif-dev libjpeg-dev libpng-dev \
