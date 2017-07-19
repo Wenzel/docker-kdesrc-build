@@ -62,12 +62,6 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 #-----------------------|---------------------------------
 
 
-# add Qt5 repo
-#---------------
-RUN zypper -n --gpg-auto-import-keys refresh && \
-    zypper ar -f "http://download.opensuse.org/repositories/KDE:/Qt5/openSUSE_13.2/" "Qt5" && \
-    zypper --non-interactive --gpg-auto-import-keys refresh
-
 # install dependencies
 #---------------------
 RUN zypper --non-interactive in vim tar git bzr cmake doxygen
