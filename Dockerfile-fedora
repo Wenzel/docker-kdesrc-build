@@ -18,7 +18,6 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # frameworkintegration  |       libXcursor-devel oxygen-fonts-devel
 # ktexteditor           |       qt5-qtxmlpatterns-devel
 # polkit-qt-1           |       polkit-devel
-# phonon-vlc            |       vlc-devel
 # phonon-gstreamer      |       gstreamer-devel gstreamer-plugins-bad-free-devel gstreamer1-plugins-bad-free-devel gstreamer1-plugins-base-devel
 # networkmanager-qt     |       NetworkManager-devel NetworkManager-glib-devel
 # baloo                 |       lmdb-devel
@@ -85,7 +84,6 @@ RUN dnf -y install gcc-c++ git doxygen cmake bzr vim tar && \
                     libXcursor-devel oxygen-fonts-devel \
                     qt5-qtxmlpatterns-devel \
                     polkit-devel \
-                    vlc-devel \
                     gstreamer-devel gstreamer-plugins-bad-free-devel gstreamer1-plugins-bad-free-devel gstreamer1-plugins-base-devel \
                                 NetworkManager-devel NetworkManager-glib-devel NetworkManager-libnm-devel && \
     dnf install -y \
