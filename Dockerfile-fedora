@@ -33,7 +33,6 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # kcm-touchpad          |       xorg-x11-drv-synaptics-devel xorg-x11-server-devel
 # kde-gtk-config        |       gtkmm24-devel gtkmm30-devel
 # kwin                  |       libepoxy-devel
-# libnm-qt              |       libmms-devel
 # oxygen-fonts          |       fontforge-devel
 # gwenview              |       exiv2-devel
 # libksane              |       sane-backends-devel
@@ -97,7 +96,6 @@ RUN dnf -y install gcc-c++ git doxygen cmake bzr vim tar && \
                     gtkmm24-devel gtkmm30-devel \
                     lmdb-devel \
                     libepoxy-devel \
-                    libmms-devel \
                     fontforge-devel \
                     exiv2-devel \
                     sane-backends-devel && \
