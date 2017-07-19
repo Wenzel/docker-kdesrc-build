@@ -24,10 +24,6 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # networkmanager-qt     |       libnm-glib-dev modemmanager-dev
 #-----------------------|---------------------------------
 
-# add Qt5 repo
-#---------------
-RUN echo 'deb http://ppa.launchpad.net/ubuntu-sdk-team/ppa/ubuntu trusty main' >> /etc/apt/sources.list.d/ubuntu-sdk-team-ppa-trusty.list
-
 # Install dependencies
 #---------------------------
 ENV DEBIAN_FRONTEND noninteractive
