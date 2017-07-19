@@ -26,7 +26,8 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
 # Install dependencies
 #---------------------------
-ENV DEBIAN_FRONTEND noninteractive
+# set noninteractive frontend only during build
+ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
     apt-key adv --recv-keys && \
     apt-get install -y git bzr vim g++ cmake tar doxygen && \
