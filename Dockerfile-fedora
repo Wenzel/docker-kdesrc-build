@@ -10,7 +10,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # kwidgetsaddons        |       qt5-qttools-devel qt5-qttools-static
 # kiconthemes           |       qt5-qtsvg-devel
 # solid                 |       systemd-devel
-# kdeclarative          |       qt5-qtquick1-devel libepoxy-devel
+# kdeclarative          |       qt5-qtquickcontrols2-devel libepoxy-devel
 # kactivities           |       boost-devel
 # kdewebkit             |       qt5-qtwebkit-devel
 # kdelibs4support       |       libSM-devel pcre-devel qca-ossl openssl-devel
@@ -36,7 +36,6 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # kwin                  |       libepoxy-devel
 # libnm-qt              |       libmms-devel
 # oxygen-fonts          |       fontforge-devel
-# kdevplatform          |       qt5-qtquick1-devel
 # gwenview              |       exiv2-devel
 # libksane              |       sane-backends-devel
 #-----------------------|---------------------------------
@@ -65,9 +64,6 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # gpgmepp               |       gpgme-devel
 #-----------------------|---------------------------------
 
-# Add RPM Fusion
-RUN rpm -ivh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm
-
 # Install dependencies
 #---------------------------
 RUN dnf -y install gcc-c++ git doxygen cmake bzr vim tar && \
@@ -81,7 +77,7 @@ RUN dnf -y install gcc-c++ git doxygen cmake bzr vim tar && \
                     qt5-qttools-devel qt5-qttools-static \
                     qt5-qtsvg-devel \
                     systemd-devel \
-                    qt5-qtquick1-devel libepoxy-devel\
+                    qt5-qtquickcontrols2-devel libepoxy-devel\
                     boost-devel \
                     qt5-qtwebkit-devel \
                     libSM-devel pcre-devel qca-ossl openssl-devel \
@@ -105,7 +101,6 @@ RUN dnf -y install gcc-c++ git doxygen cmake bzr vim tar && \
                     libepoxy-devel \
                     libmms-devel \
                     fontforge-devel \
-                    qt5-qtquick1-devel \
                     exiv2-devel \
                     sane-backends-devel && \
     dnf install -y \ 
