@@ -1,4 +1,4 @@
-FROM opensuse:13.2
+FROM opensuse:42.2
 MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
 # FRAMEWORKS            |       BUILD DEPENDENCY
