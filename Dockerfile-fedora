@@ -65,7 +65,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # Install dependencies
 #---------------------------
 RUN dnf -y install gcc-c++ git doxygen cmake bzr vim tar && \
-    dnf -y install dialog perl-libwww-perl perl-JSON perl-XML-Parser \
+    dnf -y install dialog perl-libwww-perl perl-JSON perl-JSON-PP perl-XML-Parser \
                     qt5-qtbase-devel && \
     dnf install -y \
                     qt5-qtscript-devel gettext-devel \
