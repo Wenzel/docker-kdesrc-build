@@ -4,6 +4,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # FRAMEWORKS            |       BUILD DEPENDENCY
 #-----------------------|---------------------------------
 # ki18n                 |       qt5-qtscript-devel gettext-devel
+# kcodecs               |       gperf
 # kwindowsystem         |       qt5-qtx11extras-devel libXrender-devel xcb-util-keysyms-devel
 # karchive              |       zlib-devel
 # kdoctools             |       libxslt-devel docbook-style-xsl
@@ -69,6 +70,7 @@ RUN dnf -y install gcc-c++ git doxygen cmake bzr vim tar && \
                     qt5-qtbase-devel && \
     dnf install -y \
                     qt5-qtscript-devel gettext-devel \
+                    gperf \
                     qt5-qtx11extras-devel libXrender-devel xcb-util-keysyms-devel \
                     zlib-devel \
                     libxslt-devel docbook-style-xsl \
