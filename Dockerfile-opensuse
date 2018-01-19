@@ -142,4 +142,4 @@ RUN git config --global url."git://anongit.kde.org/".insteadOf kde: && \
 VOLUME /work
 VOLUME /qt
 
-ENTRYPOINT ["/bin/bash"]
+CMD ["bash"]
