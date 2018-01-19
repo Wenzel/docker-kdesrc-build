@@ -5,6 +5,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 #-----------------------|---------------------------------
 # ki18n                 |       qt5-qtscript-devel gettext-devel
 # kcodecs               |       gperf
+# kservice              |       flex bison
 # kwindowsystem         |       qt5-qtx11extras-devel libXrender-devel xcb-util-keysyms-devel
 # karchive              |       zlib-devel
 # kdoctools             |       libxslt-devel docbook-style-xsl
@@ -71,6 +72,7 @@ RUN dnf -y install gcc-c++ git doxygen cmake bzr vim tar && \
     dnf install -y \
                     qt5-qtscript-devel gettext-devel \
                     gperf \
+                    flex bison \
                     qt5-qtx11extras-devel libXrender-devel xcb-util-keysyms-devel \
                     zlib-devel \
                     libxslt-devel docbook-style-xsl \
