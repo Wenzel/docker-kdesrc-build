@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
 """
-Usage: build.py [options]
+Usage:  build.py [options]
+        build.py [options] [--] execute <commands>...
 
 Options:
     -b --base DISTRO        Use DISTRO as base system [Default: all]
@@ -54,7 +55,7 @@ def update_image(template, cache_enabled):
         '.'
     ], cwd=__SCRIPT_CUR_DIR)
 
-def run_kdesrc_build(template, auto_rm_enabled, display, vnc_enabled, qt_dir):
+def run_kdesrc_build(template, auto_rm_enabled, display, vnc_enabled, qt_dir, commands):
     host_mnt_dir = '{}/{}'.format(MNT_DIR, template)
     # vnc vs x11socket
     xsocket = ''
@@ -84,22 +85,24 @@ def run_kdesrc_build(template, auto_rm_enabled, display, vnc_enabled, qt_dir):
     subp_cmd.extend(xsocket)
     subp_cmd.extend(vnc)
     subp_cmd.extend(qt_mount)
-    subp_cmd.extend([ 
+    subp_cmd.extend([
         '{}-kdedev'.format(template),
-        '-c',
-        '/bin/bash'
     ])
+    # commands
+    if commands:
+        subp_cmd.extend(commands)
     # run
-    subprocess.call(subp_cmd)
+    return subprocess.call(subp_cmd)
 
 if __name__ == '__main__':
     args = docopt(__doc__)
-    print(args)
     templates = check_templates(args['--base'])
     os.makedirs(MNT_DIR, exist_ok=True)
+    commands = args['<commands>'] if args['<commands>'] else None
     for i in templates:
         print(i)
         check_mnt_point(i)
         update_image(i, args['--no-cache'])
-        run_kdesrc_build(i, args['--rm'], args['--display'], 
-                args['--vnc'], args['--qt'])
+        exit_code = run_kdesrc_build(i, args['--rm'], args['--display'], args['--vnc'], args['--qt'], commands)
+        if exit_code != 0:
+            sys.exit(exit_code)
