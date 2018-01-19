@@ -40,3 +40,11 @@ function re_vnc ()
     kill_vnc
     run_vnc
 }
+
+fix_permissions ()
+{
+    # ensure /work is accessible to kdedev user (1000:1000)
+    sudo chown kdedev:kdedev /work
+}
+
+fix_permissions
