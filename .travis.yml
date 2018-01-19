@@ -7,4 +7,4 @@ services:
   - docker
 
 script:
-  - python3 run.py -b archlinux -- execute ls -l /
+  - python3 run.py -b fedora -- execute ls -l /
