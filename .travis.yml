@@ -1,0 +1,10 @@
+language: python
+
+python:
+  - "3.2"
+
+services:
+  - docker
+
+script:
+  - python3 run.py -b archlinux
