@@ -43,6 +43,7 @@ function re_vnc ()
 
 fix_permissions ()
 {
+    echo "Fixing permissions on /work"
     # ensure /work is accessible to kdedev user (1000:1000)
     sudo chown kdedev:kdedev /work
 }
