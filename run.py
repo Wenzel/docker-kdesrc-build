@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 """
-Usage:  build.py [options]
-        build.py [options] [--] execute <commands>...
+Usage:  run.py [options]
+        run.py [options] [--] execute <commands>...
 
 Options:
     -b --base DISTRO        Use DISTRO as base system [Default: all]
