@@ -1,4 +1,4 @@
-FROM greyltc/archlinux
+FROM base/archlinux
 MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
 # FRAMEWORKS            |       BUILD DEPENDENCY
