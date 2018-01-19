@@ -20,6 +20,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # kcodecs               |       gperf
 # kservice              |       flex bison
 # gpgme                 |       autoconf automake
+# kirigami              |       qt5-quickcontrols2
 #---------------------------------------------------------
 # WORKSPACE             |       BUILD DEPENDENCY
 #-----------------------|---------------------------------
@@ -80,7 +81,8 @@ RUN pacman --noconfirm -Sy \
                                 qt5-webkit \
                                 gperf \
                                 flex bison \
-                                autoconf automake
+                                autoconf automake \
+                                qt5-quickcontrols2
 # Workspace
 RUN pacman --noconfirm -Sy \
                                 libpwquality \
