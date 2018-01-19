@@ -63,7 +63,7 @@ RUN pacman --noconfirm -Syu
 RUN pacman --noconfirm -Sy gcc git cmake make vim doxygen bzr
 # kdesrc-build
 RUN pacman --noconfirm -Sy perl perl-json perl-libwww perl-xml-parser dialog \
-                            perl-io-socket-ssl qt5-base
+                            perl-io-socket-ssl qt5-base perl-yaml-libyaml
 # Frameworks
 RUN pacman --noconfirm -Sy \
                                 qt5-script \
