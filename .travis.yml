@@ -7,7 +7,4 @@ services:
   - docker
 
 script:
-  - python3 run.py -b archlinux -- execute ./kdesrc-build/kdesrc-build -v
-  - python3 run.py -b fedora -- execute ./kdesrc-build/kdesrc-build -v
-  - python3 run.py -b ubuntu -- execute ./kdesrc-build/kdesrc-build -v
-  - python3 run.py -b opensuse -- execute ./kdesrc-build/kdesrc-build -v
+  - python3 run.py -b archlinux -- execute ls -l /
