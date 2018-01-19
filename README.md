@@ -1,5 +1,7 @@
 # docker-kdesrc-build
 
+[![Build Status](https://travis-ci.org/Wenzel/docker-kdesrc-build.svg?branch=master)](https://travis-ci.org/Wenzel/docker-kdesrc-build)
+
 This project aims to provide a lightweight and ready to use KDE development
 environment by wrapping the `kdesrc-build` tool in Docker.
 
