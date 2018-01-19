@@ -98,20 +98,6 @@ on the host !
 
 Now you can run any applications, including `startkde` !
 
-## Command line options reference for run.py
-
-    Usage: run.py [options]
-
-    Options:
-        -b --base DISTRO        Use DISTRO as base system [Default: all]
-        --no-cache              Do not use cache when building the image [Default: False]
-        --rm                    Automatically remove the container when it exits [Default: True]
-        --display DISPLAY       Change the DISPLAY environment variable passed to the container [Default: :0]
-        --vnc                   Enable port forwarding and disable X11 socket sharing
-        --qt PATH               Set the PATH to your a specified Qt installation (mounted as /qt) [Default: False]
-        -h --help               Display this message
-
-
 ## kdesrc-buildrc configuration
 
 To configure `kdesrc-buildrc`, take a look at [http://kdesrc-build.kde.org/documentation/](http://kdesrc-build.kde.org/documentation/¬)
