@@ -12,7 +12,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # kxml-gui              |       libQt5PrintSupport-devel
 # solid                 |       libudev-devel
 # kiconthemes           |       libqt5-qtsvg-devel
-# kdeclarative          |       libqt5-qtquick1-devel libepoxy-devel
+# kdeclarative          |       libepoxy-devel
 # kactivities           |       boost-devel
 # kdewebkit             |       libQt5WebkKit5-devel libQt5WebKitWidgets-devel
 # khtml                 |       giflib-devel
@@ -65,7 +65,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # install dependencies
 #---------------------
 RUN zypper --non-interactive in vim tar git bzr cmake doxygen
-RUN zypper --non-interactive in perl-libwww-perl perl-XML-Parser perl-JSON \
+RUN zypper --non-interactive in perl-libwww-perl perl-XML-Parser perl-JSON perl-YAML-LibYAML perl-IO-Socket-SSL \
                                     dialog python ca-certificates libqt4-devel
 RUN zypper --non-interactive in --force-resolution \
         libQt5DBus-devel ca-certificates-mozilla \
@@ -77,7 +77,7 @@ RUN zypper --non-interactive in --force-resolution \
         libQt5PrintSupport-devel \
         libudev-devel \
         libqt5-qtsvg-devel \
-        libqt5-qtquick1-devel libepoxy-devel \
+        libepoxy-devel \
         boost-devel \
         libQt5WebKit5-devel libQt5WebKitWidgets-devel \
         giflib-devel \
