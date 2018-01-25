@@ -21,6 +21,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # kservice              |       flex bison
 # gpgme                 |       autoconf automake
 # kirigami              |       qt5-quickcontrols2
+# qca                   |       openssl-1.0
 #---------------------------------------------------------
 # WORKSPACE             |       BUILD DEPENDENCY
 #-----------------------|---------------------------------
@@ -82,7 +83,8 @@ RUN pacman --noconfirm -Sy \
                                 gperf \
                                 flex bison \
                                 autoconf automake \
-                                qt5-quickcontrols2
+                                qt5-quickcontrols2 \
+                                openssl-1.0
 # Workspace
 RUN pacman --noconfirm -Sy \
                                 libpwquality \
