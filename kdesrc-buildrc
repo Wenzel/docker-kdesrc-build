@@ -19,6 +19,14 @@ global
     stop-on-failure true
 end global
 
+options kdelibs4support
+    cmake-options -DOPENSSL_INCLUDE_DIR=/usr/include/openssl-1.0
+end options
+
+options qca
+    cmake-options -DOPENSSL_INCLUDE_DIR=/usr/include/openssl-1.0
+end options
+
 # Instead of specifying modules here, the current best practice is to refer to
 # KF5 module lists maintained with kdesrc-build by the KF5 developers. As new
 # modules are added or modified, the kdesrc-build KF5 module list is altered to
