@@ -45,7 +45,7 @@ RUN sudo apt-get update && \
                         libhunspell-dev libtelepathy-qt5-dev libakonadi-dev libarchive-dev libsamplerate0-dev libdiscid-dev libmlt-dev libmlt++-dev libflac++-dev libflac-dev libsndfile1-dev libid3-3.8.3-dev \
                         libtag1-dev libaudiofile-dev libopenal-dev libcdparanoia-dev \
                         libnm-glib-dev modemmanager-dev bash-completion libcups2-dev libmad0-dev libopus-dev fftw3 fftw3-dev libfreecell-solver-dev \
-                        python3-twisted && \
+                        python3-twisted libcurl4-openssl-dev libssl-dev && \
     sudo useradd -d /home/kdedev -m kdedev && \
     sudo mkdir /work /qt && \
     sudo chown kdedev /work /qt
@@ -55,6 +55,10 @@ RUN sudo ln -s /home/kdedev/.kdesrc-buildrc /root/.kdesrc-buildrc && \
     sudo ln -s /home/kdedev/kdesrc-build /root/kdesrc-build
 # setup kdedev account
 RUN sudo apt-get install -y sudo && sudo bash -c "echo 'kdedev ALL=NOPASSWD: ALL' >>  /etc/sudoers"
+RUN sudo mkdir /usr/lib/x86_64-linux-gnu/signon/extensions
+RUN sudo mkdir /usr/lib/mission-control-plugins.0
+RUN sudo chmod 777 /usr/lib/mission-control-plugins.0
+RUN sudo chmod 777 /usr/lib/x86_64-linux-gnu/signon/extensions
 USER kdedev
 ENV HOME /home/kdedev
 WORKDIR /home/kdedev/
