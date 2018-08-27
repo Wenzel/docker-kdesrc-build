@@ -117,8 +117,8 @@ Don't forget to change the `qtdir` variable in the `kdesrc-buildrc`
 
 # Dependencies installed
 
-|              | Archlinux | Fedora | OpenSUSE | Ubuntu |
-|--------------|-----------|--------|----------|--------|
-| Frameworks   |     ✓     |    ✗   |     ✗    |    ✗   |
-| Workspace    |     ✓     |    ✗   |     ✗    |    ✗   |
-| Applications |     ✗     |    ✗   |     ✗    |    ✗   |
+|              | Archlinux | Fedora | OpenSUSE | Ubuntu | Neon |
+|--------------|-----------|--------|----------|--------|------|
+| Frameworks   |     ✓     |    ✗   |     ✗    |    ✗   |   ✓  |
+| Workspace    |     ✓     |    ✗   |     ✗    |    ✗   |   ✓  |
+| Applications |     ✗     |    ✗   |     ✗    |    ✗   |   ✓  |
