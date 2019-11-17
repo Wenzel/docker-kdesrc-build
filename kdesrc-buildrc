@@ -3,7 +3,7 @@
 # http://kdesrc-build.kde.org/documentation/
 global
     branch-group kf5-qt5
-    qtdir /usr     # Where to find Qt5
+    qtdir /qt     # Where to find Qt5
 
     source-dir /work/source
     build-dir /work/build
@@ -15,7 +15,7 @@ global
     # cmake-options -DKDE4_BUILD_TESTS=TRUE -DLIB_SUFFIX=64
     cmake-options -DBUILD_TESTING=TRUE -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_LIBDIR=lib -DLIB_SUFFIX=64
     
-    make-options -j4
+    make-options -j8
     stop-on-failure true
 end global
 
