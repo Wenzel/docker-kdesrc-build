@@ -1,9 +1,9 @@
-FROM base/archlinux
+FROM archlinux
 MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
 # FRAMEWORKS            |       BUILD DEPENDENCY
 #-----------------------|---------------------------------
-# ki18n                 |       qt5-script
+# ki18n                 |       qt5-script gettext
 # kguiaddons            |       qt5-quickcontrols
 # kwindowsystem         |       qt5-x11extras
 # kdocbook              |       docbook-xsl
@@ -64,6 +64,7 @@ RUN pacman --noconfirm -Syu
 #---------------------------
 # build-essential
 RUN pacman --noconfirm -Sy gcc git cmake make vim doxygen bzr
+
 # kdesrc-build
 RUN pacman --noconfirm -Sy perl perl-json perl-libwww perl-xml-parser dialog \
                             perl-io-socket-ssl qt5-base perl-yaml-libyaml
@@ -82,7 +83,7 @@ RUN pacman --noconfirm -Sy \
                                 qca-qt5 \
                                 qt5-webkit \
                                 gperf \
-                                flex bison \
+                                flex bison gettext \
                                 autoconf automake \
                                 qt5-quickcontrols2 \
                                 openssl-1.0 \
@@ -103,10 +104,9 @@ RUN pacman --noconfirm -Sy \
 # Applications
 RUN pacman --noconfirm -Sy \
                                 hunspell \
-                                grantlee-qt5 \
+                                grantlee \
                                 clang llvm \
                                 glu \
-                                automoc4 \
                                 qt5-multimedia \
                                 qt5-gstreamer \
                                 eigen \
@@ -120,18 +120,26 @@ RUN pacman --noconfirm -Sy xorg-xsetroot xorg-xprop xorg-font-utils xorg-xmessag
                             xorg-fonts-100dpi xorg-fonts-75dpi xorg-fonts-alias \
                             xorg-server-xvfb x11vnc
 
+# Utilities
+RUN pacman --noconfirm -Sy nano \
+                           mc 
+
 # setup kdedev account
 RUN useradd -d /home/kdedev -m kdedev -G video && \
     pacman -S --noconfirm sudo && echo 'kdedev ALL=NOPASSWD: ALL' >> /etc/sudoers
+
 # some symlinks in /root to handle sudo ./kdesrc-build
 RUN ln -s /home/kdedev/.kdesrc-buildrc /root/.kdesrc-buildrc && \
     ln -s /home/kdedev/kdesrc-build /root/kdesrc-build && \
     mkdir -p /root/.vnc && ln -s /home/kdedev/.vnc/passwd /root/.vnc/passwd
+
 USER kdedev
 ENV HOME /home/kdedev
 WORKDIR /home/kdedev/
+
 # VNC setup
 RUN mkdir -p ~/.vnc && x11vnc -storepasswd 1234 ~/.vnc/passwd
+
 # kde anongit url alias
 RUN git config --global url."git://anongit.kde.org/".insteadOf kde: && \
     git config --global url."ssh://git@git.kde.org/".pushInsteadOf kde: && \
