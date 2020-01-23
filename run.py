@@ -10,6 +10,7 @@ Options:
     --rm                    Automatically remove the container when it exits [Default: True]
     --display DISPLAY       Change the DISPLAY environment variable passed to the container [Default: :0]
     --vnc                   Enable port forwarding and disable X11 socket sharing
+    --noninteractive        Disable TTY allocation and stdin (useful for CI test)
     --qt PATH               Set the PATH to your a specified Qt installation (mounted as /qt) [Default: False]
     -h --help               Display this message
 
@@ -55,7 +56,8 @@ def update_image(template, cache_enabled):
         '.'
     ], cwd=__SCRIPT_CUR_DIR)
 
-def run_kdesrc_build(template, auto_rm_enabled, display, vnc_enabled, qt_dir, commands):
+def run_kdesrc_build(template, auto_rm_enabled, display, vnc_enabled, qt_dir,
+        noninteractive, commands):
     host_mnt_dir = '{}/{}'.format(MNT_DIR, template)
     # vnc vs x11socket
     xsocket = ''
@@ -68,11 +70,14 @@ def run_kdesrc_build(template, auto_rm_enabled, display, vnc_enabled, qt_dir, co
     qt_mount = ''
     if qt_dir != 'False':
         qt_mount = [ '-v', '{}:/qt'.format(qt_dir) ]
+    interactive = '-it'
+    if noninteractive:
+        interactive = ''
     # create subp_cmd
     subp_cmd = [
         'docker',
         'run',
-        '-it',
+        interactive,
         '--privileged',
         '--rm={}'.format(str(auto_rm_enabled)),
         '-e', 'DISPLAY={}'.format(display),
@@ -103,6 +108,7 @@ if __name__ == '__main__':
         print(i)
         check_mnt_point(i)
         update_image(i, args['--no-cache'])
-        exit_code = run_kdesrc_build(i, args['--rm'], args['--display'], args['--vnc'], args['--qt'], commands)
+        exit_code = run_kdesrc_build(i, args['--rm'], args['--display'], args['--vnc'], args['--qt'],
+                args['--noninteractive'], commands)
         if exit_code != 0:
             sys.exit(exit_code)

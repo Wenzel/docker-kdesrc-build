@@ -15,7 +15,7 @@ jobs:
     - name: install dependencies
       run: pip install -r requirements.txt
     - name: run build
-      run: python3 run.py -b archlinux -- execute bash -c 'sudo chown 1000:1000 /work && ./kdesrc-build/kdesrc-build -v'
+      run: python3 run.py -b archlinux --noninteractive -- execute bash -c 'sudo chown 1000:1000 /work && ./kdesrc-build/kdesrc-build -v'
 
   Fedora:
     runs-on: ubuntu-latest
@@ -29,7 +29,7 @@ jobs:
     - name: install dependencies
       run: pip install -r requirements.txt
     - name: run build
-      run: python3 run.py -b fedora -- execute bash -c 'sudo chown 1000:1000 /work && ./kdesrc-build/kdesrc-build -v'
+      run: python3 run.py -b fedora --noninteractive -- execute bash -c 'sudo chown 1000:1000 /work && ./kdesrc-build/kdesrc-build -v'
 
   Neon:
     runs-on: ubuntu-latest
@@ -43,7 +43,7 @@ jobs:
     - name: install dependencies
       run: pip install -r requirements.txt
     - name: run build
-      run: python3 run.py -b neon -- execute bash -c 'sudo chown 1000:1000 /work && ./kdesrc-build/kdesrc-build -v'
+      run: python3 run.py -b neon --noninteractive -- execute bash -c 'sudo chown 1000:1000 /work && ./kdesrc-build/kdesrc-build -v'
 
   OpenSUSE:
     runs-on: ubuntu-latest
@@ -57,7 +57,7 @@ jobs:
     - name: install dependencies
       run: pip install -r requirements.txt
     - name: run build
-      run: python3 run.py -b opensuse -- execute bash -c 'sudo chown 1000:1000 /work && ./kdesrc-build/kdesrc-build -v'
+      run: python3 run.py -b opensuse --noninteractive -- execute bash -c 'sudo chown 1000:1000 /work && ./kdesrc-build/kdesrc-build -v'
 
   Ubuntu:
     runs-on: ubuntu-latest
@@ -71,4 +71,4 @@ jobs:
     - name: install dependencies
       run: pip install -r requirements.txt
     - name: run build
-      run: python3 run.py -b ubuntu -- execute bash -c 'sudo chown 1000:1000 /work && ./kdesrc-build/kdesrc-build -v'
+      run: python3 run.py -b ubuntu --noninteractive -- execute bash -c 'sudo chown 1000:1000 /work && ./kdesrc-build/kdesrc-build -v'
