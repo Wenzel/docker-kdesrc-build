@@ -1,0 +1,60 @@
+name: Build
+
+on: [push]
+
+jobs:
+  Archlinux:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: setup Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.7'
+    - name: install dependencies
+      run: pip install -r requirements.txt
+    - name: run build
+      run: docker build -t archlinux-kdedev -f Dockerfile-archlinux .
+
+  Fedora:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: setup Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.7'
+    - name: install dependencies
+      run: pip install -r requirements.txt
+    - name: run build
+      run: docker build -t fedora-kdedev -f Dockerfile-fedora .
+
+  OpenSUSE:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: setup Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.7'
+    - name: install dependencies
+      run: pip install -r requirements.txt
+    - name: run build
+      run: docker build -t opensuse-kdedev -f Dockerfile-opensuse .
+
+  Ubuntu:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: setup Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.7'
+    - name: install dependencies
+      run: pip install -r requirements.txt
+    - name: run build
+      run: docker build -t ubuntu-kdedev -f Dockerfile-ubuntu .

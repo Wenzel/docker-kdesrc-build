@@ -1,4 +1,4 @@
-FROM opensuse:42.3
+FROM opensuse/tumbleweed
 MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
 # FRAMEWORKS            |       BUILD DEPENDENCY
@@ -18,7 +18,6 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # khtml                 |       giflib-devel
 # frameworkintegration  |       libQt5PlatformSupport-private-headers-devel
 # ktexteditor           |       libqt5-qtxmlpatters-devel
-# polkit-qt-1           |       libpolkit-qt-1-devel
 # phonon-vlc            |       vlc-devel
 # phonon-gstreamer      |       libQt5OpenGL-devel gstreamer-editing-services-devel
 # modemmanager-qt       |       ModemManager-devel
@@ -42,7 +41,6 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # lokalize              |       hunspell-devel
 # libksane              |       sane-backends-devel
 # kalgebra              |       glu-devel
-# marble                |       automoc4
 # parley                |       libqt5-qtmultimedia-devel
 # step                  |       eigen3-devel
 # kcalc                 |       gmp-devel
@@ -66,7 +64,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 #---------------------
 RUN zypper --non-interactive in vim tar git bzr cmake doxygen
 RUN zypper --non-interactive in perl-libwww-perl perl-XML-Parser perl-JSON perl-YAML-LibYAML perl-IO-Socket-SSL \
-                                    dialog python ca-certificates libqt4-devel
+                                    dialog python ca-certificates
 RUN zypper --non-interactive in --force-resolution \
         libQt5DBus-devel ca-certificates-mozilla \
         libQt5Test-devel \
@@ -83,7 +81,6 @@ RUN zypper --non-interactive in --force-resolution \
         giflib-devel \
         libQt5PlatformSupport-private-headers-devel \
         libqt5-qtxmlpatterns-devel \
-        libpolkit-qt-1-devel \
         vlc-devel \
         libQt5OpenGL-devel gstreamer-editing-services-devel \
         ModemManager-devel \
@@ -102,7 +99,6 @@ RUN zypper --non-interactive in \
                               hunspell-devel \
                               sane-backends-devel \
                               glu-devel \
-                              automoc4 \
                               libqt5-qtmultimedia-devel \
                               eigen3-devel \
                               gmp-devel \

@@ -1,4 +1,4 @@
-FROM ubuntu:17.10
+FROM ubuntu:18.04
 MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
 # FRAMEWORKS            |       BUILD DEPENDENCY
@@ -29,8 +29,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # set noninteractive frontend only during build
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
-    apt-key adv --recv-keys && \
-    apt-get install -y git bzr vim g++ cmake tar doxygen && \
+    apt-get install -y git bzr vim g++ cmake tar doxygen gnupg && \
     apt-get install -y libwww-perl libxml-parser-perl libjson-perl libyaml-libyaml-perl dialog gettext libxrender-dev pkg-config libxcb-keysyms1-dev docbook-xsl libxslt1-dev libxml2-utils libudev-dev libqt4-dev && \
     apt-get install -y \
                         gperf \
