@@ -31,3 +31,16 @@ jobs:
     - name: run build
       run: python3 run.py -b fedora -- execute bash -c 'sudo chown 1000:1000 /work && ./kdesrc-build/kdesrc-build -v'
 
+  Neon:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: setup Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.7'
+    - name: install dependencies
+      run: pip install -r requirements.txt
+    - name: run build
+      run: python3 run.py -b neon -- execute bash -c 'sudo chown 1000:1000 /work && ./kdesrc-build/kdesrc-build -v'
