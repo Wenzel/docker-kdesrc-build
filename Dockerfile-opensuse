@@ -66,7 +66,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 #---------------------
 RUN zypper --non-interactive in vim tar git bzr cmake doxygen
 RUN zypper --non-interactive in perl-libwww-perl perl-XML-Parser perl-JSON perl-YAML-LibYAML perl-IO-Socket-SSL \
-                                    dialog python ca-certificates libqt4-devel
+                                    dialog python ca-certificates
 RUN zypper --non-interactive in --force-resolution \
         libQt5DBus-devel ca-certificates-mozilla \
         libQt5Test-devel \
