@@ -31,20 +31,6 @@ jobs:
     - name: run build
       run: docker build -t fedora-kdedev -f Dockerfile-fedora .
 
-  Neon:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v1
-    - name: setup Python 3.7
-      uses: actions/setup-python@v1
-      with:
-        python-version: '3.7'
-    - name: install dependencies
-      run: pip install -r requirements.txt
-    - name: run build
-      run: docker build -t neon-kdedev -f Dockerfile-neon .
-
   OpenSUSE:
     runs-on: ubuntu-latest
 
