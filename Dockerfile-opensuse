@@ -41,7 +41,6 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # lokalize              |       hunspell-devel
 # libksane              |       sane-backends-devel
 # kalgebra              |       glu-devel
-# marble                |       automoc4
 # parley                |       libqt5-qtmultimedia-devel
 # step                  |       eigen3-devel
 # kcalc                 |       gmp-devel
@@ -100,7 +99,6 @@ RUN zypper --non-interactive in \
                               hunspell-devel \
                               sane-backends-devel \
                               glu-devel \
-                              automoc4 \
                               libqt5-qtmultimedia-devel \
                               eigen3-devel \
                               gmp-devel \
