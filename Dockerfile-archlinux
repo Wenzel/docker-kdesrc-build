@@ -56,6 +56,11 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # kcalcore              |       libical
 #-----------------------|---------------------------------
 
+# Update keyring
+#---------------------------
+RUN pacman --noconfirm -Sy
+RUN pacman --noconfirm -Sy archlinux-keyring
+
 # General upgrade
 #---------------------------
 RUN pacman --noconfirm -Syu
