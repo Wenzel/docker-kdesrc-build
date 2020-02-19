@@ -85,7 +85,7 @@ RUN pacman --noconfirm -Sy \
                                 vlc \
                                 pkg-config \
                                 libnm-glib \
-				libnm \
+                                libnm \
                                 qca-qt5 \
                                 qt5-webkit \
                                 gperf \
