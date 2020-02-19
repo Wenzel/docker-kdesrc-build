@@ -13,7 +13,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # khtml                 |       giflib
 # phonon-vlc            |       vlc
 # phonon-gstreamer      |       pkg-config
-# networkmanager-qt     |       libnm-glib
+# networkmanager-qt     |       libnm-glib libnm
 # plasma-nm             |       qca-qt5
 # baloo                 |       lmdb
 # kdewebkit             |       qt5-webkit
@@ -85,6 +85,7 @@ RUN pacman --noconfirm -Sy \
                                 vlc \
                                 pkg-config \
                                 libnm-glib \
+				libnm \
                                 qca-qt5 \
                                 qt5-webkit \
                                 gperf \
