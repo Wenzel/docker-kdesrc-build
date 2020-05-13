@@ -6,7 +6,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # libdbusmenu-qt        |       libQt5DBus-devel ca-certificates-mozilla
 # attica                |       libQt5Test-devel
 # ki18n                 |       gettext-tools libQt5Concurrent-devel libqt5-qtscript-devel
-# kwindowsystem         |       libqt5-x11extras-devel xcb-util-keysyms-devel
+# kwindowsystem         |       libqt5-x11extras-devel xcb-util-keysyms-devel xcb-util-wm-devel
 # kdoctools             |       libxslt-devel docbook-xsl-stylesheets
 # kwidgetsaddons        |       libqt5-qttools-devel
 # kxml-gui              |       libQt5PrintSupport-devel
@@ -15,7 +15,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # kdeclarative          |       libepoxy-devel
 # kactivities           |       boost-devel
 # kdewebkit             |       libQt5WebkKit5-devel libQt5WebKitWidgets-devel
-# khtml                 |       giflib-devel
+# khtml                 |       giflib-devel libjpeg8-devel
 # frameworkintegration  |       libQt5PlatformSupport-private-headers-devel
 # ktexteditor           |       libqt5-qtxmlpatters-devel
 # phonon-vlc            |       vlc-devel
@@ -23,6 +23,12 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # modemmanager-qt       |       ModemManager-devel
 # networkmanager-qt     |       NetworkManager-devel
 # baloo                 |       libxapian-devel lmdb-devel
+# kcodecs               |       gperf
+# polkit-qt-1           |       polkit-devel
+# kservice              |       flex bison
+# libgpg-error          |       automake autoconf makeinfo
+# kirigami              |       libqt5-qtquickcontrols2 libqt5-qtquickcontrols2-private-headers-devel
+# kdelibs4support       |       libSM-devel
 #-----------------------|---------------------------------
 # WORKSPACE             |       BUILD DEPENDENCY
 #-----------------------|---------------------------------
@@ -30,9 +36,17 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # kde-gtk-config        |       gtk2-devel gtk3-devel
 # kfilemetadata         |       libattr-devel
 # oxygen-fonts          |       fontforge-devel
-# kwayland              |       wayland-devel
+# kwayland              |       wayland-devel libqt5-qtwayland-devel
 # kwin                  |       xcb-util-image-devel xcb-util-cursor-devel
 # kcm-touchpad          |       xf86-input-synaptics-devel xorg-x11-util-devel libX11-devel  libxkbcommon-x11-devel xf86-input-wacom-devel
+# kscreenlocker         |       pam-devel
+# kwin                  |       xcb-util-devel
+# plasma-desktop        |       libxkbfile-devel
+# breeze-gtk            |       python3-cairo-devel sassc
+# kgamma                |       libXxf86vm-devel
+# plasma-pa             |       libcanberra-devel
+# plymouth-kcm          |       plymouth-devel
+# xdg-desktop-portal-kde        pipewire-devel Mesa-devel libQt5PrintSupport-private-headers-devel
 #-----------------------|---------------------------------
 # APPLICATIONS          |       BUILD DEPENDENCY
 #-----------------------|---------------------------------
@@ -62,14 +76,14 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
 # install dependencies
 #---------------------
-RUN zypper --non-interactive in vim tar git bzr cmake doxygen
+RUN zypper --non-interactive in vim tar git bzr cmake doxygen mc
 RUN zypper --non-interactive in perl-libwww-perl perl-XML-Parser perl-JSON perl-YAML-LibYAML perl-IO-Socket-SSL \
                                     dialog python ca-certificates
 RUN zypper --non-interactive in --force-resolution \
         libQt5DBus-devel ca-certificates-mozilla \
         libQt5Test-devel \
         gettext-tools libQt5Concurrent-devel libqt5-qtscript-devel \
-        libqt5-qtx11extras-devel xcb-util-keysyms-devel \
+        libqt5-qtx11extras-devel xcb-util-keysyms-devel xcb-util-wm-devel \
         libxslt-devel docbook-xsl-stylesheets \
         libqt5-qttools-devel \
         libQt5PrintSupport-devel \
@@ -78,21 +92,24 @@ RUN zypper --non-interactive in --force-resolution \
         libepoxy-devel \
         boost-devel \
         libQt5WebKit5-devel libQt5WebKitWidgets-devel \
-        giflib-devel \
+        giflib-devel libjpeg8-devel \
         libQt5PlatformSupport-private-headers-devel \
         libqt5-qtxmlpatterns-devel \
         vlc-devel \
         libQt5OpenGL-devel gstreamer-editing-services-devel \
         ModemManager-devel \
-        NetworkManager-devel
+        NetworkManager-devel \
+        gperf polkit-devel flex bison automake autoconf makeinfo \
+        libqt5-qtquickcontrols2 libqt5-qtquickcontrols2-private-headers-devel libqt5-qtwayland-devel libSM-devel
 RUN zypper --non-interactive in \
         libpwquality-devel \
         gtk2-devel gtk3-devel \
         libattr-devel \
         fontforge-devel \
-        xcb-util-image-devel \
+        xcb-util-image-devel xcb-util-cursor-devel \
         xf86-input-synaptics-devel xorg-x11-util-devel libX11-devel  libxkbcommon-x11-devel xf86-input-wacom-devel \
-        libxapian-devel lmdb-devel
+        libxapian-devel lmdb-devel pam-devel xcb-util-devel libxkbfile-devel python3-cairo-devel sassc libXxf86vm-devel libcanberra-devel \
+        plymouth-devel pipewire-devel Mesa-devel libQt5PrintSupport-private-headers-devel
 RUN zypper --non-interactive in \
                               grantlee5-devel \
                               libexiv2-devel \
