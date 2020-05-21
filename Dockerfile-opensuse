@@ -101,6 +101,8 @@ RUN zypper --non-interactive in --force-resolution \
         NetworkManager-devel \
         gperf polkit-devel flex bison automake autoconf makeinfo \
         libqt5-qtquickcontrols2 libqt5-qtquickcontrols2-private-headers-devel libqt5-qtwayland-devel libSM-devel
+# Workspace runtime dependencies
+RUN zypper --non-interactive in libqt5-qtquickcontrols libqt5-qtgraphicaleffects
 RUN zypper --non-interactive in \
         libpwquality-devel \
         gtk2-devel gtk3-devel \
