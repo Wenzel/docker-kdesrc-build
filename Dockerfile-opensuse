@@ -76,7 +76,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
 # install dependencies
 #---------------------
-RUN zypper --non-interactive in vim tar git bzr cmake doxygen mc x11vnc
+RUN zypper --non-interactive in vim tar git bzr cmake doxygen mc x11vnc dbus-1-x11
 RUN zypper --non-interactive in perl-libwww-perl perl-XML-Parser perl-JSON perl-YAML-LibYAML perl-IO-Socket-SSL \
                                     dialog python ca-certificates
 RUN zypper --non-interactive in --force-resolution \
@@ -144,6 +144,8 @@ RUN ln -s /home/kdedev/.kdesrc-buildrc /root/.kdesrc-buildrc && \
 RUN zypper --non-interactive in sudo && \
     echo 'kdedev ALL=NOPASSWD: ALL' >> /etc/sudoers && \
     gpasswd -a kdedev video
+# Generate DBus uuid
+RUN dbus-uuidgen > /etc/machine-id
 USER kdedev
 ENV HOME /home/kdedev
 WORKDIR /home/kdedev/
