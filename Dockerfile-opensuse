@@ -34,7 +34,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 #-----------------------|---------------------------------
 # user-manager          |       libpwquality-devel
 # kde-gtk-config        |       gtk2-devel gtk3-devel
-# kfilemetadata         |       libattr-devel
+# kfilemetadata         |       libattr-devel libtag-devel
 # oxygen-fonts          |       fontforge-devel
 # kwayland              |       wayland-devel libqt5-qtwayland-devel
 # kwin                  |       xcb-util-image-devel xcb-util-cursor-devel
@@ -104,7 +104,7 @@ RUN zypper --non-interactive in --force-resolution \
 RUN zypper --non-interactive in \
         libpwquality-devel \
         gtk2-devel gtk3-devel \
-        libattr-devel \
+        libattr-devel libtag-devel \
         fontforge-devel \
         xcb-util-image-devel xcb-util-cursor-devel \
         xf86-input-synaptics-devel xorg-x11-util-devel libX11-devel  libxkbcommon-x11-devel xf86-input-wacom-devel \
