@@ -100,6 +100,23 @@ on the host !
 
 Now you can run any applications, including `startplasma-x11` !
 
+### 3 - Using Xephyr
+
+Install xephyr on the host
+
+Start xephyr on the host:
+    
+    ```Xephyr -screen 1024x768 :1 &```
+
+Run the environment:
+    
+    ```./run.py --base opensuse --display ':1'```
+
+Start Plasma :
+
+    ```/work/install/bin/startplasma-x11```
+
+
 ## kdesrc-buildrc configuration
 
 To configure `kdesrc-buildrc`, take a look at [http://kdesrc-build.kde.org/documentation/](http://kdesrc-build.kde.org/documentation/¬)
