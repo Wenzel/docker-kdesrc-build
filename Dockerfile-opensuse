@@ -57,7 +57,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # kalgebra              |       glu-devel
 # parley                |       libqt5-qtmultimedia-devel
 # step                  |       eigen3-devel
-# kcalc                 |       gmp-devel
+# kcalc                 |       gmp-devel mpfr-devel
 # print-manager         |       cups-devel
 # ark                   |       libarchive-devel
 # kmix                  |       alsa-devel
@@ -120,7 +120,7 @@ RUN zypper --non-interactive in \
                               glu-devel \
                               libqt5-qtmultimedia-devel \
                               eigen3-devel \
-                              gmp-devel \
+                              gmp-devel mpfr-devel \
                               cups-devel \
                               libarchive-devel \
                               alsa-devel \
