@@ -135,7 +135,7 @@ RUN zypper --non-interactive in \
 # some commands needed by startkde script
 RUN zypper --non-interactive in xset xsetroot xprop
 
-RUN useradd -d /home/kdedev -m kdedev && \
+RUN groupadd --gid=1000 kdedev && useradd -d /home/kdedev -m -G users,kdedev --uid=1000 kdedev && \
     mkdir /work /qt && \
     chown kdedev /work /qt
 
