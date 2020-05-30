@@ -114,7 +114,7 @@ Run the environment:
 
 Start Plasma :
 
-    ```/work/install/bin/startplasma-x11```
+    ```sudo dbus-launch && /work/install/bin/startplasma-x11```
 
 
 ## kdesrc-buildrc configuration

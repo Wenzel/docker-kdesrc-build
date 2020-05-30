@@ -63,6 +63,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # kmix                  |       alsa-devel
 # libkdegames           |       libsndfile-devel openal-soft-devel
 # ksirk                 |       libqca-qt5-devel
+# falkon                |       libqt5-qtwebengine-devel libopenssl-devel
 #-----------------------|---------------------------------
 # PIM                   |       BUILD DEPENDENCY
 #-----------------------|---------------------------------
@@ -125,7 +126,8 @@ RUN zypper --non-interactive in \
                               libarchive-devel \
                               alsa-devel \
                               libsndfile-devel openal-soft-devel \
-                              libqca-qt5-devel
+                              libqca-qt5-devel \
+                              libqt5-qtwebengine-devel libopenssl-devel
 RUN zypper --non-interactive in \
                                 libdmtx-devel qrencode-devel \
                                 libical-devel \
@@ -147,7 +149,7 @@ RUN zypper --non-interactive in sudo && \
     echo 'kdedev ALL=NOPASSWD: ALL' >> /etc/sudoers && \
     gpasswd -a kdedev video
 # Generate DBus uuid
-RUN dbus-uuidgen > /etc/machine-id
+RUN dbus-uuidgen --ensure
 USER kdedev
 ENV HOME /home/kdedev
 WORKDIR /home/kdedev/
