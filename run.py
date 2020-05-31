@@ -63,7 +63,6 @@ def update_image(template, cache_enabled):
 def run_kdesrc_build(template, auto_rm_enabled, display, vnc_enabled, qt_dir,
         noninteractive, commands):
     host_mnt_dir = '{}/{}'.format(MNT_DIR, template)
-    host_kdesrc_build_data = '{}/{}'.format(host_mnt_dir, KDESRC_BUILD_DATA_FILE_NAME)
     # vnc vs x11socket
     xsocket = ''
     vnc = ''
