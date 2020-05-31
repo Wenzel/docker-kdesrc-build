@@ -21,8 +21,10 @@ import os
 import sys
 import re
 import subprocess
+from pathlib import Path
 
 MNT_DIR = os.path.expanduser('~') + '/kdebuild'
+KDESRC_BUILD_DATA_FILE_NAME = '.kdesrc-build-data'
 
 __SCRIPT_CUR_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
 
@@ -44,6 +46,8 @@ def check_mnt_point(template):
     print("Checking mount point for {}".format(template))
     path = '{}/{}'.format(MNT_DIR, template)
     os.makedirs(path, exist_ok=True)
+    host_kdesrc_build_data_file = Path('{}/{}'.format(path, KDESRC_BUILD_DATA_FILE_NAME))
+    host_kdesrc_build_data_file.touch(exist_ok=True)
 
 def update_image(template, cache_enabled):
     print("Updating image for " + template)
@@ -59,6 +63,7 @@ def update_image(template, cache_enabled):
 def run_kdesrc_build(template, auto_rm_enabled, display, vnc_enabled, qt_dir,
         noninteractive, commands):
     host_mnt_dir = '{}/{}'.format(MNT_DIR, template)
+    host_kdesrc_build_data = '{}/{}'.format(host_mnt_dir, KDESRC_BUILD_DATA_FILE_NAME)
     # vnc vs x11socket
     xsocket = ''
     vnc = ''
@@ -86,6 +91,7 @@ def run_kdesrc_build(template, auto_rm_enabled, display, vnc_enabled, qt_dir,
         '-v', '{}:/work'.format(host_mnt_dir),
         '-v', __SCRIPT_CUR_DIR + '/kdesrc-buildrc:/home/kdedev/.kdesrc-buildrc',
         '-v', __SCRIPT_CUR_DIR + '/bashrc:/home/kdedev/.bashrc',
+        '-v', host_mnt_dir + '/' + KDESRC_BUILD_DATA_FILE_NAME + ':/home/kdedev/' + KDESRC_BUILD_DATA_FILE_NAME,
     ])
     subp_cmd.extend(xsocket)
     subp_cmd.extend(vnc)
