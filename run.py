@@ -21,7 +21,6 @@ import os
 import sys
 import re
 import subprocess
-from pathlib import Path
 
 MNT_DIR = os.path.expanduser('~') + '/kdebuild'
 KDESRC_BUILD_DATA_FILE_NAME = '.kdesrc-build-data'
@@ -46,8 +45,11 @@ def check_mnt_point(template):
     print("Checking mount point for {}".format(template))
     path = '{}/{}'.format(MNT_DIR, template)
     os.makedirs(path, exist_ok=True)
-    host_kdesrc_build_data_file = Path('{}/{}'.format(path, KDESRC_BUILD_DATA_FILE_NAME))
-    host_kdesrc_build_data_file.touch(exist_ok=True)
+    host_kdesrc_build_data_file = '{}/{}'.format(path, KDESRC_BUILD_DATA_FILE_NAME)
+    if not os.path.exists(host_kdesrc_build_data_file):
+        with open(host_kdesrc_build_data_file, 'w'):
+            pass
+
 
 def update_image(template, cache_enabled):
     print("Updating image for " + template)
