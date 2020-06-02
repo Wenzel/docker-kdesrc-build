@@ -148,8 +148,6 @@ RUN ln -s /home/kdedev/.kdesrc-buildrc /root/.kdesrc-buildrc && \
 RUN zypper --non-interactive in sudo && \
     echo 'kdedev ALL=NOPASSWD: ALL' >> /etc/sudoers && \
     gpasswd -a kdedev video
-# Generate DBus uuid
-RUN dbus-uuidgen --ensure
 USER kdedev
 ENV HOME /home/kdedev
 WORKDIR /home/kdedev/

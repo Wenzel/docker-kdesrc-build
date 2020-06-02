@@ -114,7 +114,7 @@ Run the environment:
 
 Start Plasma :
 
-    ```sudo dbus-launch && /work/install/bin/startplasma-x11```
+    ```sudo dbus-uuidgen --ensure && sudo mkdir -p /run/dbus/ && sudo dbus-daemon --system && /work/install/bin/startplasma-x11```
 
 
 ## kdesrc-buildrc configuration
