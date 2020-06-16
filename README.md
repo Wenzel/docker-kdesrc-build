@@ -100,21 +100,23 @@ on the host !
 
 Now you can run any applications, including `startplasma-x11` !
 
-### 3 - Using Xephyr
-
-Install xephyr on the host
-
-Start xephyr on the host:
-    
-    ```Xephyr -screen 1024x768 :1 &```
+### 3 
 
 Run the environment:
     
     ```./run.py --base opensuse --display ':1'```
 
-Start Plasma :
+Run the `Xvfb` server :
 
-    ```sudo dbus-uuidgen --ensure && sudo mkdir -p /run/dbus/ && sudo dbus-daemon --system && /work/install/bin/startplasma-x11```
+    ```sudo Xvfb $DISPLAY +extension GLX +render -screen 0 1024x780x24 &```
+
+Run the `VNC server :`
+
+    sudo x11vnc -display $DISPLAY &
+
+Start DBus & Plasma :
+
+    ```sudo dbus-uuidgen --ensure && sudo mkdir -p /run/dbus/ && dbus-launch --sh-syntax > $HOME/dbusenv && source $HOME/dbusenv && /work/install/bin/startplasma-x11```
 
 
 ## kdesrc-buildrc configuration
