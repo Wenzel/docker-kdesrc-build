@@ -90,8 +90,8 @@ RUN dnf -y install gcc-c++ git doxygen cmake bzr vim tar && \
                     libXcursor-devel oxygen-fonts-devel \
                     qt5-qtxmlpatterns-devel \
                     polkit-devel \
-                    gstreamer-devel gstreamer-plugins-bad-free-devel gstreamer1-plugins-bad-free-devel gstreamer1-plugins-base-devel \
-                                NetworkManager-devel NetworkManager-glib-devel NetworkManager-libnm-devel && \
+                    gstreamer1-devel gstreamer1-plugins-bad-free-devel gstreamer1-plugins-bad-free-devel gstreamer1-plugins-base-devel \
+                                libnma-devel NetworkManager-libnm-devel && \
     dnf install -y \
                     wayland-devel libwayland-cursor-devel libwayland-server-devel \
                     libattr-devel \
