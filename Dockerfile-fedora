@@ -1,4 +1,4 @@
-FROM fedora:27
+FROM fedora:rawhide
 MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 
 # FRAMEWORKS            |       BUILD DEPENDENCY
@@ -23,6 +23,8 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # phonon-gstreamer      |       gstreamer-devel gstreamer-plugins-bad-free-devel gstreamer1-plugins-bad-free-devel gstreamer1-plugins-base-devel
 # networkmanager-qt     |       NetworkManager-devel NetworkManager-glib-devel
 # baloo                 |       lmdb-devel
+# kidletime             |       libXext-devel
+# kross                 |       qt5-qttools-static
 #-----------------------|---------------------------------
 # WORKSPACE             |       BUILD DEPENDENCY
 #-----------------------|---------------------------------
@@ -34,10 +36,11 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # user-manager          |       libpwquality-devel
 # kcm-touchpad          |       xorg-x11-drv-synaptics-devel xorg-x11-server-devel
 # kde-gtk-config        |       gtkmm24-devel gtkmm30-devel
-# kwin                  |       libepoxy-devel
+# kwin                  |       libepoxy-devel qt5-qtbase-static
 # oxygen-fonts          |       fontforge-devel
 # gwenview              |       exiv2-devel
 # libksane              |       sane-backends-devel
+# plasma-workspace      |       appstream-qt-devel libXtst-devel
 #-----------------------|---------------------------------
 # APPLICATIONS          |       BUILD DEPENDENCY
 #-----------------------|---------------------------------
@@ -99,10 +102,11 @@ RUN dnf -y install gcc-c++ git doxygen cmake bzr vim tar && \
                     xorg-x11-drv-synaptics-devel xorg-x11-server-devel \
                     gtkmm24-devel gtkmm30-devel \
                     lmdb-devel \
-                    libepoxy-devel \
+                    libepoxy-devel qt5-qtbase-static \
                     fontforge-devel \
                     exiv2-devel \
-                    sane-backends-devel && \
+                    sane-backends-devel \
+                    appstream-qt-devel libXtst-devel && \
     dnf install -y \ 
                     lcms2-devel \
                     hunspell-devel \
