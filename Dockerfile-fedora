@@ -25,6 +25,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # baloo                 |       lmdb-devel
 # kidletime             |       libXext-devel
 # kross                 |       qt5-qttools-static
+# phonon-vlc            |       vlc-devel
 #-----------------------|---------------------------------
 # WORKSPACE             |       BUILD DEPENDENCY
 #-----------------------|---------------------------------
@@ -41,6 +42,11 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # gwenview              |       exiv2-devel
 # libksane              |       sane-backends-devel
 # plasma-workspace      |       appstream-qt-devel libXtst-devel
+# breeze-gtk            |       sassc
+# kgamma5               |       libXxf86vm-devel
+# plasma-pa             |       libcanberra-devel
+# plymouth-kcm          |       plymouth-devel
+# xdg-desktop-portal-kde|       pipewire-devel
 #-----------------------|---------------------------------
 # APPLICATIONS          |       BUILD DEPENDENCY
 #-----------------------|---------------------------------
@@ -91,7 +97,7 @@ RUN dnf -y install gcc-c++ git doxygen cmake bzr vim tar && \
                     qt5-qtxmlpatterns-devel \
                     polkit-devel \
                     gstreamer1-devel gstreamer1-plugins-bad-free-devel gstreamer1-plugins-bad-free-devel gstreamer1-plugins-base-devel \
-                                libnma-devel NetworkManager-libnm-devel && \
+                                libnma-devel NetworkManager-libnm-devel vlc-devel && \
     dnf install -y \
                     wayland-devel libwayland-cursor-devel libwayland-server-devel \
                     libattr-devel \
@@ -106,7 +112,7 @@ RUN dnf -y install gcc-c++ git doxygen cmake bzr vim tar && \
                     fontforge-devel \
                     exiv2-devel \
                     sane-backends-devel \
-                    appstream-qt-devel libXtst-devel && \
+                    appstream-qt-devel libXtst-devel sassc libXxf86vm-devel libcanberra-devel plymouth-devel pipewire-devel && \
     dnf install -y \ 
                     lcms2-devel \
                     hunspell-devel \
