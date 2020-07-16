@@ -106,6 +106,9 @@ Run the environment:
     
     ```./run.py --base opensuse --display ':1'```
 
+Install dependencies in container:
+    ```./kdesrc-build/kdesrc-build --initial-setup```
+
 Run the `Xvfb` server :
 
     ```sudo Xvfb $DISPLAY +extension GLX +render -screen 0 1024x780x24 &```
