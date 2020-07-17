@@ -1,5 +1,6 @@
 export KF5=$(grep kdedir $HOME/.kdesrc-buildrc  | awk '{ print $2 }')
-export QTDIR=$(grep qtdir $HOME/.kdesrc-buildrc | awk '{ print $2 }' )
+#OS Qt5 installation in most cases
+#export QTDIR=$(grep qtdir $HOME/.kdesrc-buildrc | awk '{ print $2 }' )
 export XDG_DATA_DIRS="$KF5/share:$XDG_DATA_DIRS:/usr/share"
 export XDG_CONFIG_DIRS="$KF5/etc/xdg:$XDG_CONFIG_DIRS:/etc/xdg"
 export PATH="$KF5/bin:$QTDIR/bin:$PATH"
