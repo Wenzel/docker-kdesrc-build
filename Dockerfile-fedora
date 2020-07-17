@@ -6,7 +6,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # ki18n                 |       qt5-qtscript-devel gettext-devel
 # kcodecs               |       gperf
 # kservice              |       flex bison
-# kwindowsystem         |       qt5-qtx11extras-devel libXrender-devel xcb-util-keysyms-devel
+# kwindowsystem         |       qt5-qtx11extras-devel libXrender-devel xcb-util-keysyms-devel xcb-util-wm-devel
 # karchive              |       zlib-devel
 # kdoctools             |       libxslt-devel docbook-style-xsl
 # kwidgetsaddons        |       qt5-qttools-devel qt5-qttools-static
@@ -47,6 +47,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # plasma-pa             |       libcanberra-devel
 # plymouth-kcm          |       plymouth-devel
 # xdg-desktop-portal-kde|       pipewire-devel
+# kscreenlocker         |       pam-devel
 #-----------------------|---------------------------------
 # APPLICATIONS          |       BUILD DEPENDENCY
 #-----------------------|---------------------------------
@@ -82,7 +83,7 @@ RUN dnf -y install gcc-c++ git doxygen cmake bzr vim tar && \
                     qt5-qtscript-devel gettext-devel \
                     gperf \
                     flex bison \
-                    qt5-qtx11extras-devel libXrender-devel xcb-util-keysyms-devel \
+                    qt5-qtx11extras-devel libXrender-devel xcb-util-keysyms-devel xcb-util-wm-devel \
                     zlib-devel \
                     libxslt-devel docbook-style-xsl \
                     qt5-qttools-devel qt5-qttools-static \
@@ -112,7 +113,7 @@ RUN dnf -y install gcc-c++ git doxygen cmake bzr vim tar && \
                     fontforge-devel \
                     exiv2-devel \
                     sane-backends-devel \
-                    appstream-qt-devel libXtst-devel sassc libXxf86vm-devel libcanberra-devel plymouth-devel pipewire-devel && \
+                    appstream-qt-devel libXtst-devel sassc libXxf86vm-devel libcanberra-devel plymouth-devel pipewire-devel pam-devel && \
     dnf install -y \ 
                     lcms2-devel \
                     hunspell-devel \
