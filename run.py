@@ -91,9 +91,12 @@ def run_kdesrc_build(template, auto_rm_enabled, display, vnc_enabled, qt_dir,
     subp_cmd.extend([
         '-v', '{}:/work'.format(host_mnt_dir),
         '-v', __SCRIPT_CUR_DIR + '/kdesrc-buildrc:/home/kdedev/.kdesrc-buildrc',
-        '-v', __SCRIPT_CUR_DIR + '/bashrc:/home/kdedev/.bashrc',
         '-v', host_mnt_dir + '/' + KDESRC_BUILD_DATA_FILE_NAME + ':/home/kdedev/' + KDESRC_BUILD_DATA_FILE_NAME,
     ])
+    if 'fedora' == template:
+        subp_cmd.extend(['-v', __SCRIPT_CUR_DIR + '/bash_profile-fedora:/home/kdedev/.bash_profile'])
+    else:
+        subp_cmd.extend(['-v', __SCRIPT_CUR_DIR + '/bashrc:/home/kdedev/.bashrc'])
     subp_cmd.extend(xsocket)
     subp_cmd.extend(vnc)
     subp_cmd.extend(qt_mount)
