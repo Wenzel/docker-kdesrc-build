@@ -29,7 +29,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 #-----------------------|---------------------------------
 # WORKSPACE             |       BUILD DEPENDENCY
 #-----------------------|---------------------------------
-# kwayland              |       wayland-devel libwayland-cursor-devel libwayland-server-devel
+# kwayland              |       wayland-devel libwayland-cursor-devel libwayland-server-devel qt5-qtwayland-devel
 # kfilemetadata         |       libattr-devel
 # libmm-qt              |       ModemManager-devel
 # sddm-kcm              |       xcb-util-image-devel
@@ -99,7 +99,7 @@ RUN dnf -y install gcc-c++ git doxygen cmake bzr vim tar && \
                     gstreamer1-devel gstreamer1-plugins-bad-free-devel gstreamer1-plugins-bad-free-devel gstreamer1-plugins-base-devel \
                                 libnma-devel NetworkManager-libnm-devel && \
     dnf install -y \
-                    wayland-devel libwayland-cursor-devel libwayland-server-devel \
+                    wayland-devel libwayland-cursor-devel libwayland-server-devel qt5-qtwayland-devel \
                     libattr-devel \
                     ModemManager-devel \
                     xcb-util-image-devel \
