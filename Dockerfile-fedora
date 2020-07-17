@@ -30,7 +30,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # WORKSPACE             |       BUILD DEPENDENCY
 #-----------------------|---------------------------------
 # kwayland              |       wayland-devel libwayland-cursor-devel libwayland-server-devel qt5-qtwayland-devel
-# kfilemetadata         |       libattr-devel
+# kfilemetadata         |       libattr-devel taglib-devel
 # libmm-qt              |       ModemManager-devel
 # sddm-kcm              |       xcb-util-image-devel
 # plasma-desktop        |       PackageKit-Qt5-devel xorg-x11-xkb-utils-devel xorg-x11-drv-libinput-devel xkeyboard-config-devel
@@ -100,7 +100,7 @@ RUN dnf -y install gcc-c++ git doxygen cmake bzr vim tar && \
                                 libnma-devel NetworkManager-libnm-devel && \
     dnf install -y \
                     wayland-devel libwayland-cursor-devel libwayland-server-devel qt5-qtwayland-devel \
-                    libattr-devel \
+                    libattr-devel taglib-devel \
                     ModemManager-devel \
                     xcb-util-image-devel \
                     PackageKit-Qt5-devel xorg-x11-xkb-utils-devel xorg-x11-drv-libinput-devel xkeyboard-config-devel \
