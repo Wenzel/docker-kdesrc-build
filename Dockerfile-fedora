@@ -38,7 +38,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # user-manager          |       libpwquality-devel
 # kcm-touchpad          |       xorg-x11-drv-synaptics-devel xorg-x11-server-devel
 # kde-gtk-config        |       gtkmm24-devel gtkmm30-devel
-# kwin                  |       libepoxy-devel qt5-qtbase-static qt5-qtsensors-devel xcb-util-cursor-devel
+# kwin                  |       libepoxy-devel qt5-qtbase-static qt5-qtsensors-devel xcb-util-cursor-devel xcb-util-devel
 # oxygen-fonts          |       fontforge-devel
 # gwenview              |       exiv2-devel
 # libksane              |       sane-backends-devel
@@ -110,7 +110,7 @@ RUN dnf -y install gcc-c++ git doxygen cmake bzr vim tar && \
                     xorg-x11-drv-synaptics-devel xorg-x11-server-devel \
                     gtkmm24-devel gtkmm30-devel \
                     lmdb-devel \
-                    libepoxy-devel qt5-qtbase-static qt5-qtsensors-devel xcb-util-cursor-devel \
+                    libepoxy-devel qt5-qtbase-static qt5-qtsensors-devel xcb-util-cursor-devel xcb-util-devel \
                     fontforge-devel \
                     exiv2-devel \
                     sane-backends-devel \
