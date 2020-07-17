@@ -26,6 +26,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # kidletime             |       libXext-devel
 # kross                 |       qt5-qttools-static
 # phonon-vlc            |       vlc-devel
+# khelpcenter           |       xapian-core-devel
 #-----------------------|---------------------------------
 # WORKSPACE             |       BUILD DEPENDENCY
 #-----------------------|---------------------------------
@@ -37,7 +38,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # user-manager          |       libpwquality-devel
 # kcm-touchpad          |       xorg-x11-drv-synaptics-devel xorg-x11-server-devel
 # kde-gtk-config        |       gtkmm24-devel gtkmm30-devel
-# kwin                  |       libepoxy-devel qt5-qtbase-static
+# kwin                  |       libepoxy-devel qt5-qtbase-static qt5-qtsensors-devel xcb-util-cursor-devel
 # oxygen-fonts          |       fontforge-devel
 # gwenview              |       exiv2-devel
 # libksane              |       sane-backends-devel
@@ -98,7 +99,7 @@ RUN dnf -y install gcc-c++ git doxygen cmake bzr vim tar && \
                     qt5-qtxmlpatterns-devel \
                     polkit-devel \
                     gstreamer1-devel gstreamer1-plugins-bad-free-devel gstreamer1-plugins-bad-free-devel gstreamer1-plugins-base-devel \
-                                libnma-devel NetworkManager-libnm-devel && \
+                                libnma-devel NetworkManager-libnm-devel xapian-core-devel && \
     dnf install -y \
                     wayland-devel libwayland-cursor-devel libwayland-server-devel qt5-qtwayland-devel \
                     libattr-devel taglib-devel \
@@ -109,7 +110,7 @@ RUN dnf -y install gcc-c++ git doxygen cmake bzr vim tar && \
                     xorg-x11-drv-synaptics-devel xorg-x11-server-devel \
                     gtkmm24-devel gtkmm30-devel \
                     lmdb-devel \
-                    libepoxy-devel qt5-qtbase-static \
+                    libepoxy-devel qt5-qtbase-static qt5-qtsensors-devel xcb-util-cursor-devel \
                     fontforge-devel \
                     exiv2-devel \
                     sane-backends-devel \
