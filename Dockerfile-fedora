@@ -43,11 +43,11 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # gwenview              |       exiv2-devel
 # libksane              |       sane-backends-devel
 # plasma-workspace      |       appstream-qt-devel libXtst-devel
-# breeze-gtk            |       sassc
+# breeze-gtk            |       sassc python3-cairo-devel
 # kgamma5               |       libXxf86vm-devel
 # plasma-pa             |       libcanberra-devel
 # plymouth-kcm          |       plymouth-devel
-# xdg-desktop-portal-kde|       pipewire-devel
+# xdg-desktop-portal-kde|       pipewire-devel mesa-libgbm-devel
 # kscreenlocker         |       pam-devel
 #-----------------------|---------------------------------
 # APPLICATIONS          |       BUILD DEPENDENCY
@@ -114,7 +114,7 @@ RUN dnf -y install gcc-c++ git doxygen cmake bzr vim tar && \
                     fontforge-devel \
                     exiv2-devel \
                     sane-backends-devel \
-                    appstream-qt-devel libXtst-devel sassc libXxf86vm-devel libcanberra-devel plymouth-devel pipewire-devel pam-devel && \
+                    appstream-qt-devel libXtst-devel sassc python3-cairo-devel libXxf86vm-devel libcanberra-devel plymouth-devel pipewire-devel mesa-libgbm-devel pam-devel && \
     dnf install -y \ 
                     lcms2-devel \
                     hunspell-devel \
