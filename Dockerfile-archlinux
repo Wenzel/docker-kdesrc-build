@@ -131,8 +131,8 @@ RUN pacman --noconfirm -Sy \
                                 libdmtx qrencode \
                                 libical
 # Xorg & VNC
-RUN pacman --noconfirm -Sy xorg-xsetroot xorg-xprop xorg-font-utils xorg-xmessage \
-                            xorg-fonts-100dpi xorg-fonts-75dpi xorg-fonts-alias \
+RUN pacman --noconfirm -Sy xorg-xsetroot xorg-xprop xorg-font-util xorg-xmessage \
+                            xorg-fonts-100dpi xorg-fonts-75dpi xorg-fonts-alias-misc \
                             xorg-server-xvfb x11vnc
 
 # Utilities
