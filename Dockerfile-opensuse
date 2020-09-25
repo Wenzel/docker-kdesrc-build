@@ -154,7 +154,8 @@ WORKDIR /home/kdedev/
 # kde anongit url alias
 RUN git config --global user.name "Your Name" && \
     git config --global user.email "you@email.com" && \
-    git clone https://invent.kde.org/sdk/kdesrc-build.git 
+    git clone https://invent.kde.org/sdk/kdesrc-build.git \
+    && /home/kdedev/kdesrc-build/kdesrc-build --initial-setup
 
 VOLUME /work
 VOLUME /qt

@@ -100,22 +100,27 @@ on the host !
 
 Now you can run any applications, including `startplasma-x11` !
 
-### 3 
+### 3 Xephyr
+
+Install Xephyr via package manager
+
+Tune docker:
+
+    ```sudo systemctl unmask docker.service```
+    ```sudo systemctl unmask docker.socket```
+    ```sudo systemctl restart docker.service```
+
+Run Xephyr:
+
+    ```Xephyr -screen 1024x768 :1```
 
 Run the environment:
     
     ```./run.py --base opensuse --display ':1'```
 
 Install dependencies in container:
+
     ```./kdesrc-build/kdesrc-build --initial-setup```
-
-Run the `Xvfb` server :
-
-    ```sudo Xvfb $DISPLAY +extension GLX +render -screen 0 1024x780x24 &```
-
-Run the `VNC server :`
-
-    sudo x11vnc -display $DISPLAY &
 
 Start DBus & Plasma :
 
