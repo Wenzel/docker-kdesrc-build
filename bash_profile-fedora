@@ -1,5 +1,12 @@
+#Fedora maintainers put everything in .bash_profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+        . ~/.bashrc
+fi
+
+# User specific environment and startup programs
 export KF5=$(grep kdedir $HOME/.kdesrc-buildrc  | awk '{ print $2 }')
-#OS Qt5 installation in most cases
 #export QTDIR=$(grep qtdir $HOME/.kdesrc-buildrc | awk '{ print $2 }' )
 export XDG_DATA_DIRS="$KF5/share:$XDG_DATA_DIRS:/usr/share"
 export XDG_CONFIG_DIRS="$KF5/etc/xdg:$XDG_CONFIG_DIRS:/etc/xdg"
@@ -50,3 +57,4 @@ fix_permissions ()
 }
 
 fix_permissions
+

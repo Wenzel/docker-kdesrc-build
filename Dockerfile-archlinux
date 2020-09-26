@@ -23,6 +23,7 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # kirigami              |       qt5-quickcontrols2
 # qca                   |       openssl-1.0
 # purpose               |       intltool
+# kwayland              |       qt5-wayland
 #---------------------------------------------------------
 # WORKSPACE             |       BUILD DEPENDENCY
 #-----------------------|---------------------------------
@@ -37,6 +38,10 @@ MAINTAINER Mathieu Tarral <mathieu.tarral@gmail.com>
 # libksane              |       sane
 # kaccounts-integration |       libaccounts-qt signond
 # plasma-pa             |       libcanberra
+# kwayland-server       |       appstream
+# breeze-gtk            |       sassc python-cairo
+# plymouth-kcm          |       plymouth (AUR)
+# xdg-desktop-portal-kde |      pipewire
 #-----------------------|---------------------------------
 # APPLICATIONS          |       BUILD DEPENDENCY
 #-----------------------|---------------------------------
@@ -93,7 +98,8 @@ RUN pacman --noconfirm -Sy \
                                 autoconf automake \
                                 qt5-quickcontrols2 \
                                 openssl-1.0 \
-                                intltool
+                                intltool \
+                                qt5-wayland
 # Workspace
 RUN pacman --noconfirm -Sy \
                                 libpwquality \
@@ -106,7 +112,10 @@ RUN pacman --noconfirm -Sy \
                                 exiv2 \
                                 sane \
                                 libaccounts-qt signond \
-                                libcanberra
+                                libcanberra \
+                                appstream \
+                                sassc python-cairo \
+                                pipewire
 # Applications
 RUN pacman --noconfirm -Sy \
                                 hunspell \
@@ -122,8 +131,8 @@ RUN pacman --noconfirm -Sy \
                                 libdmtx qrencode \
                                 libical
 # Xorg & VNC
-RUN pacman --noconfirm -Sy xorg-xsetroot xorg-xprop xorg-font-utils xorg-xmessage \
-                            xorg-fonts-100dpi xorg-fonts-75dpi xorg-fonts-alias \
+RUN pacman --noconfirm -Sy xorg-xsetroot xorg-xprop xorg-font-util xorg-xmessage \
+                            xorg-fonts-100dpi xorg-fonts-75dpi xorg-fonts-alias-misc \
                             xorg-server-xvfb x11vnc
 
 # Utilities
@@ -147,10 +156,10 @@ WORKDIR /home/kdedev/
 RUN mkdir -p ~/.vnc && x11vnc -storepasswd 1234 ~/.vnc/passwd
 
 # kde anongit url alias
-RUN git config --global url."git://anongit.kde.org/".insteadOf kde: && \
-    git config --global url."ssh://git@git.kde.org/".pushInsteadOf kde: && \
-    git clone git://anongit.kde.org/kdesrc-build.git 
-
+RUN git config --global user.name "Your Name" && \
+    git config --global user.email "you@email.com" && \
+    git clone https://invent.kde.org/sdk/kdesrc-build.git \
+    && /home/kdedev/kdesrc-build/kdesrc-build --initial-setup
 
 VOLUME /work
 VOLUME /qt

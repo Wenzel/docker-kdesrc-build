@@ -66,7 +66,7 @@ Note that you should have build the `workspace` set first (`kdesrc-build workspa
 
 Inside the container :
 
-    $ /work/install/bin/startkde
+    $ /work/install/bin/startplasma-x11
 
 And the KDE desktop should be starting on `tty8` !
 
@@ -98,7 +98,34 @@ and check for it's IP address:
 You can connect to the VNC server `container-ip-address`:`5900` with a VNC client
 on the host !
 
-Now you can run any applications, including `startkde` !
+Now you can run any applications, including `startplasma-x11` !
+
+### 3 Xephyr
+
+Install Xephyr via package manager
+
+Tune docker:
+
+    ```sudo systemctl unmask docker.service```
+    ```sudo systemctl unmask docker.socket```
+    ```sudo systemctl restart docker.service```
+
+Run Xephyr:
+
+    ```Xephyr -screen 1024x768 :1```
+
+Run the environment:
+    
+    ```./run.py --base opensuse --display ':1'```
+
+Install dependencies in container:
+
+    ```./kdesrc-build/kdesrc-build --initial-setup```
+
+Start DBus & Plasma :
+
+    ```sudo dbus-uuidgen --ensure && sudo mkdir -p /run/dbus/ && dbus-launch --sh-syntax > $HOME/dbusenv && source $HOME/dbusenv && /work/install/bin/startplasma-x11```
+
 
 ## kdesrc-buildrc configuration
 
@@ -119,6 +146,6 @@ Don't forget to change the `qtdir` variable in the `kdesrc-buildrc`
 
 |              | Archlinux | Fedora | OpenSUSE | Ubuntu | Neon |
 |--------------|-----------|--------|----------|--------|------|
-| Frameworks   |     ✓     |    ✗   |     ✗    |    ✗   |   ✓  |
-| Workspace    |     ✓     |    ✗   |     ✗    |    ✗   |   ✓  |
+| Frameworks   |     ✓     |    ✗   |     ✓    |    ✗   |   ✓  |
+| Workspace    |     ✓     |    ✗   |     ✓    |    ✗   |   ✓  |
 | Applications |     ✗     |    ✗   |     ✗    |    ✗   |   ✓  |
